@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Selection color */
+::selection {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Ensure the app container fills the screen */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Custom Split Screen CSS matching original_stitch.html */
+.panel-container {
+  display: flex !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0;
+  padding: 0;
+}
+
+.split-panel {
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  width: 50% !important;
+}
+
+.panel-container:hover .split-panel {
+  width: 30% !important;
+}
+
+.panel-container .split-panel:hover {
+  width: 70% !important;
+}
+
+@media (max-width: 768px) {
+  .panel-container {
+    flex-direction: column !important;
+  }
+  .split-panel {
+    width: 100% !important;
+    height: 50vh !important;
+  }
+}
+
+/* Fix for potential text overlap in Chrome due to line-height/centering */
+.split-panel h2 {
+  line-height: 0.9;
+  text-shadow: none !important;
+}

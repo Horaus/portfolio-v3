@@ -1,0 +1,12 @@
+// Note:
+// We intentionally use hard navigation for route changes because SPA transitions
+// in this project can preserve scroll position on some deep pages.
+// Keeping this helper centralized makes the behavior easy to maintain.
+export const hardNavigate = (to) => {
+  if (!to) return;
+
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (to === current) return;
+
+  window.location.assign(to);
+};

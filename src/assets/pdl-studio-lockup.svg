@@ -1,0 +1,26 @@
+<svg width="520" height="170" viewBox="0 0 520 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="170" fill="black"/>
+  <g transform="translate(20 26)">
+    <g transform="translate(0 114) rotate(-90)">
+      <text
+        x="0"
+        y="0"
+        fill="#F5F5F5"
+        font-family="'Space Grotesk', sans-serif"
+        font-size="26"
+        font-weight="700"
+        letter-spacing="8.5"
+      >PDL</text>
+    </g>
+    <text
+      x="44"
+      y="98"
+      fill="#F5F5F5"
+      font-family="'Space Grotesk', sans-serif"
+      font-size="110"
+      font-weight="700"
+      letter-spacing="4.4"
+    >STUDIO</text>
+    <circle cx="500" cy="92" r="14" fill="#0B74E5"/>
+  </g>
+</svg>

@@ -1,0 +1,193 @@
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Header from '../components/layout/Header';
+import PageTransition from '../components/layout/PageTransition';
+import { hardNavigate } from '../utils/hardNavigation';
+
+const blocks = [
+  {
+    id: 1,
+    title: 'Strategy',
+    shortTitle: 'Strategy',
+    desc: 'Nghiên cứu thị trường sâu, định vị thương hiệu và hoạch định ngân sách tổng thể.',
+    framework: '',
+    showcase: 'Strategy Report',
+    link: '/strategy-planning',
+    isUpdating: false,
+    image: 'https://images.pexels.com/photos/15635393/pexels-photo-15635393.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  },
+  {
+    id: 2,
+    title: 'Visual',
+    shortTitle: 'Visual',
+    desc: 'Xây dựng bản dạng thương hiệu, Moodboard và quy chuẩn Visual Identity.',
+    framework: '',
+    showcase: 'Brand Visuals',
+    link: '/content-creation-design',
+    isUpdating: false,
+    image: 'https://images.pexels.com/photos/17476381/pexels-photo-17476381.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  },
+  {
+    id: 3,
+    title: 'Growth',
+    shortTitle: 'Growth',
+    desc: 'Thực thi ngân sách quảng cáo, lập Media Plan và các chiến dịch Performance.',
+    framework: '',
+    showcase: 'Growth Report',
+    link: '/organic-paid-growth',
+    isUpdating: false,
+    image: 'https://images.pexels.com/photos/7108077/pexels-photo-7108077.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  },
+  {
+    id: 4,
+    title: 'Automation',
+    shortTitle: 'Automation',
+    desc: 'Mapping luồng dữ liệu khách hàng qua Make.com, Zapier và tích hợp CRM.',
+    framework: '',
+    showcase: 'Automation Workflow',
+    link: '/automation-crm',
+    isUpdating: false,
+    image: 'https://images.pexels.com/photos/2881233/pexels-photo-2881233.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  },
+  {
+    id: 5,
+    title: 'Analytics',
+    shortTitle: 'Analytics',
+    desc: 'Hệ thống Databox đo lường, tối ưu tỷ lệ chuyển đổi cuối (CRO) và báo cáo ROI.',
+    framework: '',
+    showcase: 'Data Dashboard',
+    link: '/analytics-conversion-retention',
+    isUpdating: false,
+    image: 'https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  }
+];
+
+const MarketingSystems = () => {
+  const [hoveredIndex, setHoveredIndex] = useState(0); // Default open first one
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return window.innerWidth > 768;
+  });
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 769px)');
+    const syncViewport = (event) => {
+      setIsDesktop(event.matches);
+    };
+
+    mediaQuery.addEventListener('change', syncViewport);
+
+    return () => mediaQuery.removeEventListener('change', syncViewport);
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <PageTransition>
+        <main className="h-screen w-full bg-black flex flex-col md:flex-row overflow-hidden pt-24 md:pt-0">
+          
+          {/* Title Overlay for context */}
+          <div className="absolute top-32 left-8 md:left-12 z-20 pointer-events-none hidden md:block">
+            <h1 className="text-4xl lg:text-5xl font-bold tracking-tighter uppercase text-white mix-blend-difference">
+              Marketing <br/><span className="text-accent">Systems.</span>
+            </h1>
+          </div>
+
+          {/* Accordion Container */}
+          <div className="flex flex-col md:flex-row w-full h-full mt-8 md:mt-0 p-4 gap-2">
+            {blocks.map((block, index) => {
+              const isActive = hoveredIndex === index;
+              
+              return (
+                <motion.div
+                  key={block.id}
+                  className="relative flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/5"
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onClick={() => hardNavigate(block.link)}
+                  animate={{
+                    flex: isDesktop ? (isActive ? 4 : 1) : 1,
+                    height: isDesktop ? 'auto' : (isActive ? '50vh' : '10vh')
+                  }}
+                  transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                  style={{ backgroundColor: isActive ? '#111' : '#050505' }}
+                >
+                  {/* Background image + soft top/bottom fade */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-all duration-500"
+                      style={{
+                        backgroundImage: `url(${block.image})`,
+                        opacity: isActive ? 0.32 : 0,
+                        transform: isActive ? 'scale(1.04)' : 'scale(1)'
+                      }}
+                    />
+                    <div
+                      className="absolute inset-x-0 top-0 h-40 bg-cover bg-center blur-2xl transition-opacity duration-500"
+                      style={{
+                        backgroundImage: `url(${block.image})`,
+                        opacity: isActive ? 0.35 : 0
+                      }}
+                    />
+                    <div
+                      className="absolute inset-x-0 bottom-0 h-40 bg-cover bg-center blur-2xl transition-opacity duration-500"
+                      style={{
+                        backgroundImage: `url(${block.image})`,
+                        opacity: isActive ? 0.35 : 0
+                      }}
+                    />
+                    <div className={`absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}></div>
+                    <div className={`absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}></div>
+                    <div className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}></div>
+                  </div>
+                  
+                  {/* Vertical / Short Title (when collapsed) */}
+                  <motion.div 
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    animate={{ opacity: isActive ? 0 : 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <span className="md:-rotate-90 text-xl md:text-2xl font-bold text-white/30 tracking-[0.2em] uppercase whitespace-nowrap">
+                      {block.title}
+                    </span>
+                  </motion.div>
+
+                  {/* Expanded Content */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
+                        className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end"
+                      >
+                        <span className="text-accent text-[10px] font-bold tracking-[0.3em] mb-4 rounded-sm uppercase">
+                          0{block.id}
+                        </span>
+                        <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase text-white mb-6">
+                          {block.title}
+                        </h3>
+                        <p className="text-gray-400 max-w-sm text-sm mb-8 leading-relaxed">
+                          {block.desc}
+                        </p>
+                        
+                        <div className="flex gap-4 items-center">
+                          <button className="px-6 py-2 bg-white text-black font-bold uppercase tracking-widest text-xs rounded hover:bg-accent hover:text-white transition-colors">
+                            View Detail
+                          </button>
+                          <span className="text-gray-600 text-xs uppercase tracking-widest"></span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  
+                </motion.div>
+              );
+            })}
+          </div>
+        </main>
+      </PageTransition>
+    </>
+  );
+};
+
+export default MarketingSystems;
