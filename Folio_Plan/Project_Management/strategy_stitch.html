@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Layer 1: Strategy &amp; Planning | Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="typography">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1a1a1a;
+    }
+    h1, h2, h3 {
+      letter-spacing: -0.02em;
+    }
+  </style>
+<style data-purpose="layout-spacing">
+    .section-padding {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 500px;
+    }
+    .accordion-item.active .accordion-icon {
+      transform: rotate(45deg);
+    }
+  </style>
+<script data-purpose="scroll-progress">
+    window.onscroll = function() {
+      let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      let scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+  </script>
+</head>
+<body class="antialiased">
+<!-- BEGIN: Scroll Progress Bar -->
+<div class="fixed top-0 left-0 w-full h-1 z-50 bg-gray-100">
+<div class="h-full bg-black w-0 transition-all duration-150" id="progressBar"></div>
+</div>
+<!-- END: Scroll Progress Bar -->
+<!-- BEGIN: Header -->
+<header class="section-padding flex flex-col items-center justify-center text-center px-6">
+<span class="text-sm font-light tracking-[0.3em] uppercase mb-4 text-gray-500">Layer 1</span>
+<h1 class="text-5xl md:text-7xl font-bold mb-6">STRATEGY &amp; PLANNING</h1>
+<p class="max-w-2xl text-lg md:text-xl text-gray-600 font-light leading-relaxed">
+      Xây dựng nền móng tăng trưởng bền vững bằng sự kết hợp giữa tư duy định tính và sức mạnh phân tích của AI.
+    </p>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Methodology Section -->
+<section class="section-padding bg-white border-t border-gray-100">
+<div class="max-w-6xl mx-auto px-6">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+<!-- Left Column: Title & Tools -->
+<div class="lg:col-span-4" data-purpose="methodology-intro">
+<h2 class="text-3xl font-bold mb-8 uppercase tracking-tight">Methodology</h2>
+<div class="space-y-4">
+<p class="text-xs font-bold uppercase tracking-widest text-gray-400">Core Toolkit</p>
+<ul class="space-y-2 text-sm font-medium">
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-black rounded-full"></span> Claude 3.5 Sonnet / GPT-4o
+              </li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-black rounded-full"></span> Miro (Mapping &amp; Workflow)
+              </li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-black rounded-full"></span> Notion (Documentation)
+              </li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-black rounded-full"></span> Hotjar / GA4 (Data Signals)
+              </li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Accordion Details -->
+<div class="lg:col-span-8" data-purpose="methodology-accordion">
+<div class="space-y-6">
+<!-- Accordion Item 1 -->
+<div class="accordion-item border-b border-gray-200 pb-6 group cursor-pointer" onclick="this.classList.toggle('active')">
+<div class="flex justify-between items-center py-2">
+<h3 class="text-xl font-bold uppercase tracking-tight">Qualitative Approach (Recursive Analysis)</h3>
+<span class="accordion-icon transition-transform duration-300 text-2xl">+</span>
+</div>
+<div class="accordion-content">
+<p class="pt-4 text-gray-600 leading-relaxed">
+                  Không chỉ dừng lại ở số liệu bề nổi, phương pháp Recursive Analysis đi sâu vào việc đặt câu hỏi "Tại sao" liên tục để tìm ra nguyên nhân cốt lõi của hành vi khách hàng, từ đó xây dựng chiến lược dựa trên sự thật ngầm định (Insight).
+                </p>
+</div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="accordion-item border-b border-gray-200 pb-6 group cursor-pointer" onclick="this.classList.toggle('active')">
+<div class="flex justify-between items-center py-2">
+<h3 class="text-xl font-bold uppercase tracking-tight">Buyer Persona/Empathy Mapping</h3>
+<span class="accordion-icon transition-transform duration-300 text-2xl">+</span>
+</div>
+<div class="accordion-content">
+<p class="pt-4 text-gray-600 leading-relaxed">
+                  Xây dựng chân dung khách hàng chi tiết thông qua Empathy Mapping. Chúng tôi không chỉ định nghĩa họ là ai, mà còn hiểu họ nghe gì, thấy gì, nghĩ gì và cảm thấy gì trong hành trình mua hàng.
+                </p>
+</div>
+</div>
+<!-- Accordion Item 3 -->
+<div class="accordion-item border-b border-gray-200 pb-6 group cursor-pointer active" onclick="this.classList.toggle('active')">
+<div class="flex justify-between items-center py-2">
+<h3 class="text-xl font-bold uppercase tracking-tight">AI Acceleration (Claude/GPT as Lab)</h3>
+<span class="accordion-icon transition-transform duration-300 text-2xl">+</span>
+</div>
+<div class="accordion-content">
+<p class="pt-4 text-gray-600 leading-relaxed">
+                  Sử dụng AI như một phòng thí nghiệm tư duy. Thông qua kỹ thuật Prompt Engineering chuyên sâu, AI giúp giả lập các kịch bản phản biện, xử lý khối lượng lớn dữ liệu định tính và tối ưu hóa các bước thực thi chiến lược một cách thần tốc.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Methodology Section -->
+<!-- BEGIN: Showcase Project -->
+<section class="section-padding bg-[#F4F4F4]">
+<div class="max-w-6xl mx-auto px-6">
+<div class="bg-white p-8 md:p-16 rounded-sm shadow-sm">
+<div class="mb-12">
+<span class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 block">Featured Case Study</span>
+<h2 class="text-4xl font-bold mb-4">EdTech Growth Strategy</h2>
+<div class="inline-block px-3 py-1 bg-red-50 text-red-600 text-xs font-bold rounded mb-8">
+            CHALLENGE: Chi phí Acquisition cao do thông điệp chưa trúng đích
+          </div>
+</div>
+<!-- Research Log Sub-section -->
+<div class="mt-12" data-purpose="research-log">
+<h3 class="text-sm font-bold uppercase tracking-[0.2em] mb-8 border-l-4 border-black pl-4">Research Log (AI-Enhanced)</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+<!-- Step 1 -->
+<div class="space-y-3">
+<span class="text-xs font-mono text-gray-400">01. INPUT</span>
+<p class="text-sm text-gray-800">10,000+ dòng transcript phỏng vấn khách hàng &amp; dữ liệu CRM thô.</p>
+</div>
+<!-- Step 2 -->
+<div class="space-y-3">
+<span class="text-xs font-mono text-gray-400">02. AI PROCESS</span>
+<p class="text-sm text-gray-800">Claude-3-Opus phân loại cụm từ khóa cảm xúc, nhận diện rào cản tâm lý mua hàng (Friction points).</p>
+</div>
+<!-- Step 3 -->
+<div class="space-y-3">
+<span class="text-xs font-mono text-gray-400">03. OUTPUT</span>
+<p class="text-sm text-gray-800">Bộ thông điệp 3 tầng (Awareness, Trust, Conversion) giảm 40% CPA.</p>
+</div>
+</div>
+<!-- Visual Placeholder: Flowchart -->
+<div class="w-full h-64 md:h-96 bg-gray-50 rounded-2xl shadow-inner border border-gray-100 flex items-center justify-center overflow-hidden relative" data-purpose="visual-placeholder">
+<div class="absolute inset-0 opacity-10 flex items-center justify-center">
+<svg height="100%" preserveaspectratio="none" viewbox="0 0 100 100" width="100%">
+<path d="M0,50 Q25,20 50,50 T100,50" fill="none" stroke="black" stroke-width="0.5"></path>
+</svg>
+</div>
+<div class="text-center z-10">
+<div class="w-16 h-1 bg-black mx-auto mb-4"></div>
+<p class="text-xs font-mono uppercase tracking-widest text-gray-400">Strategic Flowchart Visualization</p>
+<img alt="Growth Strategy Flowchart" class="mt-6 rounded-lg shadow-md max-w-[80%] mx-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCioMI1xU2StP1fU7FOi6MEtCzqaWTo5gFhF4DDBVBwMXtC2W-BD8h5RL_5t8TzW1D_tZ0Jf48CKdRy3SS7HmbhpZfIlouprOJZs63S68em-Q5LzV58kBNOQisQG5RRgd55zRHh31SilLZjDdkS6ca5lC7VX5TjD9NNEYeOu5_tuD2JMvmOmTAHNb3oiDAWg19i-UXPUWwCXeBVW_lQkPt-BCLtG34z5zLAZWL-2PwxGLaC8tygrNYj8QqK2_uqpx7qTpJaef_1lOA"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Showcase Project -->
+<!-- BEGIN: Navigation Footer -->
+<footer class="border-t border-gray-200">
+<div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+<p class="text-sm font-medium text-gray-500 italic">
+        "Hệ thống hóa chiến lược đã xong. Tiếp theo: Hiện thực hóa qua Nội dung &amp; Thiết kế."
+      </p>
+<a class="group flex items-center gap-4 bg-black text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition-all" href="#">
+        Khám phá Layer 2 &amp; 3: Content &amp; Design
+        <span class="group-hover:translate-x-2 transition-transform">→</span>
+</a>
+</div>
+</footer>
+<!-- END: Navigation Footer -->
+</body></html>
