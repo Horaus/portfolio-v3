@@ -34,6 +34,11 @@ const en = {
     innovationTag: 'Innovation & Labs',
     rdDesc:
       'Explore the PDL Studio team, project vision, and a partnership invitation built around shared long-term value.',
+    rdCta: 'Coming Soon',
+  },
+  comingSoon: {
+    title: 'Coming Soon',
+    desc: 'The R&D area is being prepared to showcase upcoming studies, experiments, and new products from PDL Studio.',
   },
   team: {
     heroTag: 'Team Profile',

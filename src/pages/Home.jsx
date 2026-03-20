@@ -45,7 +45,7 @@ const Home = () => {
               </div>
             </section>
 
-            <section className="split-panel h-full min-h-[48vh] md:min-h-0 bg-white flex items-center justify-center cursor-pointer group" onClick={() => hardNavigate('/team')}>
+            <section className="split-panel h-full min-h-[48vh] md:min-h-0 bg-white flex items-center justify-center cursor-pointer group" onClick={() => hardNavigate('/coming-soon')}>
               <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
                 <img
                   alt="R&D Abstract"
@@ -61,7 +61,7 @@ const Home = () => {
                 <div className="max-w-sm md:max-w-md mx-auto opacity-100 md:opacity-0 transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-500 delay-100 pointer-events-auto md:pointer-events-none md:group-hover:pointer-events-auto md:group-hover:opacity-100">
                   <p className="text-gray-600 mb-8 text-sm md:text-base">{t('home.rdDesc')}</p>
                   <button className="px-7 py-3 md:px-8 md:py-3 border-2 border-black text-black rounded-custom font-bold hover:bg-black hover:text-white transition-all uppercase text-xs md:text-sm tracking-[0.14em] md:tracking-widest translate-z-0 min-h-[44px]">
-                    {t('header.team')}
+                    {t('home.rdCta')}
                   </button>
                 </div>
               </div>

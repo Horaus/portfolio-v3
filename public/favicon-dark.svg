@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#FFFFFF" />
+  <text
+    x="10"
+    y="38"
+    fill="#050505"
+    font-family="'Space Grotesk', Arial, sans-serif"
+    font-size="24"
+    font-weight="700"
+    letter-spacing="1.5"
+  >
+    PDL
+  </text>
+  <circle cx="54" cy="50" r="5" fill="#0B74E5" />
+</svg>

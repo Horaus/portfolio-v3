@@ -81,6 +81,17 @@ const Header = () => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    const applyScrollbarWidthVar = () => {
+      const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+    };
+
+    applyScrollbarWidthVar();
+    window.addEventListener('resize', applyScrollbarWidthVar);
+    return () => window.removeEventListener('resize', applyScrollbarWidthVar);
+  }, []);
+
   const textColor = isScrolled ? 'text-black' : 'text-white';
   const bgColor = isScrolled ? 'bg-white/80' : 'bg-black/20';
   const borderColor = isScrolled ? 'border-black/5' : 'border-white/5';
@@ -122,7 +133,10 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center backdrop-blur-md transition-all duration-300 ${bgColor} ${borderColor} border-b`}
+        className={`fixed top-0 left-0 w-full z-50 pl-4 md:pl-6 py-3 md:py-4 flex justify-between items-center backdrop-blur-md transition-all duration-300 ${bgColor} ${borderColor} border-b`}
+        style={{
+          paddingRight: 'calc(1.5rem + var(--scrollbar-width, 0px))',
+        }}
       >
         <div className="relative group cursor-pointer transition-colors duration-300">
           <BrandLogo

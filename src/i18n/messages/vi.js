@@ -34,6 +34,11 @@ const vi = {
     innovationTag: 'Innovation & Labs',
     rdDesc:
       'Khám phá đội ngũ PDL Studio, tầm nhìn dự án và lời mời hợp tác dành cho các đối tác cùng hệ giá trị.',
+    rdCta: 'Coming Soon',
+  },
+  comingSoon: {
+    title: 'Coming Soon',
+    desc: 'Khu vực R&D đang được hoàn thiện để công bố các nghiên cứu, thử nghiệm và sản phẩm mới của PDL Studio.',
   },
   team: {
     heroTag: 'Team Profile',

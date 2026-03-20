@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio | Marketing &amp; R&amp;D</title>
+<!-- Google Fonts: Space Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: '#007bff',
+            darkBg: '#0a0a0a',
+            lightBg: '#ffffff',
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+          },
+          borderRadius: {
+            'custom': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-transitions">
+    /* Smooth transitions for the split screen expansion */
+    .split-panel {
+      transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .panel-container:hover .split-panel {
+      width: 30%;
+    }
+    .panel-container .split-panel:hover {
+      width: 70%;
+    }
+    /* Mobile fallback: Stack vertically */
+    @media (max-width: 768px) {
+      .panel-container {
+        flex-direction: column;
+      }
+      .split-panel {
+        width: 100% !important;
+        height: 50vh;
+      }
+    }
+    /* Overlay effects for text readability */
+    .text-overlay {
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    }
+    .light-overlay {
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
+    }
+  </style>
+</head>
+<body class="bg-darkBg text-white font-sans antialiased overflow-hidden">
+<!-- BEGIN: Navigation -->
+<header class="fixed top-0 left-0 w-full z-50 p-6 flex justify-between items-center mix-blend-difference">
+<div class="text-2xl font-bold tracking-tighter uppercase">
+      Studio<span class="text-accent">.</span>
+</div>
+<nav class="hidden md:flex space-x-8 text-sm font-medium tracking-widest uppercase">
+<a class="hover:text-accent transition-colors" href="#">About</a>
+<a class="hover:text-accent transition-colors" href="#">Contact</a>
+<a class="hover:text-accent transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-accent transition-colors" href="#">Twitter</a>
+</nav>
+<button class="md:hidden p-2 text-white">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</header>
+<!-- END: Navigation -->
+<!-- BEGIN: MainContent -->
+<main class="h-screen w-full flex panel-container bg-black" data-purpose="split-screen-layout">
+<!-- BEGIN: MarketingSection -->
+<section class="split-panel w-1/2 h-full bg-darkBg border-r border-white/10 flex items-center justify-center cursor-pointer group" data-purpose="marketing-work" id="marketing-panel">
+<!-- Abstract Background Image for Marketing -->
+<div class="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+<img alt="Marketing Abstract" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNOP8UfwNkahIkaRRoeOnHJs0oSQuPWDFJxwFqohhAwdNsGH-Ikf4NexcmunGlsNKjH0i2Buki8W8iVD3OQkeW81G1mm6D5FXeYT6SQ4eunKVn-_aDy4u5gtjuO7EJA19iUcBD7Ke-pZ4_xXIDTrcnNZR8ACs9iOtayEH2nasze3UKaOwM-QRZK6IjVdtMJ15PLH1g4Jofs-W9afJa9W5bn5UquvNrsflDwxS78xi3I37aDV9P5D7z6XRtGvJGCIgfmSCEnwX_7ak"/>
+</div>
+<!-- Content -->
+<div class="relative z-10 text-center px-10">
+<span class="text-xs uppercase tracking-[0.5em] text-accent mb-4 block">Strategy &amp; Growth</span>
+<h2 class="text-6xl md:text-8xl font-bold mb-6 tracking-tighter uppercase">Marketing</h2>
+<div class="max-w-md mx-auto opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+<p class="text-gray-400 mb-8">Crafting high-impact digital narratives and data-driven campaigns that scale brands globally.</p>
+<button class="px-8 py-3 bg-accent text-white rounded-custom font-bold hover:bg-blue-600 transition-colors uppercase text-sm tracking-widest">
+            View Projects
+          </button>
+</div>
+</div>
+<!-- Left-to-Right Arrow Indicator (from sketch) -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 group-hover:text-accent transition-colors">
+<svg class="h-12 w-12 animate-pulse" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</section>
+<!-- END: MarketingSection -->
+<!-- BEGIN: RDSection -->
+<section class="split-panel w-1/2 h-full bg-lightBg flex items-center justify-center cursor-pointer group" data-purpose="rd-work" id="rd-panel">
+<!-- Abstract Background Image for R&D -->
+<div class="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
+<img alt="R&amp;D Abstract" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiip5o-4KhOEF_JtM7Nl_t4lL_Xv1mpKsrwFgN3ebxnWQyQZQ2--iDPlWE-EdWFv1YhSVfOwZrcQcGDJZTN_J6Ml8JntF7JrktAba-hTTj9XwcXqqkFb3SBYHs0wQvnZC-VDruTo4a8n-peFhDKKZib0mj3q8DXhN5Ypghlm-5wqTAMexpOk0b_iFcQ3EC7avbq3QVl3tFLoYtKitLEx4YPR-d1E4Ul_4S9qxl_Ts59OxhihVoZ7lG9xvlO6sYBoVu63HsixgbdZA"/>
+</div>
+<!-- Content -->
+<div class="relative z-10 text-center px-10 text-black">
+<span class="text-xs uppercase tracking-[0.5em] text-accent mb-4 block">Innovation &amp; Labs</span>
+<h2 class="text-6xl md:text-8xl font-bold mb-6 tracking-tighter uppercase">R&amp;D</h2>
+<div class="max-w-md mx-auto opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+<p class="text-gray-600 mb-8">Pioneering new technologies and architectural patterns to solve tomorrow's complex challenges.</p>
+<button class="px-8 py-3 border-2 border-black text-black rounded-custom font-bold hover:bg-black hover:text-white transition-all uppercase text-sm tracking-widest">
+            Explore Labs
+          </button>
+</div>
+</div>
+<!-- Right-to-Left Arrow Indicator (from sketch) -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-black/20 group-hover:text-accent transition-colors">
+<svg class="h-12 w-12 animate-pulse" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 16l-4-4m0 0l4-4m-4 4h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</section>
+<!-- END: RDSection -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Scripts -->
+<script data-purpose="interaction-logic">
+    // Add active classes for touch devices to simulate hover
+    const panels = document.querySelectorAll('.split-panel');
+    
+    panels.forEach(panel => {
+      panel.addEventListener('click', () => {
+        // Here you could trigger a navigation to a sub-page
+        console.log('Navigating to section...');
+      });
+    });
+  </script>
+<!-- END: Scripts -->
+</body></html>

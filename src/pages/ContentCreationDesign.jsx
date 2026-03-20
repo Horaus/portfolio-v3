@@ -233,7 +233,7 @@ const ContentCreationDesign = () => {
                </section>
 
                {/* SECTION 2: VISUAL SHOWCASE (LIGHT) */}
-               <section className="bg-[#f8f9fa] py-32 px-6 md:px-12 border-t border-gray-200 shadow-inner">
+               <section id="report-section" className="bg-[#f8f9fa] py-32 px-6 md:px-12 border-t border-gray-200 shadow-inner scroll-mt-24">
                   <div className="max-w-6xl mx-auto">
                      <div className="mb-20 text-center">
                         <span className="text-gray-400 text-[10px] font-black tracking-[0.5em] uppercase mb-4 block">Integrated Portfolio</span>

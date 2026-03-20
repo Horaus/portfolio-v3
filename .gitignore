@@ -9,12 +9,16 @@ lerna-debug.log*
 
 # === Dependencies ===
 node_modules/
+**/node_modules/
 
 # === Build output ===
 dist/
 dist-ssr/
 docs/
 *.local
+**/dist/
+**/dist-ssr/
+**/docs/
 
 # === Editor / OS files ===
 .vscode/*
@@ -35,3 +39,13 @@ Thumbs.db
 # === Temp conversion scripts ===
 convert.js
 convertData.cjs
+
+# === Antigravity / Agent files ===
+.gemini/
+.agents/
+.agent/
+_agents/
+_agent/
+
+# === Old gitignore ===
+.gitignore_app_old
