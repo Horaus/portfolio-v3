@@ -95,3 +95,61 @@ body {
   line-height: 0.9;
   text-shadow: none !important;
 }
+
+.report-a4 {
+  overflow: hidden;
+}
+
+.report-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .report-a4 {
+    max-width: calc(100vw - 16px) !important;
+    min-height: auto !important;
+    padding: 20px 14px !important;
+    border-radius: 10px;
+    margin-bottom: 10px !important;
+  }
+
+  .report-a4 h1 {
+    font-size: 1.45rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .report-a4 h2 {
+    font-size: 0.95rem !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .report-a4 h3 {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .report-a4 p,
+  .report-a4 li,
+  .report-a4 td,
+  .report-a4 th,
+  .report-a4 span,
+  .report-a4 div {
+    letter-spacing: normal !important;
+  }
+
+  .report-a4 table {
+    min-width: 620px;
+  }
+
+  .report-a4 .grid.grid-cols-3 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .report-a4 .grid.grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

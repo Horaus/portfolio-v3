@@ -5,9 +5,13 @@ import PageTransition from '../components/layout/PageTransition';
 import BrandGuideline from '../components/BrandGuideline';
 import ContentPager from '../components/layout/ContentPager';
 import SiteFooter from '../components/layout/SiteFooter';
+import { useLang } from '../hooks/useLang';
 
 const ContentCreationDesign = () => {
    const [modalData, setModalData] = React.useState(null);
+   const { lang } = useLang();
+   const isEn = lang === 'en';
+   const tx = (vi, en) => (isEn ? en : vi);
 
    React.useEffect(() => {
       if (modalData) {
@@ -29,11 +33,11 @@ const ContentCreationDesign = () => {
          asset: "Homepage Narrative: Ha Long Bay",
          module: "Hero + Story Block",
          content: [
-            "Bối cảnh mở đầu: bình minh trên Vịnh Hạ Long, mặt nước trong xanh phản chiếu đội du thuyền, tạo cảm giác “quiet luxury”.",
-            "Tuyên ngôn thương hiệu gói gọn trong 2 câu: hành trình riêng tư, dịch vụ tinh tuyển, chuẩn mực quốc tế.",
-            "Mạch kể chuyện 3 hồi: khám phá kỳ quan → trải nghiệm onboard → khoảnh khắc hoàng hôn, nhấn cảm xúc thư giãn.",
-            "Ngôn ngữ hình ảnh tươi mát, tự nhiên, gió biển nhẹ; ánh sáng trong, ít bóng gắt, ưu tiên chiều sâu.",
-            "CTA chính: “Book a Private Journey” đặt ở cuối đoạn 1; CTA phụ: “View Fleet”."
+            tx("Bối cảnh mở đầu: bình minh trên Vịnh Hạ Long, mặt nước trong xanh phản chiếu đội du thuyền, tạo cảm giác “quiet luxury”.", "Opening context: sunrise over Ha Long Bay, clear water reflecting the yacht fleet, creating a quiet-luxury tone."),
+            tx("Tuyên ngôn thương hiệu gói gọn trong 2 câu: hành trình riêng tư, dịch vụ tinh tuyển, chuẩn mực quốc tế.", "Brand statement in two lines: private journeys, curated service, and international standards."),
+            tx("Mạch kể chuyện 3 hồi: khám phá kỳ quan → trải nghiệm onboard → khoảnh khắc hoàng hôn, nhấn cảm xúc thư giãn.", "Three-act narrative arc: explore the wonder -> onboard experience -> sunset moments, anchored in calm emotional value."),
+            tx("Ngôn ngữ hình ảnh tươi mát, tự nhiên, gió biển nhẹ; ánh sáng trong, ít bóng gắt, ưu tiên chiều sâu.", "Visual language is fresh and natural with soft sea-breeze mood; clean light, minimal harsh shadows, and cinematic depth."),
+            tx("CTA chính: “Book a Private Journey” đặt ở cuối đoạn 1; CTA phụ: “View Fleet”.", "Primary CTA: “Book a Private Journey” at the end of section one; secondary CTA: “View Fleet”.")
          ],
          cta: "Book a Private Journey"
       },
@@ -41,11 +45,11 @@ const ContentCreationDesign = () => {
          asset: "Guideline: Visual System",
          module: "Color + Tone",
          content: [
-            "Màu chủ đạo navy #062631 đại diện chiều sâu biển, nền tảng tin cậy.",
-            "Teal #157A7A tạo cảm giác tươi mát, gợi liên tưởng vùng nước xanh.",
-            "Gold #C5A047 là điểm nhấn luxury, dùng tiết chế cho CTA và chi tiết cao cấp.",
-            "Tông ảnh: clean, airy, độ bão hòa vừa phải; hạn chế noise, ưu tiên texture cao cấp.",
-            "Ánh sáng tự nhiên, ưu tiên khung giờ sáng sớm/hoàng hôn để giữ chất “warm luxury”."
+            tx("Màu chủ đạo navy #062631 đại diện chiều sâu biển, nền tảng tin cậy.", "Primary navy #062631 represents ocean depth and trust."),
+            tx("Teal #157A7A tạo cảm giác tươi mát, gợi liên tưởng vùng nước xanh.", "Teal #157A7A adds freshness and water association."),
+            tx("Gold #C5A047 là điểm nhấn luxury, dùng tiết chế cho CTA và chi tiết cao cấp.", "Gold #C5A047 is the luxury accent, used selectively for CTAs and premium details."),
+            tx("Tông ảnh: clean, airy, độ bão hòa vừa phải; hạn chế noise, ưu tiên texture cao cấp.", "Image tone: clean, airy, moderate saturation; minimize noise and prioritize premium texture."),
+            tx("Ánh sáng tự nhiên, ưu tiên khung giờ sáng sớm/hoàng hôn để giữ chất “warm luxury”.", "Natural lighting with early morning/sunset priority to maintain warm-luxury feel.")
          ],
          cta: "Explore Guideline"
       },
@@ -53,10 +57,10 @@ const ContentCreationDesign = () => {
          asset: "Experience Section",
          module: "Service Modules",
          content: [
-            "Trình bày 3 cụm dịch vụ: Charter riêng tư, On-board dining, Concierge 24/7.",
-            "Mỗi module có headline 6–8 từ, mô tả 2 câu ngắn, nhấn lợi ích cảm xúc.",
-            "Bố cục: 3 card ngang, icon line đơn giản, khoảng trắng rộng.",
-            "CTA theo cụm: “Plan Your Route”, “View Menu”, “Talk to Concierge”."
+            tx("Trình bày 3 cụm dịch vụ: Charter riêng tư, On-board dining, Concierge 24/7.", "Present three service clusters: private charter, onboard dining, and 24/7 concierge."),
+            tx("Mỗi module có headline 6–8 từ, mô tả 2 câu ngắn, nhấn lợi ích cảm xúc.", "Each module uses a 6-8 word headline plus a concise two-sentence emotional value statement."),
+            tx("Bố cục: 3 card ngang, icon line đơn giản, khoảng trắng rộng.", "Layout: three horizontal cards, simple line icons, generous spacing."),
+            tx("CTA theo cụm: “Plan Your Route”, “View Menu”, “Talk to Concierge”.", "Cluster CTAs: “Plan Your Route”, “View Menu”, “Talk to Concierge”.")
          ],
          cta: "Plan Your Route"
       },
@@ -64,10 +68,10 @@ const ContentCreationDesign = () => {
          asset: "Long-form Content",
          module: "About Ha Long",
          content: [
-            "Bài viết dài ~400 chữ chia bullet theo 4 phần: lịch sử, cảnh quan, trải nghiệm, dịch vụ.",
-            "Giọng văn sang trọng, mô tả bằng cảm giác (gió, ánh sáng, hương mặn, mặt nước).",
-            "Chèn 2 trích dẫn nhỏ từ du khách, tạo social proof.",
-            "Kết bài nối sang trải nghiệm đặt tàu và gợi ý lịch trình 2 ngày."
+            tx("Bài viết dài ~400 chữ chia bullet theo 4 phần: lịch sử, cảnh quan, trải nghiệm, dịch vụ.", "A ~400-word long-form piece split into four bullets: history, landscape, experience, and services."),
+            tx("Giọng văn sang trọng, mô tả bằng cảm giác (gió, ánh sáng, hương mặn, mặt nước).", "Tone should feel premium, sensory-driven (wind, light, saline air, water surface)."),
+            tx("Chèn 2 trích dẫn nhỏ từ du khách, tạo social proof.", "Add two short guest quotes for social proof."),
+            tx("Kết bài nối sang trải nghiệm đặt tàu và gợi ý lịch trình 2 ngày.", "Close with booking transition and a suggested two-day itinerary.")
          ],
          cta: "Read the Journey"
       }
@@ -77,38 +81,38 @@ const ContentCreationDesign = () => {
       {
          channel: "Facebook",
          asset: "Album: Journey Moments",
-         content: "12 ảnh + caption dài, nhấn hành trình 2 ngày tại Hạ Long, kèm quote khách hàng.",
-         cta: "Inbox để nhận lịch trình"
+         content: tx("12 ảnh + caption dài, nhấn hành trình 2 ngày tại Hạ Long, kèm quote khách hàng.", "12-photo album with long caption highlighting a two-day Ha Long itinerary and customer quotes."),
+         cta: tx("Inbox để nhận lịch trình", "Inbox to get itinerary")
       },
       {
          channel: "Facebook",
          asset: "Short Video: Heritage",
-         content: "Video 30s, hook 3s đầu, dẫn vào câu chuyện “di sản biển”, ending logo + CTA.",
-         cta: "Book lịch xem du thuyền"
+         content: tx("Video 30s, hook 3s đầu, dẫn vào câu chuyện “di sản biển”, ending logo + CTA.", "30s video with a 3s hook, leading into a sea-heritage narrative, ending with logo + CTA."),
+         cta: tx("Book lịch xem du thuyền", "Book a yacht viewing")
       },
       {
          channel: "Instagram",
          asset: "Carousel: Sunset Luxury",
-         content: "8 slide, mỗi slide 1 điểm nhấn dịch vụ (cabin, dining, lounge, deck).",
-         cta: "Save để lên lịch"
+         content: tx("8 slide, mỗi slide 1 điểm nhấn dịch vụ (cabin, dining, lounge, deck).", "8-slide carousel, each slide featuring a service highlight (cabin, dining, lounge, deck)."),
+         cta: tx("Save để lên lịch", "Save for planning")
       },
       {
          channel: "Instagram",
          asset: "Reels: 15s Highlights",
-         content: "Cut nhanh 6 cảnh, nhạc cinematic, overlay chữ ngắn 3–4 từ.",
-         cta: "Follow để xem lịch trình mới"
+         content: tx("Cut nhanh 6 cảnh, nhạc cinematic, overlay chữ ngắn 3–4 từ.", "Fast cut of 6 scenes with cinematic music and short 3-4 word overlays."),
+         cta: tx("Follow để xem lịch trình mới", "Follow for new itineraries")
       },
       {
          channel: "TikTok",
          asset: "Vertical: 3 Feature Hook",
-         content: "Mở 2s với POV, 3 tính năng nổi bật, kết thúc bằng giá trị độc quyền.",
-         cta: "Swipe để xem chi tiết"
+         content: tx("Mở 2s với POV, 3 tính năng nổi bật, kết thúc bằng giá trị độc quyền.", "Open with a 2-second POV, present 3 standout features, close on exclusive value."),
+         cta: tx("Swipe để xem chi tiết", "Swipe for details")
       },
       {
          channel: "TikTok",
          asset: "Behind The Scenes",
-         content: "Quay hậu trường chuẩn bị du thuyền, cảm giác chân thực, gần gũi.",
-         cta: "Comment để nhận giá ưu đãi"
+         content: tx("Quay hậu trường chuẩn bị du thuyền, cảm giác chân thực, gần gũi.", "Behind-the-scenes yacht preparation footage with authentic and relatable feel."),
+         cta: tx("Comment để nhận giá ưu đãi", "Comment for special pricing")
       }
    ];
 
@@ -118,14 +122,14 @@ const ContentCreationDesign = () => {
          title: "Visual Brand Guideline",
          src: "/1.BRAND-GUIDELINE-YACHT.html",
          label: "Explore Guideline",
-         description: "Hệ thống nhận diện cốt lõi: từ Typography, Color Palette đến Grid System cho các ấn phẩm du thuyền cao cấp."
+         description: tx("Hệ thống nhận diện cốt lõi: từ Typography, Color Palette đến Grid System cho các ấn phẩm du thuyền cao cấp.", "Core visual identity system: from Typography and Color Palette to Grid System for premium yacht assets.")
       },
       {
          id: "web",
          title: "Live Yacht Ecosystem",
          src: "https://yacht.pdl.io.vn/",
          label: "Visit Website",
-         description: "Trải nghiệm thực tế nền tảng Booking & Showroom 3D tích hợp, tối ưu hóa tỷ lệ chuyển đổi và trải nghiệm người dùng."
+         description: tx("Trải nghiệm thực tế nền tảng Booking & Showroom 3D tích hợp, tối ưu hóa tỷ lệ chuyển đổi và trải nghiệm người dùng.", "Live experience of an integrated Booking platform and 3D showroom, optimized for conversion and user experience.")
       }
    ];
 
@@ -154,7 +158,10 @@ const ContentCreationDesign = () => {
                            Visual Layout <br /><span className="text-gray-500 text-2xl md:text-4xl italic lowercase">content & design.</span>
                         </h1>
                         <p className="text-gray-500 text-[11px] md:text-xs max-w-2xl mx-auto border-t border-white/10 pt-8 mt-4 leading-relaxed italic uppercase tracking-widest">
-                           "Visual hiệu quả không dừng ở thẩm mỹ. Mục tiêu là tạo ra trải nghiệm tin tưởng, thúc đẩy chuyển đổi và làm khách hàng hiểu đúng giá trị thương hiệu."
+                           {tx(
+                             '"Visual hiệu quả không dừng ở thẩm mỹ. Mục tiêu là tạo ra trải nghiệm tin tưởng, thúc đẩy chuyển đổi và làm khách hàng hiểu đúng giá trị thương hiệu."',
+                             '"Effective visuals go beyond aesthetics. The goal is to create trust, accelerate conversion, and make brand value instantly clear to customers."'
+                           )}
                         </p>
                      </motion.div>
                      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-start">
@@ -163,25 +170,28 @@ const ContentCreationDesign = () => {
                               <span className="w-8 h-px bg-accent"></span> Value‑Driven Visual System
                            </h2>
                            <p>
-                              Ở tầng Visual, chúng tôi tập trung vào việc <strong>làm được gì cho khách hàng</strong>: tăng niềm tin, rút ngắn thời gian ra quyết định và nâng trải nghiệm đặt dịch vụ.
+                              {tx('Ở tầng Visual, chúng tôi tập trung vào việc ', 'At the visual layer, we focus on ')}<strong>{tx('làm được gì cho khách hàng', 'what this delivers for customers')}</strong>{tx(': tăng niềm tin, rút ngắn thời gian ra quyết định và nâng trải nghiệm đặt dịch vụ.', ': building trust, shortening decision time, and elevating service-booking experience.')}
                            </p>
                            <p>
-                              Mỗi tài sản thị giác được xây dựng để trả lời 3 câu hỏi: khách hàng hiểu gì, cảm thấy gì, và làm gì tiếp theo. Visual trở thành “đòn bẩy” cho chuyển đổi thay vì chỉ là lớp trang trí.
+                              {tx(
+                                'Mỗi tài sản thị giác được xây dựng để trả lời 3 câu hỏi: khách hàng hiểu gì, cảm thấy gì, và làm gì tiếp theo. Visual trở thành “đòn bẩy” cho chuyển đổi thay vì chỉ là lớp trang trí.',
+                                'Each visual asset is built to answer three questions: what customers understand, what they feel, and what they do next. Visual becomes a conversion lever instead of decorative output.'
+                              )}
                            </p>
                            <p>
-                              Tại Aurelia Yachts, mô hình <strong>In-house Creative Engine</strong> bảo đảm thông điệp – hình ảnh – trải nghiệm được kiểm soát xuyên suốt từ Concept → Content → Design → Post‑production.
+                              {tx('Tại Aurelia Yachts, mô hình ', 'At Aurelia Yachts, the ')}<strong>In-house Creative Engine</strong>{tx(' bảo đảm thông điệp – hình ảnh – trải nghiệm được kiểm soát xuyên suốt từ Concept → Content → Design → Post‑production.', ' model keeps message, visual language, and experience aligned from Concept -> Content -> Design -> Post-production.')}
                            </p>
                            <ul className="space-y-4 text-sm">
                               <li className="flex gap-5 group">
                                  <div className="mt-2 w-2 h-2 rounded-full bg-accent shrink-0 group-hover:scale-150 transition-transform"></div>
                                  <div className="text-gray-400 leading-snug">
-                                    <strong className="text-white uppercase tracking-widest text-xs block mb-1">Conversion‑Ready Assets:</strong> Hệ thống hoá content & visual theo hành trình khách hàng để tối ưu tỷ lệ chuyển đổi.
+                                    <strong className="text-white uppercase tracking-widest text-xs block mb-1">Conversion‑Ready Assets:</strong> {tx('Hệ thống hoá content & visual theo hành trình khách hàng để tối ưu tỷ lệ chuyển đổi.', 'Systemize content and visuals by customer journey to optimize conversion rate.')}
                                  </div>
                               </li>
                               <li className="flex gap-5 group">
                                  <div className="mt-2 w-2 h-2 rounded-full bg-accent shrink-0 group-hover:scale-150 transition-transform"></div>
                                  <div className="text-gray-400 leading-snug">
-                                    <strong className="text-white uppercase tracking-widest text-xs block mb-1">Trust & Experience Layer:</strong> Chuẩn hoá tone, layout, motion và media format để tăng cảm giác cao cấp & đáng tin.
+                                    <strong className="text-white uppercase tracking-widest text-xs block mb-1">Trust & Experience Layer:</strong> {tx('Chuẩn hoá tone, layout, motion và media format để tăng cảm giác cao cấp & đáng tin.', 'Standardize tone, layout, motion, and media formats to elevate premium and trustworthy perception.')}
                                  </div>
                               </li>
                            </ul>
@@ -200,14 +210,14 @@ const ContentCreationDesign = () => {
                                     <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">Visual DNA</span>
                                  </div>
-                                 <p className="text-[11px] text-gray-500 leading-relaxed uppercase">Chuẩn hóa hệ ngôn ngữ thị giác: Typography, Color, Interaction.</p>
+                                 <p className="text-[11px] text-gray-500 leading-relaxed uppercase">{tx('Chuẩn hóa hệ ngôn ngữ thị giác: Typography, Color, Interaction.', 'Standardize visual language system: Typography, Color, Interaction.')}</p>
                               </div>
                               <div className="bg-black/40 p-5 rounded-xl border border-white/5 group-hover:bg-black/60 transition-colors">
                                  <div className="flex items-center gap-3 mb-2">
                                     <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">Content Inventory</span>
                                  </div>
-                                 <p className="text-[11px] text-gray-500 leading-relaxed uppercase">Sản xuất nội dung dựa trên 5 Pillar chiến lược đã đề ra.</p>
+                                 <p className="text-[11px] text-gray-500 leading-relaxed uppercase">{tx('Sản xuất nội dung dựa trên 5 Pillar chiến lược đã đề ra.', 'Produce content based on the 5 defined strategic pillars.')}</p>
                               </div>
                            </div>
 
@@ -227,9 +237,9 @@ const ContentCreationDesign = () => {
                   <div className="max-w-6xl mx-auto">
                      <div className="mb-20 text-center">
                         <span className="text-gray-400 text-[10px] font-black tracking-[0.5em] uppercase mb-4 block">Integrated Portfolio</span>
-                        <h2 className="text-4xl font-black text-black tracking-tighter uppercase mb-6">Showcase Dự Án Yacht</h2>
+                        <h2 className="text-4xl font-black text-black tracking-tighter uppercase mb-6">{tx('Showcase Dự Án Yacht', 'Yacht Project Showcase')}</h2>
                         <div className="w-24 h-1 bg-black mx-auto mb-8"></div>
-                        <p className="text-gray-500 text-xs italic">"Bảng nội dung content nghiên cứu, dự tính thiết kế dựa trên nội dung từ Strategy đưa xuống"</p>
+                        <p className="text-gray-500 text-xs italic">{tx('"Bảng nội dung content nghiên cứu, dự tính thiết kế dựa trên nội dung từ Strategy đưa xuống"', '"Research-led content table and design planning based on strategy handoff."')}</p>
                      </div>
 
                      {/* TABLE 1: WEBSITE / GUIDELINE */}
@@ -239,7 +249,7 @@ const ContentCreationDesign = () => {
                               <div className="w-2 h-8 bg-black"></div>
                               <div>
                                  <h3 className="text-xs font-black tracking-widest uppercase text-black">Website & Guideline Strategy</h3>
-                                 <p className="text-[9px] text-gray-400 uppercase mt-1 italic leading-relaxed max-w-sm">Bảng nội dung tập trung narrative, thông điệp, CTA và cấu trúc nội dung triển khai cho Website & Brand Guideline</p>
+                                 <p className="text-[9px] text-gray-400 uppercase mt-1 italic leading-relaxed max-w-sm">{tx('Bảng nội dung tập trung narrative, thông điệp, CTA và cấu trúc nội dung triển khai cho Website & Brand Guideline', 'Content table focused on narrative, messaging, CTA, and execution structure for Website & Brand Guideline')}</p>
                               </div>
                            </div>
                            <div className="hidden sm:flex gap-2 text-[9px] font-black text-gray-400">
@@ -284,7 +294,7 @@ const ContentCreationDesign = () => {
                               <div className="w-2 h-8 bg-black"></div>
                               <div>
                                  <h3 className="text-xs font-black tracking-widest uppercase text-black">Social Activation Plan</h3>
-                                 <p className="text-[9px] text-gray-400 uppercase mt-1 italic leading-relaxed max-w-sm">Đẩy mạnh kênh FB/IG/TikTok với hook rõ ràng, format cụ thể và CTA nhất quán</p>
+                                 <p className="text-[9px] text-gray-400 uppercase mt-1 italic leading-relaxed max-w-sm">{tx('Đẩy mạnh kênh FB/IG/TikTok với hook rõ ràng, format cụ thể và CTA nhất quán', 'Scale FB/IG/TikTok with clear hooks, specific formats, and consistent CTA')}</p>
                               </div>
                            </div>
                            <div className="hidden sm:flex gap-2 text-[9px] font-black text-gray-400">

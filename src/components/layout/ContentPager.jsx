@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { hardNavigate } from '../../utils/hardNavigation';
+import useT from '../../hooks/useT';
+import { useLang } from '../../hooks/useLang';
+import { withLangPath } from '../../i18n/routing';
 
 const baseCardClass = 'group rounded-xl border transition-all duration-300';
 
@@ -23,20 +26,21 @@ const themeClassMap = {
   },
 };
 
-const ContentPagerCard = ({ item, direction, theme }) => {
+const ContentPagerCard = ({ item, direction, theme, directionLabel, lang }) => {
   if (!item) return <div className="hidden md:block" />;
 
   const themeClass = themeClassMap[theme];
-  const directionLabel = direction === 'prev' ? 'Previous Block' : 'Next Block';
   const arrow = direction === 'prev' ? '\u2190' : '\u2192';
+  const to = withLangPath(lang, item.to);
+
   const handleHardNavigate = (event) => {
     event.preventDefault();
-    hardNavigate(item.to);
+    hardNavigate(to);
   };
 
   return (
     <Link
-      to={item.to}
+      to={to}
       onClick={handleHardNavigate}
       className={`${baseCardClass} ${themeClass.card} p-4 md:px-5 md:py-4 flex-1 min-h-[88px] flex items-center justify-between gap-4`}
     >
@@ -56,23 +60,26 @@ const ContentPagerCard = ({ item, direction, theme }) => {
   );
 };
 
-const ContentPager = ({ prev, next, theme = 'light', title = 'Continue Through the System' }) => {
+const ContentPager = ({ prev, next, theme = 'light', title }) => {
   const themeClass = themeClassMap[theme];
+  const t = useT();
+  const { lang } = useLang();
+  const resolvedTitle = title || t('pager.defaultTitle');
 
   return (
     <section className={themeClass.wrapper}>
       <div className="text-center mb-5">
         <span className={`text-[9px] font-black uppercase tracking-[0.45em] mb-2 block ${themeClass.label}`}>
-          Navigation
+          {t('pager.navigation')}
         </span>
         <h2 className={`text-sm md:text-base font-bold uppercase tracking-[0.3em] ${themeClass.title}`}>
-          {title}
+          {resolvedTitle}
         </h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-        <ContentPagerCard item={prev} direction="prev" theme={theme} />
-        <ContentPagerCard item={next} direction="next" theme={theme} />
+        <ContentPagerCard item={prev} direction="prev" directionLabel={t('pager.prev')} theme={theme} lang={lang} />
+        <ContentPagerCard item={next} direction="next" directionLabel={t('pager.next')} theme={theme} lang={lang} />
       </div>
     </section>
   );

@@ -1,16 +1,49 @@
-# React + Vite
+# PDL Studio — Portfolio v3.0
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio cá nhân dạng split-screen, trình bày hệ thống Marketing và R&D theo dạng báo cáo tương tác.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **Vite 8**
+- **Tailwind CSS v3**
+- **Framer Motion** — page transitions & animations
+- **Recharts** — data visualization
+- **React Router v7**
 
-## React Compiler
+## Cấu trúc dự án
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+src/
+├── components/
+│   ├── layout/          # Header, Footer, PageTransition, ContentPager...
+│   └── BrandGuideline   # Brand guideline page (static)
+├── pages/               # Các trang chính
+│   ├── Home.jsx         # Split-screen landing
+│   ├── MarketingSystems # Accordion marketing blocks
+│   ├── StrategyPlanning
+│   ├── ContentCreationDesign
+│   ├── OrganicPaidGrowth
+│   ├── AutomationCRM
+│   ├── AnalyticsConversionRetention
+│   └── ContentStrategy
+├── utils/
+│   └── hardNavigation   # SPA navigation helper
+└── index.css            # Global styles + split-panel CSS
+```
 
-## Expanding the ESLint configuration
+## Khởi động
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+---
+
+*PDL Studio — Marketing & R&D Portfolio System v3.0*

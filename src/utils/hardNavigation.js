@@ -1,3 +1,5 @@
+import { ensureLangPath } from '../i18n/routing';
+
 // Note:
 // We intentionally use hard navigation for route changes because SPA transitions
 // in this project can preserve scroll position on some deep pages.
@@ -5,8 +7,9 @@
 export const hardNavigate = (to) => {
   if (!to) return;
 
+  const target = ensureLangPath(to);
   const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-  if (to === current) return;
+  if (target === current) return;
 
-  window.location.assign(to);
+  window.location.assign(target);
 };

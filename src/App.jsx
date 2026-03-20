@@ -1,9 +1,12 @@
 import React, { Suspense, lazy, useEffect, useLayoutEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 import Home from './pages/Home';
 import MarketingSystems from './pages/MarketingSystems';
+import Team from './pages/Team';
+import TeamLeadHorausMinh from './pages/TeamLeadHorausMinh';
+import CVMarketing from './pages/CVMarketing';
 
 const ContentStrategy = lazy(() => import('./pages/ContentStrategy'));
 const StrategyPlanning = lazy(() => import('./pages/StrategyPlanning'));
@@ -12,6 +15,8 @@ const ContentCreationDesign = lazy(() => import('./pages/ContentCreationDesign')
 const AutomationCRM = lazy(() => import('./pages/AutomationCRM'));
 const AnalyticsConversionRetention = lazy(() => import('./pages/AnalyticsConversionRetention'));
 const VisualShowcase = lazy(() => import('./pages/VisualShowcase'));
+import { legacyToViPath } from './i18n/routing';
+import FloatingScrollTopButton from './components/layout/FloatingScrollTopButton';
 
 const RouteLoadingShell = () => (
   <div className="min-h-screen w-full bg-darkBg text-white flex items-center justify-center">
@@ -99,20 +104,50 @@ const ScrollToTop = () => {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
+
+  const withLang = (path) => [`/vi${path}`, `/en${path}`];
+  const LegacyRedirect = ({ toPath }) => (
+    <Navigate
+      replace
+      to={`${legacyToViPath(toPath)}${location.search || ''}${location.hash || ''}`}
+    />
+  );
+
+  const legacyRedirect = (legacyPath) => (
+    <Route path={legacyPath} element={<LegacyRedirect toPath={legacyPath} />} />
+  );
+
   return (
     <AnimatePresence mode="wait">
       <Suspense fallback={<RouteLoadingShell />}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/marketing-systems" element={<MarketingSystems />} />
-          <Route path="/content-strategy" element={<ContentStrategy />} />
-          <Route path="/strategy-planning" element={<StrategyPlanning />} />
-          <Route path="/organic-paid-growth" element={<OrganicPaidGrowth />} />
-          <Route path="/content-creation-design" element={<ContentCreationDesign />} />
-          <Route path="/automation-crm" element={<AutomationCRM />} />
-          <Route path="/analytics-conversion-retention" element={<AnalyticsConversionRetention />} />
-          <Route path="/visual-showcase-preview" element={<VisualShowcase />} />
+          <Route path="/" element={<Navigate replace to="/vi" />} />
+          {withLang('').map((path) => <Route key={path} path={path} element={<Home />} />)}
+          {withLang('/marketing-systems').map((path) => <Route key={path} path={path} element={<MarketingSystems />} />)}
+          {withLang('/team').map((path) => <Route key={path} path={path} element={<Team />} />)}
+          {withLang('/team/horaus-minh').map((path) => <Route key={path} path={path} element={<TeamLeadHorausMinh />} />)}
+          {withLang('/team/horaus-minh/cv/marketing').map((path) => <Route key={path} path={path} element={<CVMarketing />} />)}
+          {withLang('/content-strategy').map((path) => <Route key={path} path={path} element={<ContentStrategy />} />)}
+          {withLang('/strategy-planning').map((path) => <Route key={path} path={path} element={<StrategyPlanning />} />)}
+          {withLang('/organic-paid-growth').map((path) => <Route key={path} path={path} element={<OrganicPaidGrowth />} />)}
+          {withLang('/content-creation-design').map((path) => <Route key={path} path={path} element={<ContentCreationDesign />} />)}
+          {withLang('/automation-crm').map((path) => <Route key={path} path={path} element={<AutomationCRM />} />)}
+          {withLang('/analytics-conversion-retention').map((path) => <Route key={path} path={path} element={<AnalyticsConversionRetention />} />)}
+          {withLang('/visual-showcase-preview').map((path) => <Route key={path} path={path} element={<VisualShowcase />} />)}
+
+          {legacyRedirect('/marketing-systems')}
+          {legacyRedirect('/team')}
+          {legacyRedirect('/team/horaus-minh')}
+          {legacyRedirect('/team/horaus-minh/cv/marketing')}
+          {legacyRedirect('/content-strategy')}
+          {legacyRedirect('/strategy-planning')}
+          {legacyRedirect('/organic-paid-growth')}
+          {legacyRedirect('/content-creation-design')}
+          {legacyRedirect('/automation-crm')}
+          {legacyRedirect('/analytics-conversion-retention')}
+          {legacyRedirect('/visual-showcase-preview')}
+
+          <Route path="*" element={<Navigate replace to="/vi" />} />
         </Routes>
       </Suspense>
     </AnimatePresence>
@@ -125,6 +160,7 @@ function App() {
       <div className="app-container selection:bg-accent selection:text-white">
         <ScrollToTop />
         <AnimatedRoutes />
+        <FloatingScrollTopButton />
       </div>
     </Router>
   );
