@@ -9,7 +9,11 @@ const CVMarketing = () => {
   const t = useT();
 
   const backTo = withLangPath(lang, '/team/horaus-minh');
-  const cvSrc = lang === 'en' ? '/cv-edit/cv-preview-en.html' : '/cv-edit/cv-preview-vi.html';
+  const cacheBust = '20260321-1';
+  const cvSrc =
+    lang === 'en'
+      ? `/cv-edit/cv-preview-en.html?v=${cacheBust}`
+      : `/cv-edit/cv-preview-vi.html?v=${cacheBust}`;
 
   return (
     <div className="w-full min-h-screen bg-[#f1f1f1] relative">

@@ -17,7 +17,7 @@
     const safeHref = escapeHtml(href);
     if (/^https?:\/\//i.test(href)) {
       // External/website links should break out of iframe to avoid keeping CV overlay UI.
-      return `href="${safeHref}" target="_top" rel="noopener noreferrer"`;
+      return `href="${safeHref}" target="_top" rel="noopener noreferrer" data-external-link="true"`;
     }
     return `href="${safeHref}"`;
   }
@@ -251,6 +251,20 @@
   }
 
   root.innerHTML = data.pages.map((page, index) => renderPage(page, index)).join("");
+
+  // Extra safety for production: force top-level navigation for external links.
+  root.addEventListener("click", (event) => {
+    const anchor = event.target.closest("a[data-external-link='true']");
+    if (!anchor) return;
+    const href = anchor.getAttribute("href");
+    if (!href) return;
+    event.preventDefault();
+    if (window.top && window.top !== window) {
+      window.top.location.assign(href);
+      return;
+    }
+    window.location.assign(href);
+  });
 
   async function printCv() {
     if (document.fonts && document.fonts.ready) {
