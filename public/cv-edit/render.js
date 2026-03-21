@@ -13,11 +13,20 @@
       .replaceAll("'", "&#39;");
   }
 
+  function buildLinkAttrs(href) {
+    const safeHref = escapeHtml(href);
+    if (/^https?:\/\//i.test(href)) {
+      // External/website links should break out of iframe to avoid keeping CV overlay UI.
+      return `href="${safeHref}" target="_top" rel="noopener noreferrer"`;
+    }
+    return `href="${safeHref}"`;
+  }
+
   function renderContactRows(items) {
     return items
       .map((item) => {
         const value = item.href
-          ? `<a href="${escapeHtml(item.href)}">${escapeHtml(item.value)}</a>`
+          ? `<a ${buildLinkAttrs(item.href)}>${escapeHtml(item.value)}</a>`
           : `<span>${escapeHtml(item.value)}</span>`;
         return `
           <div class="contact-row">
