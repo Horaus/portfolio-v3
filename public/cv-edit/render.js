@@ -259,6 +259,10 @@
     const href = anchor.getAttribute("href");
     if (!href) return;
     event.preventDefault();
+    if (window.parent && window.parent !== window) {
+      window.parent.location.assign(href);
+      return;
+    }
     if (window.top && window.top !== window) {
       window.top.location.assign(href);
       return;
