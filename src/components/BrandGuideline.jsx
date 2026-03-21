@@ -125,7 +125,7 @@ export default function BrandGuideline() {
 
                 <div className="relative">
                     <div className="aspect-[4/5] bg-[#F5F0E8] rounded-[40px] overflow-hidden shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=1200" loading="lazy" decoding="async"
+                        <img src="/images/brand/sunset-large.jpg" loading="lazy" decoding="async"
                             className="w-full h-full object-cover" />
                     </div>
                     
@@ -680,7 +680,7 @@ export default function BrandGuideline() {
                                         <div className="w-3 h-3 rounded-full bg-[#61C554]"></div>
                                     </div>
                                     <div className="h-[600px] overflow-y-scroll no-scrollbar bg-[#F5F0E8]">
-                                        <img src="https://images.unsplash.com/photo-1621275471769-e6aa344546d5?q=80&w=1600" loading="lazy" decoding="async"
+                                        <img src="/images/brand/interior.jpg" loading="lazy" decoding="async"
                                             className="w-full h-full object-cover" />
                                         <div className="p-20 space-y-20">
                                             <div className="flex justify-between items-end">
@@ -727,7 +727,7 @@ export default function BrandGuideline() {
                                     </div>
                                     <div className="flex-1 overflow-hidden grid grid-cols-2 gap-6">
                                         <div className="bg-white rounded-xl shadow-sm p-4 h-full relative group">
-                                            <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?q=80&w=600" loading="lazy" decoding="async"
+                                            <img src="/images/brand/detail-small.jpg" loading="lazy" decoding="async"
                                                 className="w-full h-32 object-cover rounded-lg mb-4" />
                                             <h5 className="font-bold text-[#062631] text-sm">Sunseeker Manhattan 66</h5>
                                             <p className="text-[10px] text-[#157A7A] font-bold mb-2">GOLD COLLECTION</p>
@@ -738,7 +738,7 @@ export default function BrandGuideline() {
                                             </div>
                                         </div>
                                         <div className="bg-white rounded-xl shadow-sm p-4 h-full group">
-                                            <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600" loading="lazy" decoding="async"
+                                            <img src="/images/brand/sunset-small.jpg" loading="lazy" decoding="async"
                                                 className="w-full h-32 object-cover rounded-lg mb-4" />
                                             <h5 className="font-bold text-[#062631] text-sm">Azimut Magellano 66</h5>
                                             <p className="text-[10px] text-[#157A7A] font-bold mb-2">PREMIUM ELITE</p>
@@ -780,7 +780,8 @@ export default function BrandGuideline() {
                                 </div>
                                 <div className="bg-[#062631] aspect-[9/19] rounded-[45px] overflow-hidden">
                                     <div
-                                        className="h-1/2 bg-[url('https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600')] bg-cover bg-center p-8 flex flex-col justify-between">
+                                        className="h-1/2 bg-cover bg-center p-8 flex flex-col justify-between"
+                                        style={{ backgroundImage: "url('/images/brand/sunset-small.jpg')" }}>
                                         <span className="font-serif text-white italic text-xl">Aurelia Yachts</span>
                                         <h2 className="font-serif text-4xl text-white font-bold leading-tight">Elite
                                             <br /><span className="text-[#C5A047] italic">Fleet</span></h2>

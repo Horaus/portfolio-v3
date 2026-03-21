@@ -10,31 +10,31 @@ const baseBlocks = [
     id: 1,
     key: 'strategy',
     link: '/strategy-planning',
-    image: 'https://images.pexels.com/photos/15635393/pexels-photo-15635393.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/images/systems/strategy.jpg',
   },
   {
     id: 2,
     key: 'visual',
     link: '/content-creation-design',
-    image: 'https://images.pexels.com/photos/17476381/pexels-photo-17476381.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/images/systems/visual.jpg',
   },
   {
     id: 3,
     key: 'growth',
     link: '/organic-paid-growth',
-    image: 'https://images.pexels.com/photos/7108077/pexels-photo-7108077.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/images/systems/growth.jpg',
   },
   {
     id: 4,
     key: 'automation',
     link: '/automation-crm',
-    image: 'https://images.pexels.com/photos/2881233/pexels-photo-2881233.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/images/systems/automation.jpg',
   },
   {
     id: 5,
     key: 'analytics',
     link: '/analytics-conversion-retention',
-    image: 'https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    image: '/images/systems/analytics.jpg',
   },
 ];
 

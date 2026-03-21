@@ -45,10 +45,10 @@ const VisualShowcase = () => {
 
   // Using the generated images (placeholders)
   const images = [
-    "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&q=80&w=1000", // Yacht sunset
-    "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=1000", // Marine luxury
-    "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=1000", // Details
-    "https://images.unsplash.com/photo-1621277224630-81a6cb829396?auto=format&fit=crop&q=80&w=1000"  // Lifestyle
+    "/images/brand/yacht-sunset.jpg",   // Yacht sunset
+    "/images/brand/marine-luxury.jpg",  // Marine luxury
+    "/images/brand/yacht-details.jpg",  // Details
+    "/images/brand/lifestyle.jpg"       // Lifestyle
   ];
 
   return (
