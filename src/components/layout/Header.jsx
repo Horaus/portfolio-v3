@@ -132,16 +132,7 @@ const Header = () => {
             asLink
             to={homePath}
             onClick={handleHardLink(homePath)}
-            className="hidden xl:inline-flex hover:opacity-85 transition-opacity"
-          />
-          <BrandLogo
-            variant="compact"
-            size="sm"
-            tone={logoTone}
-            asLink
-            to={homePath}
-            onClick={handleHardLink(homePath)}
-            className="inline-flex xl:hidden hover:opacity-85 transition-opacity"
+            className="inline-flex hover:opacity-85 transition-opacity"
           />
         </div>
 
