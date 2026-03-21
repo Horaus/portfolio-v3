@@ -7,6 +7,7 @@ import MarketingSystems from './pages/MarketingSystems';
 import Team from './pages/Team';
 import TeamLeadHorausMinh from './pages/TeamLeadHorausMinh';
 import CVMarketing from './pages/CVMarketing';
+import ComingSoon from './pages/ComingSoon';
 
 const ContentStrategy = lazy(() => import('./pages/ContentStrategy'));
 const StrategyPlanning = lazy(() => import('./pages/StrategyPlanning'));
@@ -124,6 +125,7 @@ const AnimatedRoutes = () => {
           <Route path="/" element={<Navigate replace to="/vi" />} />
           {withLang('').map((path) => <Route key={path} path={path} element={<Home />} />)}
           {withLang('/marketing-systems').map((path) => <Route key={path} path={path} element={<MarketingSystems />} />)}
+          {withLang('/coming-soon').map((path) => <Route key={path} path={path} element={<ComingSoon />} />)}
           {withLang('/team').map((path) => <Route key={path} path={path} element={<Team />} />)}
           {withLang('/team/horaus-minh').map((path) => <Route key={path} path={path} element={<TeamLeadHorausMinh />} />)}
           {withLang('/team/horaus-minh/cv/marketing').map((path) => <Route key={path} path={path} element={<CVMarketing />} />)}
@@ -136,6 +138,7 @@ const AnimatedRoutes = () => {
           {withLang('/visual-showcase-preview').map((path) => <Route key={path} path={path} element={<VisualShowcase />} />)}
 
           {legacyRedirect('/marketing-systems')}
+          {legacyRedirect('/coming-soon')}
           {legacyRedirect('/team')}
           {legacyRedirect('/team/horaus-minh')}
           {legacyRedirect('/team/horaus-minh/cv/marketing')}
