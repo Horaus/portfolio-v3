@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Header from '../components/layout/Header';
 import PageTransition from '../components/layout/PageTransition';
 import SiteFooter from '../components/layout/SiteFooter';

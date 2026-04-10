@@ -75,7 +75,7 @@ const IndexPage = () => {
 
           {/* 5 Strategic Blocks Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-white/10 border border-white/10 overflow-hidden">
-            {blocks.map((block, i) => (
+            {blocks.map((block) => (
               <Link to={block.link} key={block.id} className="group relative block bg-darkBg hover:bg-white transition-colors duration-500 min-h-[380px] p-8 flex flex-col justify-between overflow-hidden">
                 <div className="relative z-10">
                   <span className="inline-block px-2 py-1 bg-white/10 group-hover:bg-black/10 text-accent text-xs font-bold tracking-widest mb-6 rounded-sm uppercase transition-colors">

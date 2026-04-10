@@ -50,8 +50,8 @@ const A4Page = ({ children, pageNumber, totalPages }) => (
           <p className="text-[8px] text-gray-400 uppercase font-bold tracking-widest mt-1">Document ID: AZ-2026-NATIONAL-CAMPAIGN</p>
         </div>
       </div>
-      <div className="text-right">
-        <span className="text-[8px] font-black border-2 border-black px-2 py-1 tracking-tighter text-black bg-gray-50" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>CONFIDENTIAL / BOARD ONLY</span>
+      <div className="text-right shrink-0 pl-2">
+        <span className="inline-block whitespace-nowrap text-[7px] sm:text-[8px] font-black border-2 border-black px-2 py-1 tracking-tighter text-black bg-gray-50" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>CONFIDENTIAL / BOARD ONLY</span>
       </div>
     </div>
 

@@ -20,7 +20,6 @@ export const translate = (lang, key) => {
 
   const fallback = getByPath(messages[DEFAULT_LANG], key);
   if (fallback !== undefined && lang !== DEFAULT_LANG && import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
     console.warn(`[i18n] Missing key "${key}" in lang "${lang}", fallback to "${DEFAULT_LANG}".`);
   }
 

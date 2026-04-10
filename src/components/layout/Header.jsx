@@ -30,7 +30,6 @@ const Header = () => {
   useEffect(() => {
     const target = document.getElementById('report-section');
     if (!target) {
-      setIsScrolled(false);
       return;
     }
 
@@ -57,8 +56,11 @@ const Header = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setIsSystemsOpen(false);
+    const frameId = window.requestAnimationFrame(() => {
+      setIsMobileMenuOpen(false);
+      setIsSystemsOpen(false);
+    });
+    return () => window.cancelAnimationFrame(frameId);
   }, [location.pathname, location.hash]);
 
   useEffect(() => {
@@ -81,11 +83,12 @@ const Header = () => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isMobileMenuOpen]);
 
-  const textColor = isScrolled ? 'text-black' : 'text-white';
-  const bgColor = isScrolled ? 'bg-white/80' : 'bg-black/20';
-  const borderColor = isScrolled ? 'border-black/5' : 'border-white/5';
+  const isHeaderScrolled = hasReportAnchor && isScrolled;
+  const textColor = isHeaderScrolled ? 'text-black' : 'text-white';
+  const bgColor = isHeaderScrolled ? 'bg-white/80' : 'bg-black/20';
+  const borderColor = isHeaderScrolled ? 'border-black/5' : 'border-white/5';
   const navLinkClass = 'hover:text-accent transition-colors';
-  const logoTone = isScrolled ? 'dark' : 'light';
+  const logoTone = isHeaderScrolled ? 'dark' : 'light';
 
   const homePath = withLangPath(lang, '/');
   const systemsPath = withLangPath(lang, '/marketing-systems');
@@ -173,7 +176,7 @@ const Header = () => {
             type="button"
             aria-label="Open navigation"
             className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${
-              isScrolled ? 'border-black/15 text-black' : 'border-white/25 text-white'
+              isHeaderScrolled ? 'border-black/15 text-black' : 'border-white/25 text-white'
             }`}
             onClick={() => setIsMobileMenuOpen(true)}
           >

@@ -60,7 +60,8 @@ body {
 .panel-container {
   display: flex !important;
   width: 100vw !important;
-  height: 100vh !important;
+  min-height: 100dvh !important;
+  height: 100dvh !important;
   margin: 0;
   padding: 0;
 }
@@ -72,21 +73,27 @@ body {
   width: 50% !important;
 }
 
-.panel-container:hover .split-panel {
-  width: 30% !important;
-}
+@media (hover: hover) and (pointer: fine) and (min-width: 769px) {
+  .panel-container:hover .split-panel {
+    width: 30% !important;
+  }
 
-.panel-container .split-panel:hover {
-  width: 70% !important;
+  .panel-container .split-panel:hover {
+    width: 70% !important;
+  }
 }
 
 @media (max-width: 768px) {
   .panel-container {
     flex-direction: column !important;
+    height: auto !important;
+    min-height: 100dvh !important;
   }
+
   .split-panel {
     width: 100% !important;
-    height: 50vh !important;
+    min-height: 50dvh !important;
+    height: auto !important;
   }
 }
 
@@ -110,9 +117,9 @@ body {
   .report-a4 {
     max-width: calc(100vw - 16px) !important;
     min-height: auto !important;
-    padding: 20px 14px !important;
+    padding: 14px 10px !important;
     border-radius: 10px;
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
   }
 
   .report-a4 h1 {
@@ -142,7 +149,49 @@ body {
   }
 
   .report-a4 table {
-    min-width: 620px;
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed;
+  }
+
+  .report-a4 th,
+  .report-a4 td {
+    padding: 6px 5px !important;
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.35 !important;
+    font-size: 9px !important;
+  }
+
+  .report-a4 th {
+    font-size: 8px !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  .report-a4 img,
+  .report-a4 svg,
+  .report-a4 canvas,
+  .report-a4 .recharts-wrapper,
+  .report-a4 .recharts-surface {
+    max-width: 100%;
+  }
+
+  .report-a4 .h-72,
+  .report-a4 .h-64,
+  .report-a4 .h-56,
+  .report-a4 .h-48,
+  .report-a4 .h-44 {
+    height: 150px !important;
+  }
+
+  .report-a4 .mb-12,
+  .report-a4 .mb-10,
+  .report-a4 .mb-8,
+  .report-a4 .my-8,
+  .report-a4 .my-6 {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
   }
 
   .report-a4 .grid.grid-cols-3 {

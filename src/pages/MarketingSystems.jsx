@@ -58,7 +58,6 @@ const MarketingSystems = () => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 769px)');
-    setIsDesktop(mediaQuery.matches);
     const syncViewport = (event) => {
       setIsDesktop(event.matches);
     };
