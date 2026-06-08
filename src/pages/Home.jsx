@@ -45,7 +45,7 @@ const Home = () => {
               </div>
             </section>
 
-            <section className="split-panel h-full min-h-[48vh] md:min-h-0 bg-white flex items-center justify-center cursor-pointer group" onClick={() => hardNavigate('/coming-soon')}>
+            <section className="split-panel h-full min-h-[48vh] md:min-h-0 bg-white flex items-center justify-center cursor-pointer group" onClick={() => hardNavigate('/rd')}>
               <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
                 <img
                   alt="R&D Abstract"

@@ -3,9 +3,9 @@ const en = {
     home: 'Home',
     systems: 'Systems',
     team: 'Team',
-    report: 'Report',
     portfolio: 'Portfolio',
     brandShort: 'PDL',
+    rd: 'R&D Labs',
   },
   footer: {
     tagline: 'Full-stack marketing systems, narrative-led portfolio storytelling, and disciplined strategic execution.',
@@ -14,10 +14,10 @@ const en = {
     home: 'Home',
     systems: 'Systems',
     team: 'Team',
-    strategy: 'Strategy',
     visual: 'Visual',
     growth: 'Growth',
     analytics: 'Analytics',
+    rd: 'R&D',
     version: 'Portfolio System v3.0',
     base: 'Base: Hanoi, Vietnam',
   },
@@ -34,7 +34,7 @@ const en = {
     innovationTag: 'Innovation & Labs',
     rdDesc:
       'Explore the PDL Studio team, project vision, and a partnership invitation built around shared long-term value.',
-    rdCta: 'Coming Soon',
+    rdCta: 'Explore R&D',
   },
   comingSoon: {
     title: 'Coming Soon',
@@ -106,6 +106,33 @@ const en = {
       analytics: {
         title: 'Analytics',
         desc: 'Creates reporting systems to improve CRO outcomes and quantify ROI.',
+      },
+    },
+  },
+  rd: {
+    titleLine1: 'Research',
+    titleLine2: '& Development.',
+    viewDetail: 'View Case Study',
+    blocks: {
+      prix: {
+        title: 'Prix.',
+        desc: 'Pricing Intelligence System. From costing tools to profit simulation for SMEs.',
+      },
+      alpha: {
+        title: 'Project Alpha',
+        desc: 'Researching Generative AI applications to optimize bulk content production workflows.',
+      },
+      beta: {
+        title: 'Project Beta',
+        desc: 'Customized CRM system tailored specifically for B2B service enterprises.',
+      },
+      gamma: {
+        title: 'Project Gamma',
+        desc: 'Omnichannel customer data analytics and interpretation solution.',
+      },
+      delta: {
+        title: 'Project Delta',
+        desc: 'Automated performance reporting tool for multi-platform ad campaigns.',
       },
     },
   },

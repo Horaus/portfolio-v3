@@ -17,6 +17,7 @@ const SiteFooter = () => {
   const links = {
     home: withLangPath(lang, '/'),
     systems: withLangPath(lang, '/marketing-systems'),
+    rd: withLangPath(lang, '/rd'),
     team: withLangPath(lang, '/team'),
     strategy: withLangPath(lang, '/strategy-planning'),
     visual: withLangPath(lang, '/content-creation-design'),
@@ -49,8 +50,8 @@ const SiteFooter = () => {
             <div className="grid grid-cols-2 gap-x-8 gap-y-2.5 text-[13px] md:text-[15px]">
               <Link to={links.home} onClick={handleHardLink(links.home)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.home')}</Link>
               <Link to={links.systems} onClick={handleHardLink(links.systems)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.systems')}</Link>
+              <Link to={links.rd} onClick={handleHardLink(links.rd)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.rd')}</Link>
               <Link to={links.team} onClick={handleHardLink(links.team)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.team')}</Link>
-              <Link to={links.strategy} onClick={handleHardLink(links.strategy)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.strategy')}</Link>
               <Link to={links.visual} onClick={handleHardLink(links.visual)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.visual')}</Link>
               <Link to={links.growth} onClick={handleHardLink(links.growth)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.growth')}</Link>
               <Link to={links.analytics} onClick={handleHardLink(links.analytics)} className="text-gray-300 hover:text-accent transition-colors">{t('footer.analytics')}</Link>

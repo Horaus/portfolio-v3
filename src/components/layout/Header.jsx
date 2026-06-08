@@ -93,6 +93,7 @@ const Header = () => {
   const homePath = withLangPath(lang, '/');
   const systemsPath = withLangPath(lang, '/marketing-systems');
   const teamPath = withLangPath(lang, '/team');
+  const rdPath = withLangPath(lang, '/rd');
 
   const systemsBranches = [
     { to: withLangPath(lang, '/strategy-planning'), label: t('systems.blocks.strategy.title') },
@@ -148,14 +149,12 @@ const Header = () => {
           <Link to={systemsPath} onClick={handleHardLink(systemsPath)} className={navLinkClass}>
             {t('header.systems')}
           </Link>
+          <Link to={rdPath} onClick={handleHardLink(rdPath)} className={navLinkClass}>
+            {t('header.rd')}
+          </Link>
           <Link to={teamPath} onClick={handleHardLink(teamPath)} className={navLinkClass}>
             {t('header.team')}
           </Link>
-          {hasReportAnchor && (
-            <a href="#report-section" className={navLinkClass}>
-              {t('header.report')}
-            </a>
-          )}
 
           <div className="ml-2 pl-5 border-l border-current/20 flex items-center gap-2">
             <button type="button" className={langBtnClass(lang === 'vi')} onClick={() => switchLanguage('vi')}>
@@ -282,14 +281,12 @@ const Header = () => {
                   )}
                 </AnimatePresence>
 
+                <Link to={rdPath} onClick={handleHardLink(rdPath)} className={mobileLinkClass}>
+                  {t('header.rd')}
+                </Link>
                 <Link to={teamPath} onClick={handleHardLink(teamPath)} className={mobileLinkClass}>
                   {t('header.team')}
                 </Link>
-                {hasReportAnchor && (
-                  <a href="#report-section" onClick={() => setIsMobileMenuOpen(false)} className={mobileLinkClass}>
-                    {t('header.report')}
-                  </a>
-                )}
               </nav>
 
               <div className="mt-auto pt-5 border-t border-black/10">

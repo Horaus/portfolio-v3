@@ -16,6 +16,8 @@ const ContentCreationDesign = lazy(() => import('./pages/ContentCreationDesign')
 const AutomationCRM = lazy(() => import('./pages/AutomationCRM'));
 const AnalyticsConversionRetention = lazy(() => import('./pages/AnalyticsConversionRetention'));
 const VisualShowcase = lazy(() => import('./pages/VisualShowcase'));
+const RDIndex = lazy(() => import('./pages/RDIndex'));
+const PrixProject = lazy(() => import('./pages/PrixProject'));
 import { legacyToViPath } from './i18n/routing';
 import FloatingScrollTopButton from './components/layout/FloatingScrollTopButton';
 
@@ -136,6 +138,8 @@ const AnimatedRoutes = () => {
           {withLang('/automation-crm').map((path) => <Route key={path} path={path} element={<AutomationCRM />} />)}
           {withLang('/analytics-conversion-retention').map((path) => <Route key={path} path={path} element={<AnalyticsConversionRetention />} />)}
           {withLang('/visual-showcase-preview').map((path) => <Route key={path} path={path} element={<VisualShowcase />} />)}
+          {withLang('/rd').map((path) => <Route key={path} path={path} element={<RDIndex />} />)}
+          {withLang('/rd/prix').map((path) => <Route key={path} path={path} element={<PrixProject />} />)}
 
           {legacyRedirect('/marketing-systems')}
           {legacyRedirect('/coming-soon')}
@@ -149,6 +153,8 @@ const AnimatedRoutes = () => {
           {legacyRedirect('/automation-crm')}
           {legacyRedirect('/analytics-conversion-retention')}
           {legacyRedirect('/visual-showcase-preview')}
+          {legacyRedirect('/rd')}
+          {legacyRedirect('/rd/prix')}
 
           <Route path="*" element={<Navigate replace to="/vi" />} />
         </Routes>

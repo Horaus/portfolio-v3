@@ -3,9 +3,9 @@ const vi = {
     home: 'Home',
     systems: 'Systems',
     team: 'Team',
-    report: 'Report',
     portfolio: 'Portfolio',
     brandShort: 'PDL',
+    rd: 'R&D Labs',
   },
   footer: {
     tagline: 'Hệ thống marketing full-stack, portfolio theo narrative và triển khai chiến lược có cấu trúc.',
@@ -14,10 +14,10 @@ const vi = {
     home: 'Home',
     systems: 'Systems',
     team: 'Team',
-    strategy: 'Strategy',
     visual: 'Visual',
     growth: 'Growth',
     analytics: 'Analytics',
+    rd: 'R&D',
     version: 'Portfolio System v3.0',
     base: 'Base: Hà Nội, Việt Nam',
   },
@@ -34,7 +34,7 @@ const vi = {
     innovationTag: 'Innovation & Labs',
     rdDesc:
       'Khám phá đội ngũ PDL Studio, tầm nhìn dự án và lời mời hợp tác dành cho các đối tác cùng hệ giá trị.',
-    rdCta: 'Coming Soon',
+    rdCta: 'Explore R&D',
   },
   comingSoon: {
     title: 'Coming Soon',
@@ -106,6 +106,33 @@ const vi = {
       analytics: {
         title: 'Analytics',
         desc: 'Hệ thống Databox đo lường, tối ưu tỷ lệ chuyển đổi cuối (CRO) và báo cáo ROI.',
+      },
+    },
+  },
+  rd: {
+    titleLine1: 'Research',
+    titleLine2: '& Development.',
+    viewDetail: 'View Case Study',
+    blocks: {
+      prix: {
+        title: 'Prix.',
+        desc: 'Pricing Intelligence System. Từ công cụ tính giá thành đến hệ thống mô phỏng lợi nhuận cho SME.',
+      },
+      alpha: {
+        title: 'Project Alpha',
+        desc: 'Nghiên cứu ứng dụng Generative AI trong việc tối ưu hóa luồng sản xuất content hàng loạt.',
+      },
+      beta: {
+        title: 'Project Beta',
+        desc: 'Hệ thống CRM tùy biến dành riêng cho các doanh nghiệp dịch vụ B2B.',
+      },
+      gamma: {
+        title: 'Project Gamma',
+        desc: 'Giải pháp phân tích dữ liệu khách hàng đa kênh (Omnichannel Analytics).',
+      },
+      delta: {
+        title: 'Project Delta',
+        desc: 'Công cụ tự động hóa báo cáo hiệu suất chiến dịch quảng cáo.',
       },
     },
   },
