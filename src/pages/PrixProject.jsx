@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Header from '../components/layout/Header';
 import PageTransition from '../components/layout/PageTransition';
 import SiteFooter from '../components/layout/SiteFooter';
 import ReportClosing from '../components/layout/ReportClosing';
 import { hardNavigate } from '../utils/hardNavigation';
+import useLang from '../hooks/useLang';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cell, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LineChart, Line } from 'recharts';
 
@@ -50,6 +51,79 @@ const deploymentData = [
   { layer: 'Tests', readiness: 62 },
 ];
 
+const prixShellCopy = {
+  vi: {
+    roadmapTitle: 'R&D Roadmap',
+    glossaryTitle: 'Chú thích & Thuật ngữ',
+    annotationLabel: 'Chú thích',
+    kicker: 'Project 01 — R&D Document',
+    subtitle: 'Tài liệu nghiên cứu và phát triển kiến trúc kỹ thuật — giai đoạn beta',
+    metadataTitle: 'Project Metadata',
+    metadata: {
+      project: ['Dự án', 'Prix. Beta'],
+      timeline: ['Thời gian R&D', 'T3—T6/2026'],
+      unit: ['Đơn vị', 'R&D Division'],
+      scope: ['Phạm vi', 'SME F&B Pricing'],
+    },
+    readerNoteTitle: 'Lưu ý đọc:',
+    readerNote:
+      'Bộ tài liệu này được viết như một hồ sơ R&D sản phẩm, không phải brochure giới thiệu tính năng. Mỗi báo cáo có thể đọc độc lập, nhưng nên đi theo thứ tự từ khảo sát bài toán, engine tính giá, mô hình dữ liệu, ranh giới AI đến kiến trúc triển khai. Các thuật ngữ chuyên ngành sẽ được giải thích trong panel chú thích khi trang hiện tại có nội dung cần làm rõ.',
+    layersTitle: 'Architecture Layers',
+    layers: [
+      ['Product Research', 'Khảo sát & Vấn đề: xác định bài toán, đối tượng sử dụng và phạm vi kiểm chứng.'],
+      ['Pricing Engine', 'Thuật toán lõi: cấu trúc tính toán, công thức giá và guardrail tài chính.'],
+      ['Data Model', 'Cấu trúc CSDL: schema, snapshot tính toán và ingredient master.'],
+      ['Intelligence', 'Chiến lược AI: vai trò diễn giải, contract API và fallback mode.'],
+      ['Architecture', 'Triển khai & Tầm nhìn: full-stack architecture, deployment và roadmap.'],
+    ],
+    tabs: [
+      '1. Khảo sát & Vấn đề',
+      '2. Thuật toán Lõi (Engine)',
+      '3. Cấu trúc CSDL (Data)',
+      '4. Chiến lược AI (Intelligence)',
+      '5. Triển khai & Tầm nhìn',
+    ],
+    reportEyebrow: 'Prix Pricing Intelligence',
+    reportTitle: 'Architecture Report',
+    mobileBack: '← Về Danh sách Dự án',
+  },
+  en: {
+    roadmapTitle: 'R&D Roadmap',
+    glossaryTitle: 'Notes & Terms',
+    annotationLabel: 'Note',
+    kicker: 'Project 01 — R&D Document',
+    subtitle: 'Technical research and architecture document — beta stage',
+    metadataTitle: 'Project Metadata',
+    metadata: {
+      project: ['Project', 'Prix. Beta'],
+      timeline: ['R&D Timeline', 'Mar—Jun 2026'],
+      unit: ['Unit', 'R&D Division'],
+      scope: ['Scope', 'SME F&B Pricing'],
+    },
+    readerNoteTitle: 'Reader note:',
+    readerNote:
+      'This document is written as a product R&D dossier, not as a feature brochure. Each report can be read independently, but the intended order is problem research, pricing engine, data model, AI boundaries, and deployment architecture. Technical terms are explained in the notes panel when the active page contains concepts that need clarification.',
+    layersTitle: 'Architecture Layers',
+    layers: [
+      ['Product Research', 'Problem research: define the business pain, target users, and validation scope.'],
+      ['Pricing Engine', 'Core algorithm: calculation structure, pricing formulas, and financial guardrails.'],
+      ['Data Model', 'Database structure: schema, calculation snapshots, and ingredient master data.'],
+      ['Intelligence', 'AI strategy: explanation role, API contract, and fallback mode.'],
+      ['Architecture', 'Delivery path: full-stack architecture, deployment, and roadmap.'],
+    ],
+    tabs: [
+      '1. Research & Problem',
+      '2. Core Pricing Engine',
+      '3. Data Model',
+      '4. AI Strategy',
+      '5. Delivery & Roadmap',
+    ],
+    reportEyebrow: 'Prix Pricing Intelligence',
+    reportTitle: 'Architecture Report',
+    mobileBack: '← Back to Projects',
+  },
+};
+
 // ============================================================
 // FLOATING COMPONENTS (A4 Page Position)
 // ============================================================
@@ -58,10 +132,10 @@ const deploymentData = [
  * Floating R&D Roadmap - luôn hiển thị ở vị trí cố định theo trang A4
  * Vị trí: bên trái, ở giữa chiều cao viewport
  */
-const FloatingRoadmap = ({ tabs, activeTab, onTabChange, isVisible = true }) => (
+const FloatingRoadmap = ({ tabs, activeTab, onTabChange, isVisible = true, title = 'R&D Roadmap' }) => (
   <div className={`fixed left-4 lg:left-8 top-1/2 -translate-y-1/2 z-[80] hidden lg:block transition-opacity duration-300 ${isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
     <div className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl p-4 shadow-xl shadow-black/10">
-      <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center">R&D Roadmap</div>
+      <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center">{title}</div>
       <ul className="flex flex-col gap-1">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
@@ -89,7 +163,7 @@ const FloatingRoadmap = ({ tabs, activeTab, onTabChange, isVisible = true }) => 
  * Floating Chú thích & Thuật ngữ - luôn xuất hiện ở giữa bên phải vùng nhìn
  * Chỉ hiển thị khi có thuật ngữ cho trang hiện tại
  */
-const FloatingGlossary = ({ entries, pageTitle, isVisible = true }) => {
+const FloatingGlossary = ({ entries, pageTitle, isVisible = true, title = 'Chú thích & Thuật ngữ' }) => {
   if (!entries || entries.length === 0) return null;
   
   return (
@@ -106,7 +180,7 @@ const FloatingGlossary = ({ entries, pageTitle, isVisible = true }) => {
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
-          <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Chú thích & Thuật ngữ</span>
+          <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{title}</span>
         </div>
         <div className="space-y-3">
           {entries.map((entry, i) => (
@@ -144,7 +218,7 @@ const AnnotationPopup = ({ content, position, onClose }) => {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#112031" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
-        <span className="text-[10px] font-black uppercase tracking-widest text-[#112031]">Chú thích</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-[#112031]">Note</span>
       </div>
       <button
         onClick={onClose}
@@ -171,7 +245,7 @@ const AnnotatedText = ({ children, annotation, onActivate }) => {
           setIsActive(!isActive);
           if (onActivate) onActivate(e, annotation);
         }}
-        title="Nhấn để xem chú thích"
+        title="View note"
       >
         {children}
       </span>
@@ -382,6 +456,127 @@ const EncryptedBlock = ({ rows }) => (
     </div>
   </div>
 );
+
+const EnglishBriefSection = ({ title, children }) => (
+  <section className="mb-8">
+    <h3 className="text-[13px] font-black uppercase tracking-[0.16em] text-[#112031] mb-3">{title}</h3>
+    <div className="space-y-3 text-[12px] leading-relaxed text-gray-700">
+      {children}
+    </div>
+  </section>
+);
+
+const EnglishReportPage = ({ activeTab }) => {
+  const sections = {
+    research: {
+      title: 'Margin Safety Discovery Report',
+      subtitle: 'Problem framing for SME pricing decisions',
+      body: (
+        <>
+          <EnglishBriefSection title="Problem statement">
+            <p>Prix. starts from a practical operating issue: many small F&B and handmade businesses can see revenue, but cannot reliably see product-level profit by sales channel. A product may be profitable in-store while becoming risky on delivery apps, marketplaces, freeship campaigns, or direct discount programs.</p>
+            <p>The beta scope therefore stays narrow. Prix. is not positioned as POS, inventory, accounting, or ERP software. It focuses on margin safety, channel pricing, and promotion simulation so the owner can understand the cost base before changing price or campaign mechanics.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Inside the beta scope">
+            <ReportList items={[
+              'Business profile, industry context, selling channels, and default target margin.',
+              'Manufactured or trading products, ingredient master data, production cost, and selling/transaction cost.',
+              'Recommended price, channel-specific price, promotion scenarios, combo scenarios, and AI explanations based on engine output.',
+            ]} />
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Outside the beta scope">
+            <ReportList items={[
+              'Inventory operations, production planning, complex multi-branch management, and advanced tax accounting.',
+              'Competitor pricing as an engine input unless the user provides a clear data source.',
+              'AI intervention in source financial data or deterministic engine results.',
+            ]} />
+          </EnglishBriefSection>
+        </>
+      ),
+    },
+    engine: {
+      title: 'Deterministic Pricing Engine',
+      subtitle: 'Calculation structure and financial guardrails',
+      body: (
+        <>
+          <EnglishBriefSection title="Cost separation rule">
+            <p>The engine does not collapse every cost into one generic cost column. It separates production cost, selling/transaction cost, and pricing decision logic. This separation allows the same product to be recalculated across channels without changing the underlying production economics.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Formula discipline">
+            <p>Percentage-based fees such as commission, payment fee, tax, and affiliate commission depend on selling price. Break-even price and recommended price therefore need to be solved from the denominator rather than estimated by adding a fixed markup.</p>
+            <FormulaBlock lines={[
+              'break_even_price = (production_cost + fixed_selling_cost) / (1 - selling_fee_rate)',
+              'recommended_price = (production_cost + fixed_selling_cost) / (1 - selling_fee_rate - target_margin)',
+              'if denominator <= 0, return infeasible scenario',
+            ]} />
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Operational output">
+            <p>Each calculation should return profit, margin, status, warning, max safe discount, and formula breakdown. AI can explain these outputs, but the source of truth remains the deterministic engine.</p>
+          </EnglishBriefSection>
+        </>
+      ),
+    },
+    data: {
+      title: 'Relational Data Model',
+      subtitle: 'Business scope, ingredient master, and pricing snapshots',
+      body: (
+        <>
+          <EnglishBriefSection title="Business-scoped data ownership">
+            <p>Business is the boundary for data ownership. Products, ingredients, selling channels, combos, snapshots, AI recommendations, and repricing jobs must be read and written through that scope to prevent cross-workspace leakage.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Ingredient master before product BOM">
+            <p>Prix. stores ingredient master data first. A product BOM then references ingredients and records quantity used, unit, and waste override if needed. This reduces repeated manual input and allows affected products to be recalculated when purchase price changes.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Snapshot as calculation evidence">
+            <p>A pricing snapshot stores the engine output at a specific point in time: selling price, production cost, selling cost, fee rate, profit, margin, break-even, recommended price, discount threshold, status, confidence score, input, and formula breakdown. Historical reports should not change when ingredient prices or channel policies are updated later.</p>
+          </EnglishBriefSection>
+        </>
+      ),
+    },
+    ai: {
+      title: 'AI Guardrail Report',
+      subtitle: 'AI explains engine output; it does not calculate financial truth',
+      body: (
+        <>
+          <EnglishBriefSection title="Valid AI role">
+            <p>AI is not the pricing engine in Prix. Its valid role is to normalize input, ask for missing cost items, explain calculated results, suggest promotion or combo scenarios, summarize risk, and draft practical next actions. Profit, margin, break-even, and recommended price must come from the backend engine.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Backend-to-AI contract">
+            <p>AI receives a calculated object containing product, channel, calculation, and missingInputs. The prompt does not query the database directly and has no permission to modify financial figures.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Fallback mode">
+            <p>External AI is an optional explanation layer. Rule-based fallback remains the safe default when API access is unavailable, because margin calculation and risk warnings must continue to work without conversational AI.</p>
+          </EnglishBriefSection>
+        </>
+      ),
+    },
+    dev: {
+      title: 'Full-Stack Architecture',
+      subtitle: 'From R&D to an operable beta system',
+      body: (
+        <>
+          <EnglishBriefSection title="System architecture">
+            <p>Prix. separates frontend, backend, shared pricing engine, and database schema. The frontend uses React and Vite; the backend uses Fastify; the database layer uses PostgreSQL through Prisma ORM. Pricing logic lives in a shared module so preview, persistence, and tests follow the same formulas.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Deployment principle">
+            <p>The system is designed for containerized deployment with separate web and API services behind a reverse proxy. Security configuration, endpoints, and environment variables need to be managed per environment to prevent demo data or development settings from leaking into production.</p>
+          </EnglishBriefSection>
+          <EnglishBriefSection title="Next R&D priorities">
+            <p>The next stage should keep Prix. inside pricing intelligence instead of expanding prematurely into ERP. Priority should go to route guard reliability, Product Builder preview, backend validation, production-clean mode, automated tests, and RBAC.</p>
+          </EnglishBriefSection>
+        </>
+      ),
+    },
+  };
+
+  const current = sections[activeTab] || sections.research;
+
+  return (
+    <A4Page pageNumber={1} totalPages={1} docId="PRX-EN" title={current.title} subtitle={current.subtitle}>
+      {current.body}
+    </A4Page>
+  );
+};
 
 
 
@@ -918,15 +1113,18 @@ const pageGlossary = {
 // MAIN COMPONENT
 // ============================================================
 
-const tabsData = [
-  { id: 'research', title: '1. Khảo sát & Vấn đề', pages: Phase1Pages, pageKeys: ['p1-1', 'p1-2', 'p1-3'] },
-  { id: 'engine', title: '2. Thuật toán Lõi (Engine)', pages: Phase2Pages, pageKeys: ['p2-1', 'p2-2', 'p2-3'] },
-  { id: 'data', title: '3. Cấu trúc CSDL (Data)', pages: Phase3Pages, pageKeys: ['p3-1', 'p3-2', 'p3-3'] },
-  { id: 'ai', title: '4. Chiến lược AI (Intelligence)', pages: Phase4Pages, pageKeys: ['p4-1', 'p4-2', 'p4-3'] },
-  { id: 'dev', title: '5. Triển khai & Tầm nhìn', pages: Phase5Pages, pageKeys: ['p5-1', 'p5-2', 'p5-3'] },
+const createTabsData = (copy) => [
+  { id: 'research', title: copy.tabs[0], pages: Phase1Pages, pageKeys: ['p1-1', 'p1-2', 'p1-3'] },
+  { id: 'engine', title: copy.tabs[1], pages: Phase2Pages, pageKeys: ['p2-1', 'p2-2', 'p2-3'] },
+  { id: 'data', title: copy.tabs[2], pages: Phase3Pages, pageKeys: ['p3-1', 'p3-2', 'p3-3'] },
+  { id: 'ai', title: copy.tabs[3], pages: Phase4Pages, pageKeys: ['p4-1', 'p4-2', 'p4-3'] },
+  { id: 'dev', title: copy.tabs[4], pages: Phase5Pages, pageKeys: ['p5-1', 'p5-2', 'p5-3'] },
 ];
 
 const PrixProject = () => {
+  const { lang } = useLang();
+  const copy = prixShellCopy[lang] || prixShellCopy.vi;
+  const tabsData = useMemo(() => createTabsData(copy), [copy]);
   const [activeTab, setActiveTab] = useState('research');
   const [currentPageKey, setCurrentPageKey] = useState('p1-1');
   const [isAtLastPage, setIsAtLastPage] = useState(false);
@@ -946,7 +1144,7 @@ const PrixProject = () => {
   const visiblePageKeys = currentTabData.pageKeys;
   
   // Get glossary entries for current A4 page
-  const currentGlossary = pageGlossary[currentPageKey] || [];
+  const currentGlossary = lang === 'en' ? [] : pageGlossary[currentPageKey] || [];
 
   const getPageScroller = useCallback(() => {
     const root = document.getElementById('root');
@@ -1111,12 +1309,12 @@ const PrixProject = () => {
               viewport={{ once: true }}
               className="mb-10 text-center"
             >
-              <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#8EC9DB] block mb-3">Project 01 — R&D Document</span>
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#8EC9DB] block mb-3">{copy.kicker}</span>
               <h1 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-4 leading-tight text-white">
                 Prix. Pricing Intelligence <br className="md:hidden" /><span className="text-gray-500 italic lowercase">System.</span>
               </h1>
               <p className="text-gray-400 text-[11px] md:text-xs max-w-2xl mx-auto leading-relaxed uppercase tracking-widest font-['Inter']">
-                Tài liệu nghiên cứu và phát triển kiến trúc kỹ thuật — giai đoạn beta
+                {copy.subtitle}
               </p>
             </motion.div>
 
@@ -1124,20 +1322,21 @@ const PrixProject = () => {
               {/* Left Column: Metadata */}
               <div className="space-y-6 mt-2">
                 <h2 className="text-sm font-bold uppercase tracking-[0.3em] flex items-center gap-4 text-white">
-                  <span className="w-8 h-px bg-[#8EC9DB]"></span> Project Metadata
+                  <span className="w-8 h-px bg-[#8EC9DB]"></span> {copy.metadataTitle}
                 </h2>
                 
                 <div className="grid grid-cols-2 gap-4 text-[10px] font-black uppercase tracking-wider text-gray-300">
-                  <div className="border-l border-white/10 pl-3"><span className="text-gray-500 block mb-1">Dự án</span> Prix. Beta</div>
-                  <div className="border-l border-white/10 pl-3"><span className="text-gray-500 block mb-1">Thời gian R&D</span> T3—T6/2026</div>
-                  <div className="border-l border-white/10 pl-3"><span className="text-gray-500 block mb-1">Đơn vị</span> R&D Division</div>
-                  <div className="border-l border-white/10 pl-3"><span className="text-gray-500 block mb-1">Phạm vi</span> SME F&B Pricing</div>
+                  {Object.values(copy.metadata).map(([label, value]) => (
+                    <div key={label} className="border-l border-white/10 pl-3">
+                      <span className="text-gray-500 block mb-1">{label}</span> {value}
+                    </div>
+                  ))}
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-white/10">
                   <div className="p-4 bg-[#112031]/50 border-l-2 border-[#8EC9DB] rounded-r-lg">
                     <p className="text-[10px] font-['Inter'] text-gray-300 leading-relaxed text-justify">
-                      <strong className="text-white">Lưu ý đọc:</strong> Mỗi báo cáo có thể đọc độc lập. Thuật ngữ chuyên ngành giải thích trong panel <strong>Chú thích</strong> bên phải. Thông tin nhạy cảm được mã hóa trừu tượng.
+                      <strong className="text-white">{copy.readerNoteTitle}</strong> {copy.readerNote}
                     </p>
                   </div>
                 </div>
@@ -1149,50 +1348,19 @@ const PrixProject = () => {
                    <span className="text-6xl font-black italic">5</span>
                 </div>
                 <h3 className="text-[10px] font-black mb-4 text-[#8EC9DB] uppercase tracking-[0.4em] flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#8EC9DB] animate-pulse"></div> Architecture Layers
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#8EC9DB] animate-pulse"></div> {copy.layersTitle}
                 </h3>
                 
                 <div className="space-y-2 relative z-10 font-['Inter']">
-                  {/* Phase 1 */}
-                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 hover:bg-black/60 transition-colors">
-                    <div className="flex items-center gap-2 mb-1">
-                       <span className="text-[9px] font-black text-gray-500">01</span>
-                       <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">Product Research</span>
+                  {copy.layers.map(([title, desc], index) => (
+                    <div key={title} className="bg-black/40 p-3 rounded-lg border border-white/5 hover:bg-black/60 transition-colors">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[9px] font-black text-gray-500">{String(index + 1).padStart(2, '0')}</span>
+                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">{title}</span>
+                      </div>
+                      <p className="text-[9px] text-gray-500 leading-relaxed uppercase">{desc}</p>
                     </div>
-                    <p className="text-[9px] text-gray-500 leading-relaxed uppercase">Khảo sát & Vấn đề: Xác định bài toán, đối tượng, phạm vi</p>
-                  </div>
-                  {/* Phase 2 */}
-                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 hover:bg-black/60 transition-colors">
-                    <div className="flex items-center gap-2 mb-1">
-                       <span className="text-[9px] font-black text-gray-500">02</span>
-                       <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">Pricing Engine</span>
-                    </div>
-                    <p className="text-[9px] text-gray-500 leading-relaxed uppercase">Thuật toán lõi: Cấu trúc tính toán, công thức, guardrail</p>
-                  </div>
-                  {/* Phase 3 */}
-                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 hover:bg-black/60 transition-colors">
-                    <div className="flex items-center gap-2 mb-1">
-                       <span className="text-[9px] font-black text-gray-500">03</span>
-                       <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">Data Model</span>
-                    </div>
-                    <p className="text-[9px] text-gray-500 leading-relaxed uppercase">Cấu trúc CSDL: Schema, snapshot, ingredient master</p>
-                  </div>
-                  {/* Phase 4 */}
-                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 hover:bg-black/60 transition-colors">
-                    <div className="flex items-center gap-2 mb-1">
-                       <span className="text-[9px] font-black text-gray-500">04</span>
-                       <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">Intelligence</span>
-                    </div>
-                    <p className="text-[9px] text-gray-500 leading-relaxed uppercase">Chiến lược AI: Vai trò AI, contract API, fallback mode</p>
-                  </div>
-                  {/* Phase 5 */}
-                  <div className="bg-black/40 p-3 rounded-lg border border-white/5 hover:bg-black/60 transition-colors">
-                    <div className="flex items-center gap-2 mb-1">
-                       <span className="text-[9px] font-black text-gray-500">05</span>
-                       <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">Architecture</span>
-                    </div>
-                    <p className="text-[9px] text-gray-500 leading-relaxed uppercase">Triển khai & Tầm nhìn: Full-stack, deployment, roadmap</p>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1204,6 +1372,7 @@ const PrixProject = () => {
             activeTab={activeTab} 
             onTabChange={handleTabChange}
             isVisible={!isAtLastPage && isReportSectionVisible}
+            title={copy.roadmapTitle}
           />
 
           {/* FLOATING GLOSSARY */}
@@ -1211,13 +1380,14 @@ const PrixProject = () => {
             entries={currentGlossary} 
             pageTitle={currentPageKey}
             isVisible={!isAtLastPage && isReportSectionVisible}
+            title={copy.glossaryTitle}
           />
 
           {/* SECTION 2: THE A4 REPORT SHOWCASE */}
           <section ref={reportSectionRef} className="report-section bg-[#f8f9fa] pt-16 pb-24 px-4 overflow-hidden shadow-inner" id="report-section">
             <div className="text-center mb-12">
-              <span className="text-gray-400 text-[9px] font-black tracking-[0.5em] uppercase mb-4 block">Prix Pricing Intelligence</span>
-              <h2 className="text-2xl font-black text-black uppercase tracking-tighter shadow-sm inline-block">Architecture Report</h2>
+              <span className="text-gray-400 text-[9px] font-black tracking-[0.5em] uppercase mb-4 block">{copy.reportEyebrow}</span>
+              <h2 className="text-2xl font-black text-black uppercase tracking-tighter shadow-sm inline-block">{copy.reportTitle}</h2>
             </div>
 
             {/* Main Content Area - A4 Pages */}
@@ -1231,7 +1401,9 @@ const PrixProject = () => {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="flex flex-col gap-3"
                 >
-                  {currentTabData.pages({ totalPages }).map(wrapA4Page)}
+                  {lang === 'en'
+                    ? <EnglishReportPage activeTab={activeTab} />
+                    : currentTabData.pages({ totalPages }).map(wrapA4Page)}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -1242,7 +1414,7 @@ const PrixProject = () => {
                 onClick={() => hardNavigate('/rd')}
                 className="bg-[#112031] text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 rounded-full shadow-xl flex items-center gap-2"
               >
-                ← Về Danh sách Dự án
+                {copy.mobileBack}
               </button>
             </div>
           </section>
