@@ -33,7 +33,7 @@ const en = {
       'A full-stack marketing system that aligns strategy, visual execution, growth, automation, and analytics into one cohesive portfolio narrative.',
     innovationTag: 'Innovation & Labs',
     rdDesc:
-      'Explore the PDL Studio team, project vision, and a partnership invitation built around shared long-term value.',
+      'An R&D space for product experiments, system architecture, and case studies currently developed by PDL Studio.',
     rdCta: 'Explore R&D',
   },
   comingSoon: {
@@ -110,9 +110,18 @@ const en = {
     },
   },
   rd: {
+    kicker: 'R&D Portfolio',
     titleLine1: 'Research',
     titleLine2: '& Development.',
+    desc: 'R&D cases are presented as product documents: problem framing, scope, engine logic, data model, and implementation path.',
     viewDetail: 'View Case Study',
+    comingSoon: 'In Research',
+    status: {
+      published: 'Published',
+      research: 'Research',
+      prototype: 'Prototype',
+      backlog: 'Backlog',
+    },
     blocks: {
       prix: {
         title: 'Prix.',

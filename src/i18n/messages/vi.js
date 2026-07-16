@@ -33,7 +33,7 @@ const vi = {
       'Một hệ thống marketing full-stack kết nối strategy, visual execution, growth, automation và analytics trong cùng một narrative nhất quán.',
     innovationTag: 'Innovation & Labs',
     rdDesc:
-      'Khám phá đội ngũ PDL Studio, tầm nhìn dự án và lời mời hợp tác dành cho các đối tác cùng hệ giá trị.',
+      'Không gian R&D cho các thử nghiệm sản phẩm, kiến trúc hệ thống và case study đang được PDL Studio phát triển.',
     rdCta: 'Explore R&D',
   },
   comingSoon: {
@@ -110,9 +110,18 @@ const vi = {
     },
   },
   rd: {
+    kicker: 'R&D Portfolio',
     titleLine1: 'Research',
     titleLine2: '& Development.',
+    desc: 'Các case R&D được trình bày như tài liệu sản phẩm: từ bài toán, phạm vi, engine, dữ liệu đến hướng triển khai.',
     viewDetail: 'View Case Study',
+    comingSoon: 'Đang nghiên cứu',
+    status: {
+      published: 'Đã công bố',
+      research: 'Research',
+      prototype: 'Prototype',
+      backlog: 'Backlog',
+    },
     blocks: {
       prix: {
         title: 'Prix.',
@@ -120,7 +129,7 @@ const vi = {
       },
       alpha: {
         title: 'Project Alpha',
-        desc: 'Nghiên cứu ứng dụng Generative AI trong việc tối ưu hóa luồng sản xuất content hàng loạt.',
+        desc: 'Nghiên cứu cách ứng dụng Generative AI để chuẩn hóa và tăng tốc luồng sản xuất content hàng loạt.',
       },
       beta: {
         title: 'Project Beta',

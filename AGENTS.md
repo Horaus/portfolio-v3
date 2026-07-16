@@ -1,5 +1,24 @@
 # AGENTS.md
 
+## RTK Shell Rule
+- All shell commands MUST go through RTK. Prefix every shell command with `rtk` so terminal output is compressed before entering model context.
+- This applies to reads, searches, builds, tests, package-manager commands, git commands, and diagnostics.
+- Use examples like `rtk rg "pattern" src`, `rtk sed -n '1,160p' src/App.jsx`, `rtk npm run build`, and `rtk git status`.
+- Only skip RTK for non-shell tools, commands that already invoke `rtk`, or a specific command where RTK is unavailable/fails; mention that exception briefly.
+
+## Default GitHub Sync Rule
+- After a code/content change is genuinely complete, run the recommended verification workflow before committing:
+```bash
+rtk npm run lint
+rtk npm run build
+```
+- If verification passes, create a git commit and push it to `origin/main` by default.
+- Commit only files that belong to the completed task. Do not include unrelated dirty files, local archives such as `dist.zip`, dependency folders, or generated build output unless the user explicitly asks.
+- Use concise commit messages in the format `<type>: <scope summary>`, for example `feat: update prix rd narrative` or `fix: restore prix roadmap visibility`.
+- If verification fails, do not commit or push. Report the failing command and fix it first.
+- If the working tree already contains unrelated user changes, leave them unstaged and mention them in the final response.
+- If the user explicitly says not to commit, not to push, or asks for a review/explanation only, skip this rule for that turn.
+
 ## Project Description
 - **Name:** `folio-app` (PDL Studio Portfolio v3.0)
 - **Type:** Frontend single-page application (SPA)
@@ -12,33 +31,33 @@
 - **Package manager:** `npm` (lockfile is `package-lock.json`).
 - **Install dependencies:**
 ```bash
-npm install
+rtk npm install
 ```
 
 ## Build / Run Commands
 - **Development server (hot reload):**
 ```bash
-npm run dev
+rtk npm run dev
 ```
 - **Production build (outputs to `dist/`):**
 ```bash
-npm run build
+rtk npm run build
 ```
 - **Preview production build locally:**
 ```bash
-npm run preview
+rtk npm run preview
 ```
 - **Lint source:**
 ```bash
-npm run lint
+rtk npm run lint
 ```
 
 ## Test Commands
 - There is currently **no dedicated unit/integration test suite** (`npm test` is not defined).
 - Recommended verification workflow:
 ```bash
-npm run lint
-npm run build
+rtk npm run lint
+rtk npm run build
 ```
 - Manual smoke checks after build/dev:
 - `/vi`
@@ -141,8 +160,8 @@ npm run build
 
 ## Quick Start (Recommended Flow)
 ```bash
-npm install
-npm run lint
-npm run build
-npm run dev
+rtk npm install
+rtk npm run lint
+rtk npm run build
+rtk npm run dev
 ```
