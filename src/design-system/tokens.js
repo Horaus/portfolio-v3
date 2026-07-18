@@ -12,7 +12,7 @@
 // ─────────────────────────────────────────────
 export const colors = {
   // Brand
-  accent: '#007bff',
+  accent: '#0B74E5',
   accentHover: '#0056b3',
   accentLight: 'rgba(0, 123, 255, 0.15)',
   accentMuted: 'rgba(0, 123, 255, 0.4)',
@@ -59,7 +59,7 @@ export const colors = {
   info: '#3b82f6',
 
   // Selection
-  selection: '#007bff',
+  selection: '#0B74E5',
   selectionText: '#ffffff',
 };
 

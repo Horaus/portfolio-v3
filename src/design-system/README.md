@@ -62,7 +62,7 @@ Mọi user-facing text phải qua `useT()` hoặc `tx()`. Thêm keys vào cả `
 ## Tham khảo nhanh
 
 ### Color tokens
-- `accent` → `#007bff` (brand blue)
+- `accent` → `#0B74E5` (brand blue)
 - `darkBg` → `#0a0a0a` (page background)
 - `lightBg` → `#ffffff` (report background)
 - `lightSurface` → `#f8f9fa` (report section background)
