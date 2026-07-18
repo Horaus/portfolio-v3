@@ -88,9 +88,7 @@ const prixShellCopy = {
     mobileBack: '← Về Danh sách Dự án',
     liveAccess: {
       eyebrow: 'Truy cập nhanh',
-      title: 'Mở bản beta Prix.',
-      desc: 'Đi thẳng tới web app đang vận hành để xem calculator, pricing flow và logic mô phỏng trong ngữ cảnh sản phẩm thật.',
-      cta: 'Vào prix.pdl.io.vn',
+      cta: 'prix.pdl.io.vn',
       status: 'Live beta',
       url: 'https://prix.pdl.io.vn/',
     },
@@ -131,9 +129,7 @@ const prixShellCopy = {
     mobileBack: '← Back to Projects',
     liveAccess: {
       eyebrow: 'Quick access',
-      title: 'Open Prix. beta',
-      desc: 'Jump directly to the live web app to review the calculator, pricing flow, and simulation logic in the actual product context.',
-      cta: 'Visit prix.pdl.io.vn',
+      cta: 'prix.pdl.io.vn',
       status: 'Live beta',
       url: 'https://prix.pdl.io.vn/',
     },
@@ -145,7 +141,7 @@ const PrixLiveAccess = ({ copy }) => (
     href={copy.url}
     target="_blank"
     rel="noopener noreferrer"
-    className="group relative block overflow-hidden rounded-xl border border-[#8EC9DB]/35 bg-[#071019] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] outline-none transition-all duration-300 hover:-translate-y-1 hover:border-[#8EC9DB] hover:shadow-[0_28px_90px_rgba(142,201,219,0.18)] focus-visible:ring-2 focus-visible:ring-[#8EC9DB]"
+    className="group relative block overflow-hidden rounded-xl border border-[#8EC9DB]/35 bg-[#071019] px-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.34)] outline-none transition-all duration-300 hover:-translate-y-1 hover:border-[#8EC9DB] hover:shadow-[0_24px_70px_rgba(142,201,219,0.16)] focus-visible:ring-2 focus-visible:ring-[#8EC9DB]"
     initial={{ opacity: 0, y: 14 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -157,21 +153,16 @@ const PrixLiveAccess = ({ copy }) => (
       <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(142,201,219,0.08),transparent)] translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700" />
     </div>
 
-    <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="relative flex items-center justify-between gap-4">
       <div className="min-w-0">
-        <div className="mb-3 flex flex-wrap items-center gap-3">
-          <span className="text-[9px] font-black uppercase tracking-[0.32em] text-[#8EC9DB]">{copy.eyebrow}</span>
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#8EC9DB]/35 bg-[#8EC9DB]/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-[#8EC9DB]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#8EC9DB] shadow-[0_0_16px_rgba(142,201,219,0.95)] motion-safe:animate-pulse" />
-            {copy.status}
-          </span>
+        <div className="text-[9px] font-black uppercase tracking-[0.3em] text-[#8EC9DB]">{copy.eyebrow}</div>
+        <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[#8EC9DB]/35 bg-[#8EC9DB]/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#8EC9DB]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#8EC9DB] shadow-[0_0_16px_rgba(142,201,219,0.95)] motion-safe:animate-pulse" />
+          {copy.status}
         </div>
-        <h3 className="text-lg font-black uppercase tracking-tight text-white">{copy.title}</h3>
-        <p className="mt-2 max-w-xl text-[12px] leading-relaxed text-gray-400 font-['Inter']">{copy.desc}</p>
-        <div className="mt-4 text-[11px] font-black uppercase tracking-[0.18em] text-white/70">prix.pdl.io.vn</div>
       </div>
 
-      <div className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 text-[11px] font-black uppercase tracking-[0.16em] text-[#071019] transition-transform duration-300 group-hover:translate-x-1">
+      <div className="inline-flex min-h-[42px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#071019] transition-transform duration-300 group-hover:translate-x-1">
         {copy.cta}
         <span className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
       </div>
