@@ -1,11 +1,11 @@
 const en = {
   header: {
     home: 'Home',
-    systems: 'Systems',
+    systems: 'Marketing',
     team: 'Team',
     portfolio: 'Portfolio',
     brandShort: 'PDL',
-    rd: 'R&D Labs',
+    rd: 'R&D',
   },
   footer: {
     tagline: 'Full-stack marketing systems, narrative-led portfolio storytelling, and disciplined strategic execution.',
@@ -115,6 +115,8 @@ const en = {
     titleLine2: '& Development.',
     desc: 'R&D cases are presented as product documents: problem framing, scope, engine logic, data model, and implementation path.',
     viewDetail: 'View Case Study',
+    libraryCta: 'Open Library',
+    moreLabel: 'More',
     comingSoon: 'In Research',
     status: {
       published: 'Published',
@@ -143,6 +145,17 @@ const en = {
         title: 'Project Delta',
         desc: 'Automated performance reporting tool for multi-platform ad campaigns.',
       },
+      library: {
+        title: 'More',
+        desc: 'Open the R&D library to review published cases and the next research backlog.',
+      },
+    },
+    library: {
+      kicker: 'R&D Project Library',
+      title: 'R&D Library',
+      desc: 'This library gathers product research cases from PDL Studio. Prix is the open case study; the remaining entries are kept as research backlog until the problem, scope, and delivery path are documented clearly.',
+      published: 'Open',
+      researching: 'Backlog',
     },
   },
 };

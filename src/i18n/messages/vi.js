@@ -1,11 +1,11 @@
 const vi = {
   header: {
     home: 'Home',
-    systems: 'Systems',
+    systems: 'Marketing',
     team: 'Team',
     portfolio: 'Portfolio',
     brandShort: 'PDL',
-    rd: 'R&D Labs',
+    rd: 'R&D',
   },
   footer: {
     tagline: 'Hệ thống marketing full-stack, portfolio theo narrative và triển khai chiến lược có cấu trúc.',
@@ -115,6 +115,8 @@ const vi = {
     titleLine2: '& Development.',
     desc: 'Các case R&D được trình bày như tài liệu sản phẩm: từ bài toán, phạm vi, engine, dữ liệu đến hướng triển khai.',
     viewDetail: 'View Case Study',
+    libraryCta: 'Open Library',
+    moreLabel: 'More',
     comingSoon: 'Đang nghiên cứu',
     status: {
       published: 'Đã công bố',
@@ -143,6 +145,17 @@ const vi = {
         title: 'Project Delta',
         desc: 'Công cụ tự động hóa báo cáo hiệu suất chiến dịch quảng cáo.',
       },
+      library: {
+        title: 'More',
+        desc: 'Mở thư viện R&D để xem các case đã công bố và backlog nghiên cứu tiếp theo.',
+      },
+    },
+    library: {
+      kicker: 'R&D Project Library',
+      title: 'Thư viện R&D',
+      desc: 'Danh mục này gom các case nghiên cứu sản phẩm của PDL Studio. Prix là case đã mở chi tiết; các mục còn lại được giữ như backlog để mở rộng khi có tài liệu đủ rõ về bài toán, phạm vi và hướng triển khai.',
+      published: 'Đã mở',
+      researching: 'Backlog',
     },
   },
 };
