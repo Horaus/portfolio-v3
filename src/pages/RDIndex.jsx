@@ -10,35 +10,35 @@ const baseBlocks = [
     id: 1,
     key: 'prix',
     link: '/rd/prix',
-    image: '/images/home/rd-bg.png',
+    image: '/images/rd/research-lab.svg',
     position: 'center',
   },
   {
     id: 2,
     key: 'alpha',
     link: '/coming-soon',
-    image: '/images/home/rd-bg.png',
+    image: '/images/rd/research-lab.svg',
     position: '35% center',
   },
   {
     id: 3,
     key: 'beta',
     link: '/coming-soon',
-    image: '/images/home/rd-bg.png',
+    image: '/images/rd/research-lab.svg',
     position: '60% center',
   },
   {
     id: 4,
     key: 'gamma',
     link: '/coming-soon',
-    image: '/images/home/rd-bg.png',
+    image: '/images/rd/research-lab.svg',
     position: '75% center',
   },
   {
     id: 5,
     key: 'library',
     link: '/rd/library',
-    image: '/images/home/rd-bg.png',
+    image: '/images/rd/research-lab.svg',
     position: 'right center',
   },
 ];
@@ -80,7 +80,7 @@ const RDIndex = () => {
           <div className="absolute top-32 left-8 md:left-12 z-20 pointer-events-none hidden md:block">
             <h1 className="text-4xl lg:text-5xl font-bold tracking-tighter uppercase text-white mix-blend-difference">
               {t('rd.titleLine1')} <br />
-              <span className="text-[#8EC9DB]">{t('rd.titleLine2')}</span>
+              <span className="text-accent">{t('rd.titleLine2')}</span>
             </h1>
           </div>
 
@@ -149,7 +149,7 @@ const RDIndex = () => {
                           transition={{ duration: 0.4, delay: 0.1 }}
                           className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end"
                         >
-                          <span className="text-[#8EC9DB] text-[10px] font-bold tracking-[0.3em] mb-4 rounded-sm uppercase">
+                          <span className="text-accent text-[10px] font-bold tracking-[0.3em] mb-4 rounded-sm uppercase">
                             {block.key === 'library' ? t('rd.moreLabel') : `0${block.id}`}
                           </span>
                           <h3 className="text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase text-white mb-4 md:mb-6">{block.title}</h3>
@@ -159,8 +159,8 @@ const RDIndex = () => {
                             <button
                               className={`px-6 py-2.5 font-bold uppercase tracking-[0.15em] text-xs rounded transition-colors min-h-[44px] ${
                                 isComingSoon
-                                  ? 'border border-white/20 text-white hover:border-[#8EC9DB]/60 hover:text-[#8EC9DB]'
-                                  : 'bg-white text-black hover:bg-[#8EC9DB] hover:text-black'
+                                  ? 'border border-white/20 text-white hover:border-accent/60 hover:text-accent'
+                                  : 'bg-white text-black hover:bg-accent hover:text-white'
                               }`}
                             >
                               {isComingSoon
@@ -196,7 +196,7 @@ const RDIndex = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/60 to-black/88" />
 
                     <div className="relative z-10 p-5 flex flex-col justify-end min-h-[220px]">
-                      <span className="text-[#8EC9DB] text-[10px] font-bold tracking-[0.28em] uppercase mb-3">
+                      <span className="text-accent text-[10px] font-bold tracking-[0.28em] uppercase mb-3">
                         {block.key === 'library' ? t('rd.moreLabel') : `0${block.id}`}
                       </span>
                       <h3 className="text-2xl font-bold tracking-tight uppercase text-white mb-2">{block.title}</h3>
