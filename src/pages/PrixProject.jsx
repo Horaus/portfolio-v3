@@ -141,28 +141,28 @@ const PrixLiveAccess = ({ copy }) => (
     href={copy.url}
     target="_blank"
     rel="noopener noreferrer"
-    className="group relative block overflow-hidden rounded-xl border border-[#8EC9DB]/35 bg-[#071019] px-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.34)] outline-none transition-all duration-300 hover:-translate-y-1 hover:border-[#8EC9DB] hover:shadow-[0_24px_70px_rgba(142,201,219,0.16)] focus-visible:ring-2 focus-visible:ring-[#8EC9DB]"
+    className="group relative block overflow-hidden rounded-xl border border-[#007bff]/35 bg-[#080808] px-5 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.34)] outline-none transition-all duration-300 hover:-translate-y-1 hover:border-[#007bff] hover:shadow-[0_24px_70px_rgba(0,123,255,0.16)] focus-visible:ring-2 focus-visible:ring-[#007bff]"
     initial={{ opacity: 0, y: 14 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, ease: 'easeOut' }}
     viewport={{ once: true }}
   >
     <div className="pointer-events-none absolute inset-0 opacity-60">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#8EC9DB] to-transparent" />
-      <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full bg-[#8EC9DB]/15 blur-3xl transition-transform duration-500 group-hover:scale-125" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(142,201,219,0.08),transparent)] translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#007bff] to-transparent" />
+      <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full bg-[#007bff]/15 blur-3xl transition-transform duration-500 group-hover:scale-125" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(0,123,255,0.08),transparent)] translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700" />
     </div>
 
     <div className="relative flex items-center justify-between gap-4">
       <div className="min-w-0">
-        <div className="text-[9px] font-black uppercase tracking-[0.3em] text-[#8EC9DB]">{copy.eyebrow}</div>
-        <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[#8EC9DB]/35 bg-[#8EC9DB]/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#8EC9DB]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#8EC9DB] shadow-[0_0_16px_rgba(142,201,219,0.95)] motion-safe:animate-pulse" />
+        <div className="text-[9px] font-black uppercase tracking-[0.3em] text-[#007bff]">{copy.eyebrow}</div>
+        <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-[#007bff]/35 bg-[#007bff]/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-[#007bff]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#007bff] shadow-[0_0_16px_rgba(0,123,255,0.95)] motion-safe:animate-pulse" />
           {copy.status}
         </div>
       </div>
 
-      <div className="inline-flex min-h-[42px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#071019] transition-transform duration-300 group-hover:translate-x-1">
+      <div className="inline-flex min-h-[42px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#080808] transition-transform duration-300 group-hover:translate-x-1">
         {copy.cta}
         <span className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
       </div>
@@ -191,7 +191,7 @@ const FloatingRoadmap = ({ tabs, activeTab, onTabChange, isVisible = true, title
                 onClick={() => onTabChange(tab.id)}
                 className={`block text-left text-[11px] uppercase font-bold tracking-wider transition-all duration-300 px-3 py-2 rounded-lg w-full ${
                   isActive 
-                    ? 'bg-[#112031] text-white' 
+                    ? 'bg-[#111111] text-white' 
                     : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -222,7 +222,7 @@ const FloatingGlossary = ({ entries, pageTitle, isVisible = true, title = 'Chú 
         className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl p-4 shadow-xl shadow-black/10 max-w-[260px]"
       >
         <div className="flex items-center gap-2 mb-3">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#112031" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
           </svg>
@@ -230,8 +230,8 @@ const FloatingGlossary = ({ entries, pageTitle, isVisible = true, title = 'Chú 
         </div>
         <div className="space-y-3">
           {entries.map((entry, i) => (
-            <div key={i} className="border-l-2 border-[#8EC9DB] pl-3">
-              <div className="text-[10px] font-bold text-[#112031] leading-tight">{entry.term}</div>
+            <div key={i} className="border-l-2 border-[#007bff] pl-3">
+              <div className="text-[10px] font-bold text-[#111111] leading-tight">{entry.term}</div>
               <div className="text-[9px] text-gray-500 mt-0.5 leading-tight">{entry.definition}</div>
             </div>
           ))}
@@ -253,7 +253,7 @@ const AnnotationPopup = ({ content, position, onClose }) => {
       initial={{ opacity: 0, scale: 0.9, y: 10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9, y: 10 }}
-      className="fixed z-50 bg-white border border-[#8EC9DB] shadow-2xl rounded-xl p-5 max-w-sm"
+      className="fixed z-50 bg-white border border-[#007bff] shadow-2xl rounded-xl p-5 max-w-sm"
       style={{
         left: Math.min(position.x, window.innerWidth - 350),
         top: Math.min(position.y, window.innerHeight - 200),
@@ -261,10 +261,10 @@ const AnnotationPopup = ({ content, position, onClose }) => {
       onClick={(e) => e.stopPropagation()}
     >
       <div className="absolute top-3 left-3 flex items-center gap-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#112031" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
-        <span className="text-[10px] font-black uppercase tracking-widest text-[#112031]">Note</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-[#111111]">Note</span>
       </div>
       <button
         onClick={onClose}
@@ -285,7 +285,7 @@ const AnnotatedText = ({ children, annotation, onActivate }) => {
   return (
     <>
       <span
-        className="border-b-2 border-dashed border-[#8EC9DB] cursor-help hover:bg-[#8EC9DB]/10 transition-colors px-1 -mx-1"
+        className="border-b-2 border-dashed border-[#007bff] cursor-help hover:bg-[#007bff]/10 transition-colors px-1 -mx-1"
         onClick={(e) => {
           e.stopPropagation();
           setIsActive(!isActive);
@@ -322,9 +322,9 @@ const A4Page = ({ children, pageNumber, totalPages, docId, title, subtitle }) =>
     {/* Page Header */}
     <div className="flex justify-between items-start border-b border-black pb-4 mb-8">
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 bg-[#112031] text-white flex items-center justify-center font-black text-lg font-['Space_Grotesk']">P</div>
+        <div className="w-8 h-8 bg-[#111111] text-white flex items-center justify-center font-black text-lg font-['Space_Grotesk']">P</div>
         <div className="font-['Space_Grotesk']">
-          <h3 className="text-[11px] sm:text-[13px] font-black uppercase tracking-[0.2em] text-[#112031]">PRIX R&D DOCUMENT</h3>
+          <h3 className="text-[11px] sm:text-[13px] font-black uppercase tracking-[0.2em] text-[#111111]">PRIX R&D DOCUMENT</h3>
           <p className="text-[8px] text-gray-400 uppercase font-bold tracking-widest mt-1">DOC ID: {docId}</p>
         </div>
       </div>
@@ -338,7 +338,7 @@ const A4Page = ({ children, pageNumber, totalPages, docId, title, subtitle }) =>
     {/* Page Title */}
     {title && (
       <div className="text-center mb-6">
-        <h1 className="text-2xl md:text-[32px] leading-tight font-black uppercase tracking-tight text-[#112031] font-['Space_Grotesk'] mb-2">
+        <h1 className="text-2xl md:text-[32px] leading-tight font-black uppercase tracking-tight text-[#111111] font-['Space_Grotesk'] mb-2">
           {title}
         </h1>
         {subtitle && (
@@ -368,8 +368,8 @@ const A4Page = ({ children, pageNumber, totalPages, docId, title, subtitle }) =>
 
 const SectionHeader = ({ number, title }) => (
   <div className="flex items-center gap-4 mb-6">
-    <div className="w-10 h-10 bg-[#112031] text-white rounded-full flex items-center justify-center font-black text-sm">{number}</div>
-    <h2 className="text-[16px] md:text-[18px] font-black uppercase tracking-wide text-[#112031] font-['Space_Grotesk']">
+    <div className="w-10 h-10 bg-[#111111] text-white rounded-full flex items-center justify-center font-black text-sm">{number}</div>
+    <h2 className="text-[16px] md:text-[18px] font-black uppercase tracking-wide text-[#111111] font-['Space_Grotesk']">
       {title}
     </h2>
   </div>
@@ -378,7 +378,7 @@ const SectionHeader = ({ number, title }) => (
 const InfoBox = ({ children, variant = 'default', className = '' }) => {
   const variants = {
     default: 'bg-gray-50 border-l-4 border-gray-300',
-    highlight: 'bg-[#8EC9DB]/10 border-l-4 border-[#8EC9DB]',
+    highlight: 'bg-[#007bff]/10 border-l-4 border-[#007bff]',
     warning: 'bg-red-50 border-l-4 border-red-400',
     success: 'bg-green-50 border-l-4 border-green-400',
   };
@@ -390,7 +390,7 @@ const InfoBox = ({ children, variant = 'default', className = '' }) => {
   );
 };
 
-const DataCard = ({ label, value, subtext, color = '#112031' }) => (
+const DataCard = ({ label, value, subtext, color = '#111111' }) => (
   <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-sm">
     <div className="text-[9px] uppercase tracking-widest text-gray-500 mb-2">{label}</div>
     <div className="text-2xl font-black" style={{ color }}>{value}</div>
@@ -399,7 +399,7 @@ const DataCard = ({ label, value, subtext, color = '#112031' }) => (
 );
 
 const ReportLead = ({ children }) => (
-  <p className="text-[13px] leading-[1.85] text-justify text-gray-700 mb-6 first-letter:text-4xl first-letter:font-black first-letter:text-[#112031] first-letter:mr-1 first-letter:float-left">
+  <p className="text-[13px] leading-[1.85] text-justify text-gray-700 mb-6 first-letter:text-4xl first-letter:font-black first-letter:text-[#111111] first-letter:mr-1 first-letter:float-left">
     {children}
   </p>
 );
@@ -408,7 +408,7 @@ const ReportList = ({ items }) => (
   <ul className="space-y-3 my-5">
     {items.map((item, index) => (
       <li key={index} className="flex gap-3 text-[12px] leading-relaxed text-gray-700">
-        <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#8EC9DB]" />
+        <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#007bff]" />
         <span>{item}</span>
       </li>
     ))}
@@ -416,7 +416,7 @@ const ReportList = ({ items }) => (
 );
 
 const FormulaBlock = ({ lines }) => (
-  <div className="bg-[#112031] text-gray-300 p-5 rounded-md font-mono text-[11px] leading-loose overflow-x-auto shadow-inner my-6">
+  <div className="bg-[#111111] text-gray-300 p-5 rounded-md font-mono text-[11px] leading-loose overflow-x-auto shadow-inner my-6">
     {lines.map((line, index) => (
       <div key={index} className={line.startsWith('//') ? 'text-gray-400' : 'text-white'}>
         {line}
@@ -464,7 +464,7 @@ const MiniTable = ({ columns, rows }) => (
   <div className="overflow-x-auto my-6">
     <table className="w-full text-[11px] border-collapse">
       <thead>
-        <tr className="bg-[#112031] text-white">
+        <tr className="bg-[#111111] text-white">
           {columns.map((column) => (
             <th key={column} className="p-3 text-left font-bold">{column}</th>
           ))}
@@ -484,19 +484,19 @@ const MiniTable = ({ columns, rows }) => (
 );
 
 const EncryptedBlock = ({ rows }) => (
-  <div className="bg-[#112031] text-gray-300 p-5 rounded-md font-mono text-[11px] leading-loose overflow-x-auto shadow-inner my-6 border border-[#1a2d42]">
-    <div className="text-[9px] text-[#8EC9DB] font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8EC9DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <div className="bg-[#111111] text-gray-300 p-5 rounded-md font-mono text-[11px] leading-loose overflow-x-auto shadow-inner my-6 border border-[#262626]">
+    <div className="text-[9px] text-[#007bff] font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#007bff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
       </svg>
       Encoded Configuration
     </div>
-    <div className="border border-[#1a2d42] rounded overflow-hidden">
+    <div className="border border-[#262626] rounded overflow-hidden">
       {rows.map((row, index) => (
-        <div key={index} className={`flex justify-between px-4 py-2 ${index % 2 === 0 ? 'bg-[#0d1a27]' : 'bg-[#112031]'}`}>
+        <div key={index} className={`flex justify-between px-4 py-2 ${index % 2 === 0 ? 'bg-[#101010]' : 'bg-[#111111]'}`}>
           <span className="text-gray-400">{row.label}</span>
-          <span className="text-[#8EC9DB] font-bold">{row.value}</span>
+          <span className="text-[#007bff] font-bold">{row.value}</span>
         </div>
       ))}
     </div>
@@ -505,7 +505,7 @@ const EncryptedBlock = ({ rows }) => (
 
 const EnglishBriefSection = ({ title, children }) => (
   <section className="mb-8">
-    <h3 className="text-[13px] font-black uppercase tracking-[0.16em] text-[#112031] mb-3">{title}</h3>
+    <h3 className="text-[13px] font-black uppercase tracking-[0.16em] text-[#111111] mb-3">{title}</h3>
     <div className="space-y-3 text-[12px] leading-relaxed text-gray-700">
       {children}
     </div>
@@ -637,11 +637,11 @@ const Phase1Pages = ({ totalPages }) => [
       Prix. bắt đầu từ một quan sát rất cụ thể: nhiều SME không thiếu doanh thu, nhưng thiếu khả năng nhìn thấy lợi nhuận thật theo từng sản phẩm và từng kênh bán. Khi tiệm bánh, F&B handmade, đồ uống nhỏ, nến thơm hoặc mỹ phẩm thủ công mở rộng đa kênh, cùng một sản phẩm có thể lãi khi bán tại cửa hàng nhưng rơi vào vùng nguy hiểm khi đưa lên sàn, food delivery hoặc chạy freeship.
     </ReportLead>
     <InfoBox variant="highlight">
-      <strong className="text-[#112031]">Định vị R&D:</strong> Prix. không được thiết kế để thay Excel, POS, phần mềm kế toán hoặc ERP. Giai đoạn beta tập trung vào ba năng lực: <strong>Margin Safety + Channel Pricing + Promotion Simulator</strong>, nhằm giúp chủ doanh nghiệp thấy giá vốn thật, giá bán an toàn và kịch bản khuyến mãi có nguy cơ làm hỏng biên lợi nhuận.
+      <strong className="text-[#111111]">Định vị R&D:</strong> Prix. không được thiết kế để thay Excel, POS, phần mềm kế toán hoặc ERP. Giai đoạn beta tập trung vào ba năng lực: <strong>Margin Safety + Channel Pricing + Promotion Simulator</strong>, nhằm giúp chủ doanh nghiệp thấy giá vốn thật, giá bán an toàn và kịch bản khuyến mãi có nguy cơ làm hỏng biên lợi nhuận.
     </InfoBox>
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
       <DataCard label="Trọng tâm beta" value="SME" subtext="Bakery, F&B, handmade" />
-      <DataCard label="Đơn vị tiền" value="VND" subtext="Mặc định thị trường VN" color="#8EC9DB" />
+      <DataCard label="Đơn vị tiền" value="VND" subtext="Mặc định thị trường VN" color="#007bff" />
       <DataCard label="Kênh bán" value="Multi" subtext="Store, food app, marketplace" />
       <DataCard label="Nguyên tắc" value="Engine trước" subtext="AI không can thiệp vào số liệu gốc" color="#C1292E" />
     </div>
@@ -671,8 +671,8 @@ const Phase1Pages = ({ totalPages }) => [
           <YAxis tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
           <Legend />
-          <Bar dataKey="clarity" name="Độ rõ quyết định" fill="#112031" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="risk" name="Rủi ro còn lại" fill="#8EC9DB" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="clarity" name="Độ rõ quyết định" fill="#111111" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="risk" name="Rủi ro còn lại" fill="#007bff" radius={[4, 4, 0, 0]} />
         </BarChart>
       )}
     </ChartFrame>
@@ -785,8 +785,8 @@ const Phase2Pages = ({ totalPages }) => [
           <YAxis tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
           <Legend />
-          <Bar dataKey="margin" name="Margin hiện tại (%)" fill="#112031" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="recommended" name="Giá đề xuất index" fill="#8EC9DB" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="margin" name="Margin hiện tại (%)" fill="#111111" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="recommended" name="Giá đề xuất index" fill="#007bff" radius={[4, 4, 0, 0]} />
         </BarChart>
       )}
     </ChartFrame>
@@ -881,7 +881,7 @@ const Phase3Pages = ({ totalPages }) => [
           <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
           <Legend />
-          <Line yAxisId="left" type="monotone" dataKey="margin" name="Margin snapshot (%)" stroke="#112031" strokeWidth={3} dot={{ r: 4, fill: '#112031' }} />
+          <Line yAxisId="left" type="monotone" dataKey="margin" name="Margin snapshot (%)" stroke="#111111" strokeWidth={3} dot={{ r: 4, fill: '#111111' }} />
           <Line yAxisId="right" type="monotone" dataKey="cost" name="Cost index" stroke="#C1292E" strokeWidth={2} strokeDasharray="5 5" />
         </LineChart>
       )}
@@ -910,11 +910,11 @@ const Phase4Pages = ({ totalPages }) => [
         <BarChart width={width} height={height} data={aiGuardrailData} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
           <XAxis type="number" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
-          <YAxis type="category" dataKey="area" tick={{ fontSize: 10, fill: '#112031', fontWeight: 'bold' }} axisLine={false} tickLine={false} width={90} />
+          <YAxis type="category" dataKey="area" tick={{ fontSize: 10, fill: '#111111', fontWeight: 'bold' }} axisLine={false} tickLine={false} width={90} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
           <Legend />
-          <Bar dataKey="engine" name="Engine quyết định" stackId="a" fill="#112031" />
-          <Bar dataKey="ai" name="AI diễn giải" stackId="a" fill="#8EC9DB" />
+          <Bar dataKey="engine" name="Engine quyết định" stackId="a" fill="#111111" />
+          <Bar dataKey="ai" name="AI diễn giải" stackId="a" fill="#007bff" />
         </BarChart>
       )}
     </ChartFrame>
@@ -1032,11 +1032,11 @@ const Phase5Pages = ({ totalPages }) => [
         <BarChart width={width} height={height} data={deploymentData} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
           <XAxis type="number" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
-          <YAxis type="category" dataKey="layer" tick={{ fontSize: 10, fill: '#112031', fontWeight: 'bold' }} axisLine={false} tickLine={false} width={70} />
+          <YAxis type="category" dataKey="layer" tick={{ fontSize: 10, fill: '#111111', fontWeight: 'bold' }} axisLine={false} tickLine={false} width={70} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
-          <Bar dataKey="readiness" name="Readiness" fill="#112031" radius={[0, 4, 4, 0]}>
+          <Bar dataKey="readiness" name="Readiness" fill="#111111" radius={[0, 4, 4, 0]}>
             {deploymentData.map((entry, index) => (
-              <Cell key={`deploy-${entry.layer}`} fill={index < 3 ? '#112031' : index === 3 ? '#8EC9DB' : '#f59e0b'} />
+              <Cell key={`deploy-${entry.layer}`} fill={index < 3 ? '#111111' : index === 3 ? '#007bff' : '#f59e0b'} />
             ))}
           </Bar>
         </BarChart>
@@ -1355,7 +1355,7 @@ const PrixProject = () => {
               viewport={{ once: true }}
               className="mb-10 text-center"
             >
-              <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#8EC9DB] block mb-3">{copy.kicker}</span>
+              <span className="text-[10px] font-black tracking-[0.4em] uppercase text-[#007bff] block mb-3">{copy.kicker}</span>
               <h1 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-4 leading-tight text-white">
                 Prix. Pricing Intelligence <br className="md:hidden" /><span className="text-gray-500 italic lowercase">System.</span>
               </h1>
@@ -1368,7 +1368,7 @@ const PrixProject = () => {
               {/* Left Column: Metadata */}
               <div className="space-y-6 mt-2">
                 <h2 className="text-sm font-bold uppercase tracking-[0.3em] flex items-center gap-4 text-white">
-                  <span className="w-8 h-px bg-[#8EC9DB]"></span> {copy.metadataTitle}
+                  <span className="w-8 h-px bg-[#007bff]"></span> {copy.metadataTitle}
                 </h2>
                 
                 <div className="grid grid-cols-2 gap-4 text-[10px] font-black uppercase tracking-wider text-gray-300">
@@ -1380,7 +1380,7 @@ const PrixProject = () => {
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-white/10">
-                  <div className="p-4 bg-[#112031]/50 border-l-2 border-[#8EC9DB] rounded-r-lg">
+                  <div className="p-4 bg-[#111111]/50 border-l-2 border-[#007bff] rounded-r-lg">
                     <p className="text-[10px] font-['Inter'] text-gray-300 leading-relaxed text-justify">
                       <strong className="text-white">{copy.readerNoteTitle}</strong> {copy.readerNote}
                     </p>
@@ -1391,12 +1391,12 @@ const PrixProject = () => {
               </div>
 
               {/* Right Column: 5 Layers */}
-              <div className="bg-white/5 p-6 rounded-xl border border-white/10 relative group hover:border-[#8EC9DB]/40 transition-all shadow-2xl">
-                <div className="absolute top-4 right-6 text-[#8EC9DB]/10 select-none pointer-events-none group-hover:text-[#8EC9DB]/20 transition-colors">
+              <div className="bg-white/5 p-6 rounded-xl border border-white/10 relative group hover:border-[#007bff]/40 transition-all shadow-2xl">
+                <div className="absolute top-4 right-6 text-[#007bff]/10 select-none pointer-events-none group-hover:text-[#007bff]/20 transition-colors">
                    <span className="text-6xl font-black italic">5</span>
                 </div>
-                <h3 className="text-[10px] font-black mb-4 text-[#8EC9DB] uppercase tracking-[0.4em] flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#8EC9DB] animate-pulse"></div> {copy.layersTitle}
+                <h3 className="text-[10px] font-black mb-4 text-[#007bff] uppercase tracking-[0.4em] flex items-center gap-3">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#007bff] animate-pulse"></div> {copy.layersTitle}
                 </h3>
                 
                 <div className="space-y-2 relative z-10 font-['Inter']">
@@ -1460,7 +1460,7 @@ const PrixProject = () => {
             <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
               <button
                 onClick={() => hardNavigate('/rd')}
-                className="bg-[#112031] text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 rounded-full shadow-xl flex items-center gap-2"
+                className="bg-[#111111] text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 rounded-full shadow-xl flex items-center gap-2"
               >
                 {copy.mobileBack}
               </button>
