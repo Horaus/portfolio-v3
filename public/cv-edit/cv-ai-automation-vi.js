@@ -16,6 +16,11 @@ window.CV_DATA = {
       "value": "+84 886 268 015"
     },
     {
+      "label": "Instagram",
+      "value": "@pre.v.horaus",
+      "href": "https://www.instagram.com/pre.v.horaus/"
+    },
+    {
       "label": "Portfolio",
       "value": "studio.pdl.io.vn",
       "href": "https://studio.pdl.io.vn/vi"
@@ -137,21 +142,6 @@ window.CV_DATA = {
       "experienceLabel": "Sản phẩm & dự án",
       "experience": [
         {
-          "role": "Nghiên cứu & triển khai sản phẩm AI",
-          "company": "Danh mục sản phẩm AI",
-          "period": "5+ sản phẩm đã phát hành",
-          "bullets": [
-            "Tham gia từ nghiên cứu ý tưởng, thiết kế trải nghiệm đến phát triển ứng dụng với AI hỗ trợ và tích hợp model/API.",
-            "Thiết kế workflow tự động hóa, kiểm thử, triển khai server và vận hành sản phẩm.",
-            "Kết hợp góc nhìn kinh doanh, marketing và công nghệ để xác định hướng phát triển và hoàn thiện trải nghiệm."
-          ],
-          "tags": [
-            "AI Product",
-            "Automation",
-            "AI-assisted development"
-          ]
-        },
-        {
           "role": "Hệ thống hỗ trợ quyết định giá",
           "company": "Prix",
           "period": "Dự án R&D",
@@ -169,11 +159,11 @@ window.CV_DATA = {
           ],
           "links": [
             {
-              "label": "Hồ sơ R&D",
+              "label": "https://studio.pdl.io.vn/vi/rd/prix",
               "href": "https://studio.pdl.io.vn/vi/rd/prix"
             },
             {
-              "label": "Website dự án",
+              "label": "https://prix.pdl.io.vn/",
               "href": "https://prix.pdl.io.vn/"
             }
           ]
