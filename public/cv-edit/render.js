@@ -114,7 +114,6 @@
   }
 
   function renderPage(page, index) {
-    if (page.layout === 'resume') return renderResume(page);
     const isContinuation = Boolean(page.continuation);
     const continuationLeftStack = isContinuation && Boolean(page.stackOnLeft);
     const educationOnLeft = Boolean(page.educationOnLeft);
@@ -249,30 +248,6 @@
         </div>
       </section>
     `;
-  }
-
-  function renderResume(page) {
-    const section = (title, content) => `<section class="resume-section"><h2>${escapeHtml(title)}</h2>${content}</section>`;
-    return `<section class="page resume-page" aria-label="CV AI và Automation, trang 1">
-      <div class="page-inner">
-        <header class="resume-header">
-          <div><h1>${escapeHtml(data.name)}</h1><p class="resume-role">${escapeHtml(data.headline)}</p>
-          <div class="resume-contacts">${renderContactRows(data.contacts)}</div></div>
-          <img class="resume-photo" src="${escapeHtml(data.photoSrc)}" alt="Chân dung ${escapeHtml(data.name)}" />
-        </header>
-        ${section('Giới thiệu', `<p class="resume-summary">${escapeHtml(page.intro)}</p>`)}
-        ${section('Dự án tiêu biểu', page.projects.map(project => `<article class="resume-project">
-          <div class="resume-entry-heading"><h3>${escapeHtml(project.name)}</h3><span>${escapeHtml(project.status)}</span></div>
-          <p class="resume-project-description">${escapeHtml(project.description)}</p>
-          <ul class="resume-list">${renderTextList(project.bullets)}</ul>
-          <p class="resume-tech"><strong>Nền tảng sản phẩm:</strong> ${escapeHtml(project.technology)}</p>
-          <div class="resume-links">${project.links.map(link => `<a ${buildLinkAttrs(link.href)}>${escapeHtml(link.label)}</a>`).join('')}</div>
-        </article>`).join(''))}
-        ${section('Năng lực liên quan', `<dl class="resume-skills">${page.skills.map(skill => `<div><dt>${escapeHtml(skill.title)}</dt><dd>${escapeHtml(skill.description)}</dd></div>`).join('')}</dl>`)}
-        ${section('Kinh nghiệm dự án khác', page.background.map(item => `<article class="resume-background"><h3>${escapeHtml(item.company)} <span>${escapeHtml(item.role)}</span></h3><p>${escapeHtml(item.description)}</p></article>`).join(''))}
-        ${section('Học vấn', `<p class="resume-education">${page.education.map(escapeHtml).join('<span aria-hidden="true"> · </span>')}</p>`)}
-      </div>
-    </section>`;
   }
 
   root.innerHTML = data.pages.map((page, index) => renderPage(page, index)).join("");
