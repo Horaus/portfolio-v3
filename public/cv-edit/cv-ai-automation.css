@@ -1,0 +1,28 @@
+.cv-automation .app { padding-top: 72px; }
+.cv-automation .hero { grid-template-columns: 36mm 1fr; gap: 6mm; }
+.cv-automation .photo-slot { height: 43mm; }
+.cv-automation .name-block h1 { font-size: 2rem; }
+.cv-automation .headline { font-size: 0.72rem; letter-spacing: 0.1em; }
+.cv-automation .content-grid { grid-template-columns: 0.95fr 1.15fr; gap: 6mm; }
+.cv-automation .pillars { grid-template-columns: 1fr; }
+.cv-automation .pillar-card { border: 0; padding: 0 0 9px; }
+.cv-automation .list li,
+.cv-automation .experience-list li { font-size: 0.69rem; line-height: 1.5; }
+.cv-automation .section { margin-top: 3mm; }
+.cv-automation .experience-role { font-size: 0.9rem; }
+.cv-automation .experience-company { letter-spacing: 0.1em; line-height: 1.6; }
+.cv-automation .stack-card { padding: 10px; }
+@media screen and (max-width: 900px) {
+  .cv-automation .page { width: 100%; height: auto; overflow: visible; }
+  .cv-automation .preview { width: 100%; overflow: visible; }
+  .cv-automation .page-inner { padding: 24px 20px 60px; }
+  .cv-automation .content-grid { grid-template-columns: 1fr; }
+  .cv-automation .hero { grid-template-columns: 90px 1fr; gap: 16px; }
+  .cv-automation .photo-slot { height: 120px; }
+  .cv-automation .name-block h1 { font-size: 1.6rem; }
+  .cv-automation .intro { font-size: 0.8rem; }
+  .cv-automation .hero { align-items: start; }
+}
+@media print {
+  .cv-automation .app { padding: 0; }
+}

@@ -34,14 +34,14 @@ src/
 ## Khởi động
 
 ```bash
-npm install
-npm run dev
+rtk pnpm install --frozen-lockfile
+rtk pnpm run dev
 ```
 
 ## Build
 
 ```bash
-npm run build
+rtk pnpm run build
 ```
 
 ---

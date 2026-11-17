@@ -132,6 +132,7 @@ const AnimatedRoutes = () => {
           {withLang('/team').map((path) => <Route key={path} path={path} element={<Team />} />)}
           {withLang('/team/horaus-minh').map((path) => <Route key={path} path={path} element={<TeamLeadHorausMinh />} />)}
           {withLang('/team/horaus-minh/cv/marketing').map((path) => <Route key={path} path={path} element={<CVMarketing />} />)}
+          <Route path="/vi/team/horaus-minh/cv/ai-automation" element={<CVMarketing variant="ai-automation" />} />
           {withLang('/content-strategy').map((path) => <Route key={path} path={path} element={<ContentStrategy />} />)}
           {withLang('/strategy-planning').map((path) => <Route key={path} path={path} element={<StrategyPlanning />} />)}
           {withLang('/organic-paid-growth').map((path) => <Route key={path} path={path} element={<OrganicPaidGrowth />} />)}

@@ -4,15 +4,17 @@ import { useLang } from '../hooks/useLang';
 import useT from '../hooks/useT';
 import { withLangPath } from '../i18n/routing';
 
-const CVMarketing = () => {
+const CVMarketing = ({ variant = 'marketing' }) => {
   const { lang } = useLang();
   const t = useT();
   const iframeRef = useRef(null);
 
   const backTo = withLangPath(lang, '/team/horaus-minh');
   const cacheBust = '20260321-3';
-  const cvSrc =
-    lang === 'en'
+  const isAutomation = variant === 'ai-automation';
+  const cvSrc = isAutomation
+    ? '/cv-edit/cv-ai-automation-vi.html?v=20261117-1'
+    : lang === 'en'
       ? `/cv-edit/cv-preview-en.html?v=${cacheBust}`
       : `/cv-edit/cv-preview-vi.html?v=${cacheBust}`;
 
@@ -40,7 +42,7 @@ const CVMarketing = () => {
       </Link>
       <iframe
         ref={iframeRef}
-        title="Horaus Minh - Marketing CV"
+        title={`Horaus Minh - ${isAutomation ? 'AI & Automation' : 'Marketing'} CV`}
         src={cvSrc}
         onLoad={handleIframeLoad}
         className="w-full min-h-screen border-0"
