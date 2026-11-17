@@ -14,7 +14,7 @@ const Team = () => {
   const { lang } = useLang();
 
   const leadName = 'Horaus Minh';
-  const leadRole = `${t('team.leadRole')} / ${t('team.leadTitle')}`;
+  const leadRole = t('team.leadTitle');
 
   const members = [
     {
@@ -130,6 +130,12 @@ const Team = () => {
                             className="px-4 py-2 rounded-custom border border-black bg-black text-white text-xs font-bold uppercase tracking-[0.14em] hover:bg-accent hover:border-accent transition-colors"
                           >
                             {t('lead.cvButtons.marketing')}
+                          </Link>
+                          <Link
+                            to={withLangPath(lang, '/team/horaus-minh/cv/ai-automation')}
+                            className="px-4 py-2 rounded-custom border border-black bg-black text-white text-xs font-bold uppercase tracking-[0.14em] hover:bg-accent hover:border-accent transition-colors"
+                          >
+                            {t('team.aiCv')}
                           </Link>
                         </div>
                       </div>
