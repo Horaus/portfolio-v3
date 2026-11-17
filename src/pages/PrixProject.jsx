@@ -1255,11 +1255,22 @@ const PrixProject = () => {
           {/* SECTION 2: THE A4 REPORT SHOWCASE */}
           <section ref={reportSectionRef} className="report-section bg-[#f8f9fa] pt-16 pb-24 px-4 overflow-hidden shadow-inner" id="report-section">
             <DataProvenance />
-            <nav aria-label={copy.roadmapTitle} className="sticky top-20 z-30 max-w-[900px] mx-auto mb-8 bg-white border border-black/15 p-3">
-              <label htmlFor="prix-report-select" className="block text-xs font-bold text-black mb-2">{copy.roadmapTitle}</label>
-              <select id="prix-report-select" value={activeTab} onChange={(event) => handleTabChange(event.target.value)} className="w-full border border-black/30 bg-white text-black p-3 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent">
-                {tabsData.map((tab) => <option key={tab.id} value={tab.id}>{tab.title}</option>)}
-              </select>
+            <nav aria-label={copy.roadmapTitle} className="lg:hidden max-w-lg mx-auto mb-10 bg-white/95 border border-gray-200 rounded-xl p-4 shadow-xl shadow-black/10">
+              <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center">{copy.roadmapTitle}</div>
+              <ul className="flex flex-col gap-1">
+                {tabsData.map((tab) => (
+                  <li key={tab.id}>
+                    <button
+                      type="button"
+                      aria-current={activeTab === tab.id ? 'step' : undefined}
+                      onClick={() => handleTabChange(tab.id)}
+                      className={`block w-full text-left text-[11px] uppercase font-bold tracking-wider px-3 py-3 rounded-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent ${activeTab === tab.id ? 'bg-[#111111] text-white' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}
+                    >
+                      {tab.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </nav>
             <div className="text-center mb-12">
               <span className="text-gray-400 text-[9px] font-black tracking-[0.5em] uppercase mb-4 block">{copy.reportEyebrow}</span>
