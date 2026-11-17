@@ -1,3 +1,6 @@
+import { chartColors as COLORS } from '../design-system/tokens';
+import ReportSheet from '../design-system/templates/ReportSheet';
+import DataProvenance from '../components/layout/DataProvenance';
 import React from 'react';
 import Header from '../components/layout/Header';
 import PageTransition from '../components/layout/PageTransition';
@@ -14,7 +17,7 @@ const budgetData = [
   { key: 'koc', vi: 'KOC & PR', en: 'KOC & PR', value: 200 },
   { key: 'ops', vi: 'Vận hành/Tech', en: 'Operations/Tech', value: 150 },
 ];
-const COLORS = ['#000000', '#4B5563', '#9CA3AF', '#D1D5DB'];
+
 
 const seasonalityData = [
   { name: 'Jan-Mar', booking: 20, search: 100 },
@@ -33,14 +36,7 @@ const kpiData = [
 ];
 
 const A4Page = ({ children, pageNumber, totalPages }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true, margin: "-50px" }}
-    className="report-a4 bg-white text-black shadow-2xl w-full max-w-[210mm] min-h-[297mm] mx-auto mb-2 py-12 px-[70px] md:py-16 md:px-[100px] relative flex flex-col rounded-sm border border-gray-200"
-    style={{ fontFamily: "'Inter', sans-serif" }}
-  >
+  <ReportSheet variant="strategy">
     {/* Page Header */}
     <div className="flex justify-between items-start border-b border-black pb-5 mb-10">
       <div className="flex items-center gap-3">
@@ -65,7 +61,7 @@ const A4Page = ({ children, pageNumber, totalPages }) => (
       <div>Aurelia Yachts Strategy — 2026</div>
       <div>Page {pageNumber} of {totalPages}</div>
     </div>
-  </motion.div>
+  </ReportSheet>
 );
 
 const StrategyPlanning = () => {
@@ -201,6 +197,7 @@ const StrategyPlanning = () => {
 
           {/* SECTION 2: THE A4 REPORT SHOWCASE */}
           <section className="report-section bg-[#f8f9fa] pt-20 pb-24 px-4 overflow-hidden shadow-inner" id="report-section">
+            <DataProvenance />
             <div className="text-center mb-16">
               <span className="text-gray-400 text-[9px] font-black tracking-[0.5em] uppercase mb-4 block">Strategic Portfolio v2.0</span>
               <h2 className="text-3xl font-black text-black uppercase tracking-tighter shadow-sm inline-block">Growth Strategy Report</h2>

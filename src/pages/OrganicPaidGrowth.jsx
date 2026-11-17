@@ -1,3 +1,6 @@
+import { chartColors as COLORS } from '../design-system/tokens';
+import ReportSheet from '../design-system/templates/ReportSheet';
+import DataProvenance from '../components/layout/DataProvenance';
 import React from 'react';
 import Header from '../components/layout/Header';
 import PageTransition from '../components/layout/PageTransition';
@@ -14,7 +17,7 @@ const adsBudgetData = [
   { name: 'TikTok', value: 90 },
   { name: 'CRM/Retarget', value: 30 },
 ];
-const COLORS = ['#000000', '#4B5563', '#9CA3AF', '#D1D5DB'];
+
 
 const seasonalityData = [
   { name: 'T1-T3', booking: 20, search: 100 },
@@ -45,14 +48,7 @@ const phase2ChannelPerf = [
 ];
 
 const A4Page = ({ children, pageNumber, totalPages }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true, margin: "-50px" }}
-    className="report-a4 bg-white text-black shadow-lg w-full max-w-[210mm] min-h-[297mm] mx-auto mb-4 py-10 px-[53px] md:py-14 md:px-[75px] relative flex flex-col rounded-sm border border-gray-200"
-    style={{ fontFamily: "'Inter', sans-serif" }}
-  >
+  <ReportSheet variant="standard">
     {/* Page Header */}
     <div className="flex justify-between items-start border-b border-black pb-4 mb-8">
       <div className="flex items-center gap-2">
@@ -77,7 +73,7 @@ const A4Page = ({ children, pageNumber, totalPages }) => (
       <div>Aurelia Yachts National Launch — 2026</div>
       <div>Page {pageNumber} of {totalPages}</div>
     </div>
-  </motion.div>
+  </ReportSheet>
 );
 
 const OrganicPaidGrowth = () => {
@@ -188,6 +184,7 @@ const OrganicPaidGrowth = () => {
 
           {/* SECTION 2: THE A4 BOARD REPORT */}
           <section className="report-section bg-[#f2f2f2] pt-16 pb-24 px-4 overflow-hidden shadow-inner" id="report-section">
+            <DataProvenance />
             <div className="text-center mb-12">
                <span className="text-gray-400 text-[9px] font-black tracking-[0.4em] uppercase mb-2 block">Ads Execution Suite v2.0</span>
                <h2 className="text-3xl font-black text-black uppercase tracking-tighter">Attention‑Led Advertising Report</h2>
@@ -235,8 +232,8 @@ const OrganicPaidGrowth = () => {
                   </div>
                 </div>
                 <div className="text-[10px] text-gray-600 leading-relaxed space-y-1 mb-2">
-                  <p><strong>{tx('Nguồn dữ liệu:', 'Data sources:')}</strong> Google Trends + Search Console, Meta Insights, TikTok Analytics, CRM email logs.</p>
-                  <p><strong>{tx('Thời gian đo:', 'Measurement window:')}</strong> {tx('Trung bình 3 năm gần nhất (2023–2025), đối chiếu theo mùa cao điểm.', '3-year average (2023-2025), benchmarked against peak season behavior.')}</p>
+                  <p><strong>{tx('Nguồn cần đối chiếu:', 'Sources to validate:')}</strong> Google Trends + Search Console, Meta Insights, TikTok Analytics, CRM email logs.</p>
+                  <p><strong>{tx('Khung thời gian giả định:', 'Assumed measurement window:')}</strong> {tx('Trung bình 3 năm gần nhất (2023–2025), đối chiếu theo mùa cao điểm.', '3-year average (2023-2025), benchmarked against peak season behavior.')}</p>
                 </div>
                 <table className="w-full text-[10px] border-collapse border border-gray-300 mb-6">
                   <thead>
@@ -525,13 +522,14 @@ const OrganicPaidGrowth = () => {
               </A4Page>
 
               <div className="max-w-[210mm] mx-auto w-full mt-4">
-                <div className="text-[9px] font-black text-gray-500 uppercase tracking-[0.4em] mb-2">Phase 02 — 5‑Month Campaign Result (Post‑launch)</div>
+                <div className="text-[9px] font-black text-gray-500 uppercase tracking-[0.4em] mb-2">{tx('Giai đoạn 02: Kịch bản báo cáo 5 tháng (minh họa)', 'Phase 02: Illustrative 5-month reporting scenario')}</div>
               </div>
 
               {/* PAGE 4: COST RESULT */}
               <A4Page pageNumber={1} totalPages={3}>
                 <div className="text-center mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none italic">Ads Performance Report</h1>
+                  <p className="text-xs text-gray-600 mt-3">{tx('Kịch bản minh họa; chưa xác minh bằng dữ liệu chiến dịch.', 'Illustrative scenario; not verified against campaign records.')}</p>
                   <h2 className="text-[12px] font-bold text-gray-400 uppercase tracking-[0.3em] mt-3">Objective: evaluate spend efficiency & conversion outcome</h2>
                 </div>
 
@@ -542,12 +540,12 @@ const OrganicPaidGrowth = () => {
                   <div><span className="font-bold">{tx('Mục tiêu:', 'Objective:')}</span> {tx('Đánh giá hiệu quả chi tiêu & chuyển đổi', 'Evaluate spend efficiency & conversion outcomes')}</div>
                 </div>
 
-                <h3 className="text-base font-black uppercase mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{tx('1. Thực chi & Hiệu quả ngân sách', '1. Actual Spend & Budget Efficiency')}</h3>
+                <h3 className="text-base font-black uppercase mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{tx('1. Chi tiêu & Hiệu quả ngân sách (minh họa)', '1. Illustrative Spend & Budget Efficiency')}</h3>
                 <table className="w-full text-[10px] border-collapse border border-gray-300 mb-6">
                   <thead>
                     <tr className="bg-gray-100 uppercase tracking-wider">
                       <th className="border border-gray-300 p-3 text-left">{tx('Hạng mục', 'Category')}</th>
-                      <th className="border border-gray-300 p-3 text-left">{tx('Thực chi', 'Actual Spend')}</th>
+                      <th className="border border-gray-300 p-3 text-left">{tx('Chi tiêu minh họa', 'Illustrative spend')}</th>
                       <th className="border border-gray-300 p-3 text-left">{tx('Hiệu quả', 'Performance')}</th>
                       <th className="border border-gray-300 p-3 text-left">{tx('Ghi chú', 'Notes')}</th>
                     </tr>

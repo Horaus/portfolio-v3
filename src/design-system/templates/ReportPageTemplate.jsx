@@ -5,7 +5,7 @@ import ContentPager from '../../components/layout/ContentPager';
 import SiteFooter from '../../components/layout/SiteFooter';
 import ReportClosing from '../../components/layout/ReportClosing';
 import { motion } from 'framer-motion';
-import { reportPageReveal } from '../motion';
+import ReportSheet from './ReportSheet';
 import { container, reportPage } from '../layout';
 import { report as reportTypo } from '../typography';
 
@@ -33,11 +33,7 @@ export const A4Page = ({
   confidentialLabel = 'CONFIDENTIAL / BOARD ONLY',
   footerLeft = 'Aurelia Yachts Strategy — 2026',
 }) => (
-  <motion.div
-    {...reportPageReveal}
-    className={container.a4Page}
-    style={{ fontFamily: "'Inter', sans-serif" }}
-  >
+  <ReportSheet variant="strategy">
     {/* Page Header */}
     <div className={reportPage.header}>
       <div className={reportPage.headerBrand}>
@@ -67,7 +63,7 @@ export const A4Page = ({
       <div>{footerLeft}</div>
       <div>Page {pageNumber} of {totalPages}</div>
     </div>
-  </motion.div>
+  </ReportSheet>
 );
 
 /**

@@ -10,10 +10,10 @@ const CVMarketing = ({ variant = 'marketing' }) => {
   const iframeRef = useRef(null);
 
   const backTo = withLangPath(lang, '/team/horaus-minh');
-  const cacheBust = '20261117-3';
+  const cacheBust = '20261117-9';
   const isAutomation = variant === 'ai-automation';
   const cvSrc = isAutomation
-    ? `/cv-edit/cv-ai-automation-vi.html?v=${cacheBust}`
+    ? `/cv-edit/cv-ai-automation-${lang}.html?v=${cacheBust}`
     : lang === 'en'
       ? `/cv-edit/cv-preview-en.html?v=${cacheBust}`
       : `/cv-edit/cv-preview-vi.html?v=${cacheBust}`;

@@ -1,3 +1,6 @@
+import { prixText, prixGlossaryEnglish } from '../i18n/messages/prixReport';
+import ReportSheet from '../design-system/templates/ReportSheet';
+import DataProvenance from '../components/layout/DataProvenance';
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Header from '../components/layout/Header';
 import PageTransition from '../components/layout/PageTransition';
@@ -311,14 +314,7 @@ const AnnotatedText = ({ children, annotation, onActivate }) => {
 // ============================================================
 
 const A4Page = ({ children, pageNumber, totalPages, docId, title, subtitle }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true, margin: "-50px" }}
-    className="report-a4 bg-white text-black shadow-2xl w-full max-w-[210mm] mx-auto mb-8 py-12 px-[50px] md:py-16 md:px-[70px] relative flex flex-col rounded-sm border border-gray-200 min-h-[297mm]"
-    style={{ fontFamily: "'Inter', sans-serif" }}
-  >
+  <ReportSheet variant="prix">
     {/* Page Header */}
     <div className="flex justify-between items-start border-b border-black pb-4 mb-8">
       <div className="flex items-center gap-3">
@@ -359,7 +355,7 @@ const A4Page = ({ children, pageNumber, totalPages, docId, title, subtitle }) =>
       <div>Prix. R&D — Pricing Intelligence System</div>
       <div>Page {pageNumber} of {totalPages}</div>
     </div>
-  </motion.div>
+  </ReportSheet>
 );
 
 // ============================================================
@@ -503,166 +499,36 @@ const EncryptedBlock = ({ rows }) => (
   </div>
 );
 
-const EnglishBriefSection = ({ title, children }) => (
-  <section className="mb-8">
-    <h3 className="text-[13px] font-black uppercase tracking-[0.16em] text-[#111111] mb-3">{title}</h3>
-    <div className="space-y-3 text-[12px] leading-relaxed text-gray-700">
-      {children}
-    </div>
-  </section>
-);
-
-const EnglishReportPage = ({ activeTab }) => {
-  const sections = {
-    research: {
-      title: 'Margin Safety Discovery Report',
-      subtitle: 'Problem framing for SME pricing decisions',
-      body: (
-        <>
-          <EnglishBriefSection title="Problem statement">
-            <p>Prix. starts from a practical operating issue: many small F&B and handmade businesses can see revenue, but cannot reliably see product-level profit by sales channel. A product may be profitable in-store while becoming risky on delivery apps, marketplaces, freeship campaigns, or direct discount programs.</p>
-            <p>The beta scope therefore stays narrow. Prix. is not positioned as POS, inventory, accounting, or ERP software. It focuses on margin safety, channel pricing, and promotion simulation so the owner can understand the cost base before changing price or campaign mechanics.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Inside the beta scope">
-            <ReportList items={[
-              'Business profile, industry context, selling channels, and default target margin.',
-              'Manufactured or trading products, ingredient master data, production cost, and selling/transaction cost.',
-              'Recommended price, channel-specific price, promotion scenarios, combo scenarios, and AI explanations based on engine output.',
-            ]} />
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Outside the beta scope">
-            <ReportList items={[
-              'Inventory operations, production planning, complex multi-branch management, and advanced tax accounting.',
-              'Competitor pricing as an engine input unless the user provides a clear data source.',
-              'AI intervention in source financial data or deterministic engine results.',
-            ]} />
-          </EnglishBriefSection>
-        </>
-      ),
-    },
-    engine: {
-      title: 'Deterministic Pricing Engine',
-      subtitle: 'Calculation structure and financial guardrails',
-      body: (
-        <>
-          <EnglishBriefSection title="Cost separation rule">
-            <p>The engine does not collapse every cost into one generic cost column. It separates production cost, selling/transaction cost, and pricing decision logic. This separation allows the same product to be recalculated across channels without changing the underlying production economics.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Formula discipline">
-            <p>Percentage-based fees such as commission, payment fee, tax, and affiliate commission depend on selling price. Break-even price and recommended price therefore need to be solved from the denominator rather than estimated by adding a fixed markup.</p>
-            <FormulaBlock lines={[
-              'break_even_price = (production_cost + fixed_selling_cost) / (1 - selling_fee_rate)',
-              'recommended_price = (production_cost + fixed_selling_cost) / (1 - selling_fee_rate - target_margin)',
-              'if denominator <= 0, return infeasible scenario',
-            ]} />
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Operational output">
-            <p>Each calculation should return profit, margin, status, warning, max safe discount, and formula breakdown. AI can explain these outputs, but the source of truth remains the deterministic engine.</p>
-          </EnglishBriefSection>
-        </>
-      ),
-    },
-    data: {
-      title: 'Relational Data Model',
-      subtitle: 'Business scope, ingredient master, and pricing snapshots',
-      body: (
-        <>
-          <EnglishBriefSection title="Business-scoped data ownership">
-            <p>Business is the boundary for data ownership. Products, ingredients, selling channels, combos, snapshots, AI recommendations, and repricing jobs must be read and written through that scope to prevent cross-workspace leakage.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Ingredient master before product BOM">
-            <p>Prix. stores ingredient master data first. A product BOM then references ingredients and records quantity used, unit, and waste override if needed. This reduces repeated manual input and allows affected products to be recalculated when purchase price changes.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Snapshot as calculation evidence">
-            <p>A pricing snapshot stores the engine output at a specific point in time: selling price, production cost, selling cost, fee rate, profit, margin, break-even, recommended price, discount threshold, status, confidence score, input, and formula breakdown. Historical reports should not change when ingredient prices or channel policies are updated later.</p>
-          </EnglishBriefSection>
-        </>
-      ),
-    },
-    ai: {
-      title: 'AI Guardrail Report',
-      subtitle: 'AI explains engine output; it does not calculate financial truth',
-      body: (
-        <>
-          <EnglishBriefSection title="Valid AI role">
-            <p>AI is not the pricing engine in Prix. Its valid role is to normalize input, ask for missing cost items, explain calculated results, suggest promotion or combo scenarios, summarize risk, and draft practical next actions. Profit, margin, break-even, and recommended price must come from the backend engine.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Backend-to-AI contract">
-            <p>AI receives a calculated object containing product, channel, calculation, and missingInputs. The prompt does not query the database directly and has no permission to modify financial figures.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Fallback mode">
-            <p>External AI is an optional explanation layer. Rule-based fallback remains the safe default when API access is unavailable, because margin calculation and risk warnings must continue to work without conversational AI.</p>
-          </EnglishBriefSection>
-        </>
-      ),
-    },
-    dev: {
-      title: 'Full-Stack Architecture',
-      subtitle: 'From R&D to an operable beta system',
-      body: (
-        <>
-          <EnglishBriefSection title="System architecture">
-            <p>Prix. separates frontend, backend, shared pricing engine, and database schema. The frontend uses React and Vite; the backend uses Fastify; the database layer uses PostgreSQL through Prisma ORM. Pricing logic lives in a shared module so preview, persistence, and tests follow the same formulas.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Deployment principle">
-            <p>The system is designed for containerized deployment with separate web and API services behind a reverse proxy. Security configuration, endpoints, and environment variables need to be managed per environment to prevent demo data or development settings from leaking into production.</p>
-          </EnglishBriefSection>
-          <EnglishBriefSection title="Next R&D priorities">
-            <p>The next stage should keep Prix. inside pricing intelligence instead of expanding prematurely into ERP. Priority should go to route guard reliability, Product Builder preview, backend validation, production-clean mode, automated tests, and RBAC.</p>
-          </EnglishBriefSection>
-        </>
-      ),
-    },
-  };
-
-  const current = sections[activeTab] || sections.research;
-
-  return (
-    <A4Page pageNumber={1} totalPages={1} docId="PRX-EN" title={current.title} subtitle={current.subtitle}>
-      {current.body}
-    </A4Page>
-  );
-};
-
-
-
-// ============================================================
 // PHASE 1: PRODUCT RESEARCH
 // ============================================================
 
-const Phase1Pages = ({ totalPages }) => [
-  <A4Page key="p1-1" pageNumber={1} totalPages={totalPages} docId="PRX-001" title="Margin Safety Discovery Report" subtitle="Khảo sát bài toán lợi nhuận SME">
-    <SectionHeader number="I" title="Tuyên bố vấn đề" />
-    <ReportLead>
-      Prix. bắt đầu từ một quan sát rất cụ thể: nhiều SME không thiếu doanh thu, nhưng thiếu khả năng nhìn thấy lợi nhuận thật theo từng sản phẩm và từng kênh bán. Khi tiệm bánh, F&B handmade, đồ uống nhỏ, nến thơm hoặc mỹ phẩm thủ công mở rộng đa kênh, cùng một sản phẩm có thể lãi khi bán tại cửa hàng nhưng rơi vào vùng nguy hiểm khi đưa lên sàn, food delivery hoặc chạy freeship.
-    </ReportLead>
+const Phase1Pages = ({ totalPages, lang }) => [
+  <A4Page key="p1-1" pageNumber={1} totalPages={totalPages} docId="PRX-001" title="Margin Safety Discovery Report" subtitle={prixText(lang, "Khảo sát bài toán lợi nhuận SME")}>
+    <SectionHeader number="I" title={prixText(lang, "Tuyên bố vấn đề")} />
+    <ReportLead>{" "}{prixText(lang, "Prix. bắt đầu từ một quan sát rất cụ thể: nhiều SME không thiếu doanh thu, nhưng thiếu khả năng nhìn thấy lợi nhuận thật theo từng sản phẩm và từng kênh bán. Khi tiệm bánh, F&B handmade, đồ uống nhỏ, nến thơm hoặc mỹ phẩm thủ công mở rộng đa kênh, cùng một sản phẩm có thể lãi khi bán tại cửa hàng nhưng rơi vào vùng nguy hiểm khi đưa lên sàn, food delivery hoặc chạy freeship.")}{" "}</ReportLead>
     <InfoBox variant="highlight">
-      <strong className="text-[#111111]">Định vị R&D:</strong> Prix. không được thiết kế để thay Excel, POS, phần mềm kế toán hoặc ERP. Giai đoạn beta tập trung vào ba năng lực: <strong>Margin Safety + Channel Pricing + Promotion Simulator</strong>, nhằm giúp chủ doanh nghiệp thấy giá vốn thật, giá bán an toàn và kịch bản khuyến mãi có nguy cơ làm hỏng biên lợi nhuận.
-    </InfoBox>
+      <strong className="text-[#111111]">{" "}{prixText(lang, "Định vị R&D:")}{" "}</strong>{" "}{prixText(lang, "Prix. không được thiết kế để thay Excel, POS, phần mềm kế toán hoặc ERP. Giai đoạn beta tập trung vào ba năng lực:")}{" "}<strong>Margin Safety + Channel Pricing + Promotion Simulator</strong>{" "}{prixText(lang, ", nhằm giúp chủ doanh nghiệp thấy giá vốn thật, giá bán an toàn và kịch bản khuyến mãi có nguy cơ làm hỏng biên lợi nhuận.")}{" "}</InfoBox>
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
-      <DataCard label="Trọng tâm beta" value="SME" subtext="Bakery, F&B, handmade" />
-      <DataCard label="Đơn vị tiền" value="VND" subtext="Mặc định thị trường VN" color="#0B74E5" />
-      <DataCard label="Kênh bán" value="Multi" subtext="Store, food app, marketplace" />
-      <DataCard label="Nguyên tắc" value="Engine trước" subtext="AI không can thiệp vào số liệu gốc" color="#C1292E" />
+      <DataCard label={prixText(lang, "Trọng tâm beta")} value="SME" subtext="Bakery, F&B, handmade" />
+      <DataCard label={prixText(lang, "Đơn vị tiền")} value="VND" subtext={prixText(lang, "Mặc định thị trường VN")} color="#0B74E5" />
+      <DataCard label={prixText(lang, "Kênh bán")} value="Multi" subtext="Store, food app, marketplace" />
+      <DataCard label={prixText(lang, "Nguyên tắc")} value={prixText(lang, "Engine trước")} subtext={prixText(lang, "AI không can thiệp vào số liệu gốc")} color="#C1292E" />
     </div>
-    <SectionHeader number="II" title="Các giả định bị loại bỏ" />
+    <SectionHeader number="II" title={prixText(lang, "Các giả định bị loại bỏ")} />
     <ReportList
       items={[
-        'Một sản phẩm không có một giá vốn duy nhất khi đem đi bán; nó có production cost, selling/transaction cost và pricing decision riêng theo kênh.',
-        'Margin hiện tại không phải dữ liệu người dùng tự khai. Margin phải được engine tính từ selling price, production hoặc COGS và chi phí kênh.',
-        'Giảm giá không phải công cụ tăng trưởng mặc định. Với SME biên mỏng, discount trực tiếp thường nguy hiểm hơn combo hoặc quà tặng có kiểm soát.',
+        prixText(lang, "Một sản phẩm không có một giá vốn duy nhất khi đem đi bán; nó có production cost, selling/transaction cost và pricing decision riêng theo kênh."),
+        prixText(lang, "Margin hiện tại không phải dữ liệu người dùng tự khai. Margin phải được engine tính từ selling price, production hoặc COGS và chi phí kênh."),
+        prixText(lang, "Giảm giá không phải công cụ tăng trưởng mặc định. Với SME biên mỏng, discount trực tiếp thường nguy hiểm hơn combo hoặc quà tặng có kiểm soát."),
       ]}
     />
     <InfoBox variant="success">
-      <strong>Luận điểm R&D:</strong> Bài toán không phải "làm phần mềm tính giá" mà là tạo một lớp kiểm soát quyết định giá đủ rõ để SME không bán dưới vùng an toàn.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Luận điểm R&D:")}{" "}</strong>{" "}{prixText(lang, "Bài toán không phải \"làm phần mềm tính giá\" mà là tạo một lớp kiểm soát quyết định giá đủ rõ để SME không bán dưới vùng an toàn.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p1-2" pageNumber={2} totalPages={totalPages} docId="PRX-001">
-    <SectionHeader number="III" title="Luồng sản phẩm chính thức" />
-    <ReportLead>
-      Theo phạm vi beta, Prix. được chia thành sáu luồng vận hành: public calculator, onboarding, tạo sản phẩm, kiểm tra sản phẩm đang lỗ, tạo khuyến mãi và tạo combo. Thứ tự này phản ánh một hành trình ra quyết định thực tế: người dùng thử tính nhanh trước, lưu dữ liệu khi cần quản trị lâu dài, sau đó dùng snapshot và scenario để so sánh các phương án giá.
-    </ReportLead>
+    <SectionHeader number="III" title={prixText(lang, "Luồng sản phẩm chính thức")} />
+    <ReportLead>{" "}{prixText(lang, "Theo phạm vi beta, Prix. được chia thành sáu luồng vận hành: public calculator, onboarding, tạo sản phẩm, kiểm tra sản phẩm đang lỗ, tạo khuyến mãi và tạo combo. Thứ tự này phản ánh một hành trình ra quyết định thực tế: người dùng thử tính nhanh trước, lưu dữ liệu khi cần quản trị lâu dài, sau đó dùng snapshot và scenario để so sánh các phương án giá.")}{" "}</ReportLead>
     <ChartFrame>
       {({ width, height }) => (
         <BarChart width={width} height={height} data={workflowData}>
@@ -671,60 +537,50 @@ const Phase1Pages = ({ totalPages }) => [
           <YAxis tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
           <Legend />
-          <Bar dataKey="clarity" name="Độ rõ quyết định" fill="#111111" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="risk" name="Rủi ro còn lại" fill="#0B74E5" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="clarity" name={prixText(lang, "Độ rõ quyết định")} fill="#111111" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="risk" name={prixText(lang, "Rủi ro còn lại")} fill="#0B74E5" radius={[4, 4, 0, 0]} />
         </BarChart>
       )}
     </ChartFrame>
-    <p className="text-[8px] text-center text-gray-400 uppercase font-bold tracking-wider mb-6">
-      Fig 1.1: Mức độ rõ quyết định tăng khi dữ liệu đi từ calculator sang sản phẩm lưu trữ.
-    </p>
+    <p className="text-[8px] text-center text-gray-400 uppercase font-bold tracking-wider mb-6">{" "}{prixText(lang, "Fig 1.1: Mức độ rõ quyết định tăng khi dữ liệu đi từ calculator sang sản phẩm lưu trữ.")}{" "}</p>
     <MiniTable
-      columns={['Luồng', 'Dữ liệu nhập', 'Kết quả hệ thống']}
+      columns={[prixText(lang, "Luồng"), prixText(lang, "Dữ liệu nhập"), prixText(lang, "Kết quả hệ thống")]}
       rows={[
-        ['Public Calculator', 'Giá bán, nguyên liệu, bao bì, nhân công, hao hụt, kênh bán', 'Production cost, selling cost, margin, recommended price, max safe discount'],
-        ['Tạo sản phẩm', 'Thông tin sản phẩm, BOM/recipe, direct cost, kênh được gán', 'Realtime preview, product detail, pricing snapshot'],
-        ['Promotion/Combo', 'Discount, gift, freeship, affiliate rate hoặc danh sách item combo', 'Profit, margin, status, warning và khuyến nghị phương án tốt hơn'],
+        ['Public Calculator', prixText(lang, "Giá bán, nguyên liệu, bao bì, nhân công, hao hụt, kênh bán"), 'Production cost, selling cost, margin, recommended price, max safe discount'],
+        [prixText(lang, "Tạo sản phẩm"), prixText(lang, "Thông tin sản phẩm, BOM/recipe, direct cost, kênh được gán"), 'Realtime preview, product detail, pricing snapshot'],
+        ['Promotion/Combo', prixText(lang, "Discount, gift, freeship, affiliate rate hoặc danh sách item combo"), prixText(lang, "Profit, margin, status, warning và khuyến nghị phương án tốt hơn")],
       ]}
     />
     <InfoBox variant="success">
-      <strong>Ghi chú vận hành:</strong> UX của Prix. cần làm rõ hơn một form nhập liệu thông thường. Mỗi bước phải phân biệt dữ liệu người dùng cung cấp, con số engine tính ra và phần AI diễn giải để tránh nhầm lẫn giữa dữ kiện và khuyến nghị.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Ghi chú vận hành:")}{" "}</strong>{" "}{prixText(lang, "UX của Prix. cần làm rõ hơn một form nhập liệu thông thường. Mỗi bước phải phân biệt dữ liệu người dùng cung cấp, con số engine tính ra và phần AI diễn giải để tránh nhầm lẫn giữa dữ kiện và khuyến nghị.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p1-3" pageNumber={3} totalPages={totalPages} docId="PRX-001">
-    <SectionHeader number="IV" title="Phạm vi beta" />
-    <ReportLead>
-      Phạm vi beta của Prix. được khóa rõ để sản phẩm giữ đúng bài toán pricing intelligence, thay vì mở rộng sớm sang vận hành ERP. Hệ thống tập trung vào tính giá, mô phỏng kênh bán, cảnh báo khuyến mãi và giải thích kết quả. Những phần như tồn kho realtime, nhập xuất tồn, POS, kế toán thuế chuyên sâu hoặc tự crawl giá thị trường chưa thuộc phạm vi kiểm chứng hiện tại.
-    </ReportLead>
+    <SectionHeader number="IV" title={prixText(lang, "Phạm vi beta")} />
+    <ReportLead>{" "}{prixText(lang, "Phạm vi beta của Prix. được khóa rõ để sản phẩm giữ đúng bài toán pricing intelligence, thay vì mở rộng sớm sang vận hành ERP. Hệ thống tập trung vào tính giá, mô phỏng kênh bán, cảnh báo khuyến mãi và giải thích kết quả. Những phần như tồn kho realtime, nhập xuất tồn, POS, kế toán thuế chuyên sâu hoặc tự crawl giá thị trường chưa thuộc phạm vi kiểm chứng hiện tại.")}{" "}</ReportLead>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-6">
       <InfoBox variant="highlight">
-        <strong>Beta phải có:</strong>
+        <strong>{" "}{prixText(lang, "Beta phải có:")}{" "}</strong>
         <ReportList items={[
-          'Tài khoản, business profile, ngành, kênh bán và target margin mặc định.',
-          'Sản phẩm manufactured hoặc trading; ingredient master; production cost; selling/transaction cost.',
-          'Recommended price, channel-specific price, promotion scenario, combo scenario và AI explanation dựa trên kết quả engine.',
+          prixText(lang, "Tài khoản, business profile, ngành, kênh bán và target margin mặc định."),
+          prixText(lang, "Sản phẩm manufactured hoặc trading; ingredient master; production cost; selling/transaction cost."),
+          prixText(lang, "Recommended price, channel-specific price, promotion scenario, combo scenario và AI explanation dựa trên kết quả engine."),
         ]} />
       </InfoBox>
       <InfoBox variant="warning">
-        <strong>Ngoài phạm vi beta:</strong>
+        <strong>{" "}{prixText(lang, "Ngoài phạm vi beta:")}{" "}</strong>
         <ReportList items={[
-          'Quản lý tồn kho, sản xuất, nhiều chi nhánh phức tạp và kế toán thuế chuyên sâu.',
-          'Dữ liệu giá đối thủ chưa được đưa vào engine nếu người dùng chưa cung cấp nguồn đáng tin cậy.',
-          'AI chỉ diễn giải và gợi ý hành động; lớp này không can thiệp vào số liệu gốc hoặc kết quả engine.',
+          prixText(lang, "Quản lý tồn kho, sản xuất, nhiều chi nhánh phức tạp và kế toán thuế chuyên sâu."),
+          prixText(lang, "Dữ liệu giá đối thủ chưa được đưa vào engine nếu người dùng chưa cung cấp nguồn đáng tin cậy."),
+          prixText(lang, "AI chỉ diễn giải và gợi ý hành động; lớp này không can thiệp vào số liệu gốc hoặc kết quả engine."),
         ]} />
       </InfoBox>
     </div>
-    <SectionHeader number="V" title="Kết luận và bước tiếp theo" />
-    <p className="text-justify mb-5">
-      Báo cáo Khảo sát kết luận rằng Prix. cần giải quyết một vấn đề hẹp nhưng đủ sâu: giúp SME nhìn thấy lợi nhuận thật trước khi quyết định giá, kênh bán hoặc khuyến mãi. Phạm vi beta vì vậy được giữ có chủ đích: POS, ERP và kế toán được tách khỏi giai đoạn này để nguồn lực tập trung vào an toàn biên lợi nhuận và quyết định giá theo kênh.
-    </p>
-    <p className="text-justify mb-5">
-      Phần tiếp theo là một báo cáo độc lập về Thuật toán lõi. Báo cáo đó sẽ giải thích cách Prix. chuyển các kết luận trên thành một engine tất định: nhận dữ liệu sản phẩm, chi phí sản xuất, chi phí bán hàng và mục tiêu margin; sau đó trả về giá hòa vốn, giá đề xuất, cảnh báo và các kịch bản quyết định.
-    </p>
+    <SectionHeader number="V" title={prixText(lang, "Kết luận và bước tiếp theo")} />
+    <p className="text-justify mb-5">{" "}{prixText(lang, "Báo cáo Khảo sát kết luận rằng Prix. cần giải quyết một vấn đề hẹp nhưng đủ sâu: giúp SME nhìn thấy lợi nhuận thật trước khi quyết định giá, kênh bán hoặc khuyến mãi. Phạm vi beta vì vậy được giữ có chủ đích: POS, ERP và kế toán được tách khỏi giai đoạn này để nguồn lực tập trung vào an toàn biên lợi nhuận và quyết định giá theo kênh.")}{" "}</p>
+    <p className="text-justify mb-5">{" "}{prixText(lang, "Phần tiếp theo là một báo cáo độc lập về Thuật toán lõi. Báo cáo đó sẽ giải thích cách Prix. chuyển các kết luận trên thành một engine tất định: nhận dữ liệu sản phẩm, chi phí sản xuất, chi phí bán hàng và mục tiêu margin; sau đó trả về giá hòa vốn, giá đề xuất, cảnh báo và các kịch bản quyết định.")}{" "}</p>
     <InfoBox variant="success">
-      <strong>Kết luận báo cáo 1:</strong> Nghiên cứu khảo sát cho thấy vấn đề cốt lõi của SME F&B không nằm ở doanh thu đơn thuần, mà ở khả năng nhìn thấy lợi nhuận thật trên từng sản phẩm và từng kênh bán. Phạm vi beta được khóa vào ba trụ: Margin Safety, Channel Pricing và Promotion Simulator; các mảng POS, kho bãi và kế toán thuế được tách ra khỏi giai đoạn này. Cách khóa phạm vi này giúp R&D tránh feature creep và tập trung vào giá trị cần kiểm chứng trước: chủ doanh nghiệp có thể biết giá vốn thật, vùng giá an toàn và kịch bản khuyến mãi có nguy cơ phá margin. Báo cáo tiếp theo trình bày cách chuyển phạm vi này thành engine tính toán tất định.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Kết luận báo cáo 1:")}{" "}</strong>{" "}{prixText(lang, "Nghiên cứu khảo sát cho thấy vấn đề cốt lõi của SME F&B không nằm ở doanh thu đơn thuần, mà ở khả năng nhìn thấy lợi nhuận thật trên từng sản phẩm và từng kênh bán. Phạm vi beta được khóa vào ba trụ: Margin Safety, Channel Pricing và Promotion Simulator; các mảng POS, kho bãi và kế toán thuế được tách ra khỏi giai đoạn này. Cách khóa phạm vi này giúp R&D tránh feature creep và tập trung vào giá trị cần kiểm chứng trước: chủ doanh nghiệp có thể biết giá vốn thật, vùng giá an toàn và kịch bản khuyến mãi có nguy cơ phá margin. Báo cáo tiếp theo trình bày cách chuyển phạm vi này thành engine tính toán tất định.")}{" "}</InfoBox>
   </A4Page>,
 ];
 
@@ -732,18 +588,16 @@ const Phase1Pages = ({ totalPages }) => [
 // PHASE 2: PRICING ENGINE
 // ============================================================
 
-const Phase2Pages = ({ totalPages }) => [
-  <A4Page key="p2-1" pageNumber={1} totalPages={totalPages} docId="PRX-002" title="Deterministic Pricing Engine" subtitle="Cấu trúc tính toán lõi">
-    <SectionHeader number="I" title="Luật phân tách bắt buộc" />
-    <ReportLead>
-      Engine của Prix. không cộng mọi thứ vào một cột "giá vốn". Nó tách chi phí thành ba lớp: production cost, selling/transaction cost và pricing decision. Đây là nền tảng để cùng một sản phẩm có thể được tính lại theo nhiều kênh mà không làm sai bản chất chi phí sản xuất.
-    </ReportLead>
+const Phase2Pages = ({ totalPages, lang }) => [
+  <A4Page key="p2-1" pageNumber={1} totalPages={totalPages} docId="PRX-002" title="Deterministic Pricing Engine" subtitle={prixText(lang, "Cấu trúc tính toán lõi")}>
+    <SectionHeader number="I" title={prixText(lang, "Luật phân tách bắt buộc")} />
+    <ReportLead>{" "}{prixText(lang, "Engine của Prix. không cộng mọi thứ vào một cột \"giá vốn\". Nó tách chi phí thành ba lớp: production cost, selling/transaction cost và pricing decision. Đây là nền tảng để cùng một sản phẩm có thể được tính lại theo nhiều kênh mà không làm sai bản chất chi phí sản xuất.")}{" "}</ReportLead>
     <MiniTable
-      columns={['Lớp', 'Thành phần chính', 'Vai trò trong quyết định']}
+      columns={[prixText(lang, "Lớp"), prixText(lang, "Thành phần chính"), prixText(lang, "Vai trò trong quyết định")]}
       rows={[
-        ['Production Cost', 'Nguyên liệu, bao bì trực tiếp, nhân công, utility, overhead, waste buffer', 'Cho biết sản phẩm tốn bao nhiêu để tạo ra trước khi đem đi bán.'],
-        ['Selling/Transaction Cost', 'Commission, payment fee, tax, fixed fee, voucher, freeship, rent/staff allocation', 'Cho biết kênh bán ăn bao nhiêu vào mỗi đơn hàng.'],
-        ['Pricing Layer', 'Break-even, recommended price, max safe discount, channel-specific price', 'Biến dữ liệu chi phí thành quyết định giá và khuyến mãi.'],
+        ['Production Cost', prixText(lang, "Nguyên liệu, bao bì trực tiếp, nhân công, utility, overhead, waste buffer"), prixText(lang, "Cho biết sản phẩm tốn bao nhiêu để tạo ra trước khi đem đi bán.")],
+        ['Selling/Transaction Cost', 'Commission, payment fee, tax, fixed fee, voucher, freeship, rent/staff allocation', prixText(lang, "Cho biết kênh bán ăn bao nhiêu vào mỗi đơn hàng.")],
+        ['Pricing Layer', 'Break-even, recommended price, max safe discount, channel-specific price', prixText(lang, "Biến dữ liệu chi phí thành quyết định giá và khuyến mãi.")],
       ]}
     />
     <FormulaBlock
@@ -758,15 +612,12 @@ const Phase2Pages = ({ totalPages }) => [
       ]}
     />
     <InfoBox variant="success">
-      <strong>Phát hiện kỹ thuật:</strong> Tách lớp chi phí giúp Prix. không bị khóa vào một ngành duy nhất. Bakery, handmade F&B, đồ uống hoặc sản phẩm trading đều có thể đi qua cùng một engine nếu input được chuẩn hóa đúng.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Phát hiện kỹ thuật:")}{" "}</strong>{" "}{prixText(lang, "Tách lớp chi phí giúp Prix. không bị khóa vào một ngành duy nhất. Bakery, handmade F&B, đồ uống hoặc sản phẩm trading đều có thể đi qua cùng một engine nếu input được chuẩn hóa đúng.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p2-2" pageNumber={2} totalPages={totalPages} docId="PRX-002">
-    <SectionHeader number="II" title="Vì sao không cộng thẳng phí phần trăm" />
-    <ReportLead>
-      Sai lầm phổ biến khi tính phí sàn là lấy production cost cộng thêm một số tiền ước lượng. Nhưng commission, payment fee, tax và affiliate commission đều phụ thuộc vào chính selling price. Vì vậy break-even price và recommended price phải được giải ngược từ mẫu số, nếu không hệ thống sẽ đánh giá sai kênh có phí cao.
-    </ReportLead>
+    <SectionHeader number="II" title={prixText(lang, "Vì sao không cộng thẳng phí phần trăm")} />
+    <ReportLead>{" "}{prixText(lang, "Sai lầm phổ biến khi tính phí sàn là lấy production cost cộng thêm một số tiền ước lượng. Nhưng commission, payment fee, tax và affiliate commission đều phụ thuộc vào chính selling price. Vì vậy break-even price và recommended price phải được giải ngược từ mẫu số, nếu không hệ thống sẽ đánh giá sai kênh có phí cao.")}{" "}</ReportLead>
     <FormulaBlock
       lines={[
         '// Break-even',
@@ -785,33 +636,29 @@ const Phase2Pages = ({ totalPages }) => [
           <YAxis tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
           <Legend />
-          <Bar dataKey="margin" name="Margin hiện tại (%)" fill="#111111" radius={[4, 4, 0, 0]} />
-          <Bar dataKey="recommended" name="Giá đề xuất index" fill="#0B74E5" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="margin" name={prixText(lang, "Margin hiện tại (%)")} fill="#111111" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="recommended" name={prixText(lang, "Giá đề xuất index")} fill="#0B74E5" radius={[4, 4, 0, 0]} />
         </BarChart>
       )}
     </ChartFrame>
     <InfoBox variant="warning">
-      <strong>Guardrail quan trọng:</strong> Nếu selling fee rate cộng target margin làm mẫu số nhỏ hơn hoặc bằng 0, Prix. phải trả về scenario không khả thi thay vì cố sinh ra một giá đề xuất vô nghĩa.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Guardrail quan trọng:")}{" "}</strong>{" "}{prixText(lang, "Nếu selling fee rate cộng target margin làm mẫu số nhỏ hơn hoặc bằng 0, Prix. phải trả về scenario không khả thi thay vì cố sinh ra một giá đề xuất vô nghĩa.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p2-3" pageNumber={3} totalPages={totalPages} docId="PRX-002">
-    <SectionHeader number="III" title="Từ phép tính sang quyết định vận hành" />
-    <ReportLead>
-      Engine cần trả về nhiều hơn một chỉ số margin. Mỗi kết quả phải đi kèm profit, status, warning, max safe discount và formula breakdown để UI và AI có đủ dữ kiện giải thích. Promotion scenario và combo scenario đều chạy lại trên cùng nguyên tắc, chỉ khác cách biến đổi giá bán, fixed selling cost hoặc selling fee rate.
-    </ReportLead>
+    <SectionHeader number="III" title={prixText(lang, "Từ phép tính sang quyết định vận hành")} />
+    <ReportLead>{" "}{prixText(lang, "Engine cần trả về nhiều hơn một chỉ số margin. Mỗi kết quả phải đi kèm profit, status, warning, max safe discount và formula breakdown để UI và AI có đủ dữ kiện giải thích. Promotion scenario và combo scenario đều chạy lại trên cùng nguyên tắc, chỉ khác cách biến đổi giá bán, fixed selling cost hoặc selling fee rate.")}{" "}</ReportLead>
     <MiniTable
-      columns={['Scenario', 'Biến đổi input', 'Điểm cần cảnh báo']}
+      columns={['Scenario', prixText(lang, "Biến đổi input"), prixText(lang, "Điểm cần cảnh báo")]}
       rows={[
-        ['Percent/fixed discount', 'Giảm scenario price trước khi tính lại margin', 'Âm profit hoặc margin thấp hơn watch threshold.'],
-        ['Free shipping/gift/voucher', 'Tăng fixed selling cost bằng shipping subsidy, gift cost hoặc expected voucher cost', 'Có thể giữ perceived value tốt hơn discount nhưng vẫn cần giới hạn chi phí.'],
-        ['Affiliate/reseller', 'Tăng selling_fee_rate bằng affiliate commission', 'Tác động mạnh vì phí tính theo phần trăm selling price.'],
-        ['Combo', 'Cộng production cost của nhiều item, thêm bao bì/quà tặng, áp phí kênh combo', 'So sánh với bán lẻ để biết tăng AOV hay chỉ đang bào margin.'],
+        ['Percent/fixed discount', prixText(lang, "Giảm scenario price trước khi tính lại margin"), prixText(lang, "Âm profit hoặc margin thấp hơn watch threshold.")],
+        ['Free shipping/gift/voucher', prixText(lang, "Tăng fixed selling cost bằng shipping subsidy, gift cost hoặc expected voucher cost"), prixText(lang, "Có thể giữ perceived value tốt hơn discount nhưng vẫn cần giới hạn chi phí.")],
+        ['Affiliate/reseller', prixText(lang, "Tăng selling_fee_rate bằng affiliate commission"), prixText(lang, "Tác động mạnh vì phí tính theo phần trăm selling price.")],
+        ['Combo', prixText(lang, "Cộng production cost của nhiều item, thêm bao bì/quà tặng, áp phí kênh combo"), prixText(lang, "So sánh với bán lẻ để biết tăng AOV hay chỉ đang bào margin.")],
       ]}
     />
     <InfoBox variant="success">
-      <strong>Kết luận báo cáo 2:</strong> Pricing engine là nguồn sự thật tính toán duy nhất trong toàn bộ hệ thống Prix. Bằng cách tách chi phí thành ba lớp rõ ràng (production, selling, pricing) và giải ngược break-even từ mẫu số thay vì cộng thẳng, engine đảm bảo không kênh bán nào bị đánh giá sai. Mọi kịch bản khuyến mãi và combo đều chạy lại trên cùng nguyên tắc, chỉ khác cách biến đổi input. Dữ liệu từ engine cần được lưu có lịch sử và có quan hệ rõ giữa sản phẩm, nguyên liệu, kênh và snapshot — đây là chủ đề của báo cáo tiếp theo.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Kết luận báo cáo 2:")}{" "}</strong>{" "}{prixText(lang, "Pricing engine là nguồn sự thật tính toán duy nhất trong toàn bộ hệ thống Prix. Bằng cách tách chi phí thành ba lớp rõ ràng (production, selling, pricing) và giải ngược break-even từ mẫu số thay vì cộng thẳng, engine đảm bảo không kênh bán nào bị đánh giá sai. Mọi kịch bản khuyến mãi và combo đều chạy lại trên cùng nguyên tắc, chỉ khác cách biến đổi input. Dữ liệu từ engine cần được lưu có lịch sử và có quan hệ rõ giữa sản phẩm, nguyên liệu, kênh và snapshot — đây là chủ đề của báo cáo tiếp theo.")}{" "}</InfoBox>
   </A4Page>,
 ];
 
@@ -819,31 +666,26 @@ const Phase2Pages = ({ totalPages }) => [
 // PHASE 3: DATABASE
 // ============================================================
 
-const Phase3Pages = ({ totalPages }) => [
-  <A4Page key="p3-1" pageNumber={1} totalPages={totalPages} docId="PRX-003" title="Relational Data Model" subtitle="Business scope và product taxonomy">
-    <SectionHeader number="I" title="Đơn vị cô lập dữ liệu" />
-    <ReportLead>
-      Schema chính thức của Prix. đặt business làm biên sở hữu dữ liệu. User sở hữu business; business sở hữu products, ingredients, selling channels, combos, AI recommendations và repricing jobs. Mọi tính toán phải luôn đi qua business scope để một workspace không đọc nhầm dữ liệu của workspace khác.
-    </ReportLead>
+const Phase3Pages = ({ totalPages, lang }) => [
+  <A4Page key="p3-1" pageNumber={1} totalPages={totalPages} docId="PRX-003" title="Relational Data Model" subtitle={prixText(lang, "Business scope và product taxonomy")}>
+    <SectionHeader number="I" title={prixText(lang, "Đơn vị cô lập dữ liệu")} />
+    <ReportLead>{" "}{prixText(lang, "Schema chính thức của Prix. đặt business làm biên sở hữu dữ liệu. User sở hữu business; business sở hữu products, ingredients, selling channels, combos, AI recommendations và repricing jobs. Mọi tính toán phải luôn đi qua business scope để một workspace không đọc nhầm dữ liệu của workspace khác.")}{" "}</ReportLead>
     <MiniTable
-      columns={['Entity', 'Trường quyết định', 'Ý nghĩa R&D']}
+      columns={['Entity', prixText(lang, "Trường quyết định"), prixText(lang, "Ý nghĩa R&D")]}
       rows={[
-        ['Business', 'currency, defaultTargetMargin, safe/watch thresholds, tax profile', 'Là cấu hình tài chính mặc định của workspace.'],
-        ['Product', 'productKind, salesStatus, currentPrice, targetMargin, primaryChannelId', 'Phân biệt sản phẩm đang bán và sản phẩm R&D; manufactured và trading.'],
-        ['ProductChannel', 'sellingPrice, isPrimary', 'Một sản phẩm có nhiều giá theo kênh, không còn chỉ một primary channel đơn giản.'],
-        ['SellingChannel', 'presetId, feePolicyVersion, commission, payment, tax, fixed costs', 'Lưu chính sách phí theo kênh và cho phép chỉnh theo hợp đồng thật.'],
+        ['Business', 'currency, defaultTargetMargin, safe/watch thresholds, tax profile', prixText(lang, "Là cấu hình tài chính mặc định của workspace.")],
+        ['Product', 'productKind, salesStatus, currentPrice, targetMargin, primaryChannelId', prixText(lang, "Phân biệt sản phẩm đang bán và sản phẩm R&D; manufactured và trading.")],
+        ['ProductChannel', 'sellingPrice, isPrimary', prixText(lang, "Một sản phẩm có nhiều giá theo kênh, không còn chỉ một primary channel đơn giản.")],
+        ['SellingChannel', 'presetId, feePolicyVersion, commission, payment, tax, fixed costs', prixText(lang, "Lưu chính sách phí theo kênh và cho phép chỉnh theo hợp đồng thật.")],
       ]}
     />
     <InfoBox variant="highlight">
-      <strong>Quy tắc vận hành:</strong> sản phẩm mới chỉ tự gán kênh `offline_store`/`Tại cửa hàng`. Shopee, TikTok Shop hoặc food delivery chỉ tham gia pricing sau khi người dùng chủ động thêm tab kênh đó.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Quy tắc vận hành:")}{" "}</strong>{" "}{prixText(lang, "sản phẩm mới chỉ tự gán kênh `offline_store`/`Tại cửa hàng`. Shopee, TikTok Shop hoặc food delivery chỉ tham gia pricing sau khi người dùng chủ động thêm tab kênh đó.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p3-2" pageNumber={2} totalPages={totalPages} docId="PRX-003">
-    <SectionHeader number="II" title="Ingredient master trước product BOM" />
-    <ReportLead>
-      Prix. thiết kế luồng nguyên liệu theo hướng lưu ingredient master trước. Khi tạo product BOM, người dùng chỉ chọn nguyên liệu và nhập lượng dùng thay vì nhập lại toàn bộ thông tin thủ công cho từng sản phẩm. Cách này giảm lỗi nhập liệu, cho phép sửa giá mua ở thư viện và tái tính những sản phẩm bị ảnh hưởng.
-    </ReportLead>
+    <SectionHeader number="II" title={prixText(lang, "Ingredient master trước product BOM")} />
+    <ReportLead>{" "}{prixText(lang, "Prix. thiết kế luồng nguyên liệu theo hướng lưu ingredient master trước. Khi tạo product BOM, người dùng chỉ chọn nguyên liệu và nhập lượng dùng thay vì nhập lại toàn bộ thông tin thủ công cho từng sản phẩm. Cách này giảm lỗi nhập liệu, cho phép sửa giá mua ở thư viện và tái tính những sản phẩm bị ảnh hưởng.")}{" "}</ReportLead>
     <FormulaBlock
       lines={[
         '// Ingredient master',
@@ -857,24 +699,21 @@ const Phase3Pages = ({ totalPages }) => [
     />
     <ReportList
       items={[
-        'Ingredient có group_name để gom bột, sữa, topping, bao bì hoặc hàng nhập; nếu chưa có nhóm thì UI hiển thị dấu gạch ngang thay vì tự sinh dữ liệu thay thế.',
-        'Unit type quyết định đơn vị hợp lệ. Nguyên liệu kg/g không được hiển thị l/ml hoặc cái/chiếc trong dòng BOM.',
-        'Direct cost được lưu riêng: packaging, labor minutes, labor rate, utility, overhead và production waste buffer.',
+        prixText(lang, "Ingredient có group_name để gom bột, sữa, topping, bao bì hoặc hàng nhập; nếu chưa có nhóm thì UI hiển thị dấu gạch ngang thay vì tự sinh dữ liệu thay thế."),
+        prixText(lang, "Unit type quyết định đơn vị hợp lệ. Nguyên liệu kg/g không được hiển thị l/ml hoặc cái/chiếc trong dòng BOM."),
+        prixText(lang, "Direct cost được lưu riêng: packaging, labor minutes, labor rate, utility, overhead và production waste buffer."),
       ]}
     />
     <InfoBox variant="success">
-      <strong>Ghi chú dữ liệu:</strong> Dữ liệu nguyên liệu là lớp master data quan trọng của Prix. Khi dữ liệu này đổi, hệ thống giữ nguyên lịch sử cũ và tạo bối cảnh cho snapshot mới.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Ghi chú dữ liệu:")}{" "}</strong>{" "}{prixText(lang, "Dữ liệu nguyên liệu là lớp master data quan trọng của Prix. Khi dữ liệu này đổi, hệ thống giữ nguyên lịch sử cũ và tạo bối cảnh cho snapshot mới.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p3-3" pageNumber={3} totalPages={totalPages} docId="PRX-003">
-    <SectionHeader number="III" title="Snapshot là bằng chứng tính toán" />
-    <ReportLead>
-      Pricing snapshot lưu kết quả engine tại một thời điểm: selling price, production cost, fixed selling cost, selling fee rate, total effective cost, profit, margin, break-even, recommended price, max safe discount, status, confidence score, calculation input và formula breakdown. Đây là lý do báo cáo lợi nhuận quá khứ không bị nhảy khi nguyên liệu hoặc thuế thay đổi.
-    </ReportLead>
+    <SectionHeader number="III" title={prixText(lang, "Snapshot là bằng chứng tính toán")} />
+    <ReportLead>{" "}{prixText(lang, "Pricing snapshot lưu kết quả engine tại một thời điểm: selling price, production cost, fixed selling cost, selling fee rate, total effective cost, profit, margin, break-even, recommended price, max safe discount, status, confidence score, calculation input và formula breakdown. Đây là lý do báo cáo lợi nhuận quá khứ không bị nhảy khi nguyên liệu hoặc thuế thay đổi.")}{" "}</ReportLead>
     <ChartFrame>
       {({ width, height }) => (
-        <LineChart width={width} height={height} data={snapshotTimelineData}>
+        <LineChart width={width} height={height} data={snapshotTimelineData.map((row, index) => ({ ...row, month: lang === 'en' ? 'M' + (index + 1) : row.month }))}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
           <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
           <YAxis yAxisId="left" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
@@ -887,11 +726,9 @@ const Phase3Pages = ({ totalPages }) => [
       )}
     </ChartFrame>
     <InfoBox variant="highlight">
-      <strong>Repricing job:</strong> Khi channel fee, tax profile hoặc input liên quan thay đổi, hệ thống có `RepricingJob` để xếp hàng tính lại phạm vi bị ảnh hưởng. Snapshot cũ vẫn là lịch sử; snapshot mới là quyết định hiện tại.
-    </InfoBox>
+      <strong>Repricing job:</strong>{" "}{prixText(lang, "Khi channel fee, tax profile hoặc input liên quan thay đổi, hệ thống có `RepricingJob` để xếp hàng tính lại phạm vi bị ảnh hưởng. Snapshot cũ vẫn là lịch sử; snapshot mới là quyết định hiện tại.")}{" "}</InfoBox>
     <InfoBox variant="success" className="mt-5">
-      <strong>Kết luận báo cáo 3:</strong> Kiến trúc dữ liệu của Prix. chọn snapshot-first thay vì chỉ lưu trạng thái hiện tại. Quyết định này giải quyết một vấn đề cốt lõi: khi nguyên liệu hoặc phí kênh thay đổi, lịch sử tính toán cũ không bị viết đè, và hệ thống có đủ bối cảnh để so sánh trước-sau. Ingredient master tách rời khỏi product BOM giúp giảm lỗi nhập liệu và cho phép tái tính hàng loạt khi giá mua biến động. Cấu trúc dữ liệu đã đủ vững để engine vận hành có lịch sử — báo cáo tiếp theo sẽ trình bày vai trò của AI trong việc diễn giải kết quả.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Kết luận báo cáo 3:")}{" "}</strong>{" "}{prixText(lang, "Kiến trúc dữ liệu của Prix. chọn snapshot-first thay vì chỉ lưu trạng thái hiện tại. Quyết định này giải quyết một vấn đề cốt lõi: khi nguyên liệu hoặc phí kênh thay đổi, lịch sử tính toán cũ không bị viết đè, và hệ thống có đủ bối cảnh để so sánh trước-sau. Ingredient master tách rời khỏi product BOM giúp giảm lỗi nhập liệu và cho phép tái tính hàng loạt khi giá mua biến động. Cấu trúc dữ liệu đã đủ vững để engine vận hành có lịch sử — báo cáo tiếp theo sẽ trình bày vai trò của AI trong việc diễn giải kết quả.")}{" "}</InfoBox>
   </A4Page>,
 ];
 
@@ -899,35 +736,30 @@ const Phase3Pages = ({ totalPages }) => [
 // PHASE 4: AI STRATEGY
 // ============================================================
 
-const Phase4Pages = ({ totalPages }) => [
-  <A4Page key="p4-1" pageNumber={1} totalPages={totalPages} docId="PRX-004" title="AI Guardrail Report" subtitle="AI chỉ diễn giải số liệu đã tính">
-    <SectionHeader number="I" title="Vai trò hợp lệ của AI trong bản beta" />
-    <ReportLead>
-      Trong Prix., AI không giữ vai trò pricing engine. Lớp AI chỉ chuẩn hóa input, hỏi thêm các khoản chi phí còn thiếu, giải thích kết quả tính toán, gợi ý kịch bản khuyến mãi/combo, tóm tắt rủi ro và soạn đề xuất hành động. Các chỉ số như profit, margin, break-even và recommended price phải đến từ backend engine.
-    </ReportLead>
+const Phase4Pages = ({ totalPages, lang }) => [
+  <A4Page key="p4-1" pageNumber={1} totalPages={totalPages} docId="PRX-004" title="AI Guardrail Report" subtitle={prixText(lang, "AI chỉ diễn giải số liệu đã tính")}>
+    <SectionHeader number="I" title={prixText(lang, "Vai trò hợp lệ của AI trong bản beta")} />
+    <ReportLead>{" "}{prixText(lang, "Trong Prix., AI không giữ vai trò pricing engine. Lớp AI chỉ chuẩn hóa input, hỏi thêm các khoản chi phí còn thiếu, giải thích kết quả tính toán, gợi ý kịch bản khuyến mãi/combo, tóm tắt rủi ro và soạn đề xuất hành động. Các chỉ số như profit, margin, break-even và recommended price phải đến từ backend engine.")}{" "}</ReportLead>
     <ChartFrame>
       {({ width, height }) => (
-        <BarChart width={width} height={height} data={aiGuardrailData} layout="vertical">
+        <BarChart width={width} height={height} data={aiGuardrailData.map((row, index) => ({ ...row, area: lang === 'en' ? ['Calculation', 'Explanation', 'Promotion', 'Missing data'][index] : row.area }))} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
           <XAxis type="number" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} />
           <YAxis type="category" dataKey="area" tick={{ fontSize: 10, fill: '#111111', fontWeight: 'bold' }} axisLine={false} tickLine={false} width={90} />
           <Tooltip contentStyle={{ fontSize: '12px', border: 'none' }} />
           <Legend />
-          <Bar dataKey="engine" name="Engine quyết định" stackId="a" fill="#111111" />
-          <Bar dataKey="ai" name="AI diễn giải" stackId="a" fill="#0B74E5" />
+          <Bar dataKey="engine" name={prixText(lang, "Engine quyết định")} stackId="a" fill="#111111" />
+          <Bar dataKey="ai" name={prixText(lang, "AI diễn giải")} stackId="a" fill="#0B74E5" />
         </BarChart>
       )}
     </ChartFrame>
     <InfoBox variant="warning">
-      <strong>Ranh giới AI:</strong> AI không được tạo giá thị trường khi chưa có nguồn, sửa kết quả backend, kết luận chắc chắn khi dữ liệu còn thiếu, thay công thức tài chính bằng cảm tính hoặc dùng competitor price nếu người dùng chưa cung cấp nguồn dữ liệu.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Ranh giới AI:")}{" "}</strong>{" "}{prixText(lang, "AI không được tạo giá thị trường khi chưa có nguồn, sửa kết quả backend, kết luận chắc chắn khi dữ liệu còn thiếu, thay công thức tài chính bằng cảm tính hoặc dùng competitor price nếu người dùng chưa cung cấp nguồn dữ liệu.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p4-2" pageNumber={2} totalPages={totalPages} docId="PRX-004">
-    <SectionHeader number="II" title="Contract giữa backend và AI" />
-    <ReportLead>
-      AI chỉ nhận một object đã được backend tính sẵn. Object này chứa product, calculation, channel và missingInputs. Cách thiết kế này giúp prompt không cần truy cập database trực tiếp, không tự chạy query và không có quyền thay đổi số liệu. Vai trò của AI là chuyển kết quả kỹ thuật thành ngôn ngữ vận hành để chủ doanh nghiệp hiểu được tình trạng sản phẩm.
-    </ReportLead>
+    <SectionHeader number="II" title={prixText(lang, "Contract giữa backend và AI")} />
+    <ReportLead>{" "}{prixText(lang, "AI chỉ nhận một object đã được backend tính sẵn. Object này chứa product, calculation, channel và missingInputs. Cách thiết kế này giúp prompt không cần truy cập database trực tiếp, không tự chạy query và không có quyền thay đổi số liệu. Vai trò của AI là chuyển kết quả kỹ thuật thành ngôn ngữ vận hành để chủ doanh nghiệp hiểu được tình trạng sản phẩm.")}{" "}</ReportLead>
     <FormulaBlock
       lines={[
         '// AI receives calculated result',
@@ -940,31 +772,28 @@ const Phase4Pages = ({ totalPages }) => [
       ]}
     />
     <MiniTable
-      columns={['Output AI', 'Mục đích', 'Ràng buộc']}
+      columns={['Output AI', prixText(lang, "Mục đích"), prixText(lang, "Ràng buộc")]}
       rows={[
-        ['Summary', 'Tóm tắt tình trạng sản phẩm trong 2-3 câu', 'Giữ nguyên số liệu từ engine, tránh diễn giải phóng đại.'],
-        ['Risks', 'Nêu rủi ro chính như phí kênh cao hoặc discount quá sâu', 'Phải bám vào calculation/status.'],
-        ['Recommendations', 'Đề xuất tăng giá, đổi kênh, tạo combo hoặc gift', 'Chỉ dùng benchmark khi có nguồn dữ liệu được cung cấp rõ.'],
-        ['Plain language explanation', 'Giải thích cho chủ SME không chuyên tài chính', 'Thuật ngữ phải được giải thích nếu dùng.'],
+        ['Summary', prixText(lang, "Tóm tắt tình trạng sản phẩm trong 2-3 câu"), prixText(lang, "Giữ nguyên số liệu từ engine, tránh diễn giải phóng đại.")],
+        ['Risks', prixText(lang, "Nêu rủi ro chính như phí kênh cao hoặc discount quá sâu"), prixText(lang, "Phải bám vào calculation/status.")],
+        ['Recommendations', prixText(lang, "Đề xuất tăng giá, đổi kênh, tạo combo hoặc gift"), prixText(lang, "Chỉ dùng benchmark khi có nguồn dữ liệu được cung cấp rõ.")],
+        ['Plain language explanation', prixText(lang, "Giải thích cho chủ SME không chuyên tài chính"), prixText(lang, "Thuật ngữ phải được giải thích nếu dùng.")],
       ]}
     />
   </A4Page>,
 
   <A4Page key="p4-3" pageNumber={3} totalPages={totalPages} docId="PRX-004">
-    <SectionHeader number="III" title="Khi external AI chưa khả dụng" />
-    <ReportLead>
-      Trạng thái hiện tại của Prix. xem external AI provider là lớp bổ trợ; rule-based fallback vẫn là mặc định an toàn khi chưa có API key. Với sản phẩm tài chính cho SME, luồng cốt lõi là tính margin và cảnh báo rủi ro phải chạy ổn định trước, còn phần diễn giải bằng AI có thể được bật sau khi hạ tầng sẵn sàng.
-    </ReportLead>
+    <SectionHeader number="III" title={prixText(lang, "Khi external AI chưa khả dụng")} />
+    <ReportLead>{" "}{prixText(lang, "Trạng thái hiện tại của Prix. xem external AI provider là lớp bổ trợ; rule-based fallback vẫn là mặc định an toàn khi chưa có API key. Với sản phẩm tài chính cho SME, luồng cốt lõi là tính margin và cảnh báo rủi ro phải chạy ổn định trước, còn phần diễn giải bằng AI có thể được bật sau khi hạ tầng sẵn sàng.")}{" "}</ReportLead>
     <ReportList
       items={[
-        'Explain pricing: backend gửi calculation JSON; AI hoặc fallback diễn giải tình trạng, rủi ro, 3 hành động và giới hạn dữ liệu.',
-        'Suggest promotion: backend tính sẵn danh sách scenario; AI hoặc fallback chỉ xếp hạng và giải thích vì sao combo/gift có thể tốt hơn giảm trực tiếp.',
-        'Confidence score thấp phải nói rõ dữ liệu còn thiếu, ví dụ thiếu labor, overhead, waste hoặc phí kênh.',
+        prixText(lang, "Explain pricing: backend gửi calculation JSON; AI hoặc fallback diễn giải tình trạng, rủi ro, 3 hành động và giới hạn dữ liệu."),
+        prixText(lang, "Suggest promotion: backend tính sẵn danh sách scenario; AI hoặc fallback chỉ xếp hạng và giải thích vì sao combo/gift có thể tốt hơn giảm trực tiếp."),
+        prixText(lang, "Confidence score thấp phải nói rõ dữ liệu còn thiếu, ví dụ thiếu labor, overhead, waste hoặc phí kênh."),
       ]}
     />
     <InfoBox variant="success">
-      <strong>Kết luận báo cáo 4:</strong> AI trong Prix. được thiết kế với một nguyên tắc rõ ràng: lớp này không can thiệp vào số liệu gốc hoặc kết quả tài chính do engine trả về. Vai trò hợp lệ là diễn giải kết quả engine thành ngôn ngữ kinh doanh dễ hiểu, gợi ý kịch bản và cảnh báo rủi ro. Rule-based fallback giữ cho luồng cốt lõi không bị phụ thuộc vào external AI provider. Kiến trúc này phù hợp với sản phẩm tài chính SME, nơi độ tin cậy của con số quan trọng hơn trải nghiệm hội thoại.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Kết luận báo cáo 4:")}{" "}</strong>{" "}{prixText(lang, "AI trong Prix. được thiết kế với một nguyên tắc rõ ràng: lớp này không can thiệp vào số liệu gốc hoặc kết quả tài chính do engine trả về. Vai trò hợp lệ là diễn giải kết quả engine thành ngôn ngữ kinh doanh dễ hiểu, gợi ý kịch bản và cảnh báo rủi ro. Rule-based fallback giữ cho luồng cốt lõi không bị phụ thuộc vào external AI provider. Kiến trúc này phù hợp với sản phẩm tài chính SME, nơi độ tin cậy của con số quan trọng hơn trải nghiệm hội thoại.")}{" "}</InfoBox>
   </A4Page>,
 ];
 
@@ -972,31 +801,26 @@ const Phase4Pages = ({ totalPages }) => [
 // PHASE 5: DEPLOYMENT & VISION
 // ============================================================
 
-const Phase5Pages = ({ totalPages }) => [
-  <A4Page key="p5-1" pageNumber={1} totalPages={totalPages} docId="PRX-005" title="Full-Stack Architecture" subtitle="Từ R&D sang bản beta vận hành">
-    <SectionHeader number="I" title="Kiến trúc tổng thể" />
-    <ReportLead>
-      Prix. ở giai đoạn beta đã tách rõ frontend, backend, shared pricing engine và database schema. Frontend là React + Vite SPA; backend là Fastify API; database dùng PostgreSQL qua Prisma ORM. Logic tính toán nằm ở shared pricing engine để frontend, backend và test cùng bám một nguồn công thức.
-    </ReportLead>
+const Phase5Pages = ({ totalPages, lang }) => [
+  <A4Page key="p5-1" pageNumber={1} totalPages={totalPages} docId="PRX-005" title="Full-Stack Architecture" subtitle={prixText(lang, "Từ R&D sang bản beta vận hành")}>
+    <SectionHeader number="I" title={prixText(lang, "Kiến trúc tổng thể")} />
+    <ReportLead>{" "}{prixText(lang, "Prix. ở giai đoạn beta đã tách rõ frontend, backend, shared pricing engine và database schema. Frontend là React + Vite SPA; backend là Fastify API; database dùng PostgreSQL qua Prisma ORM. Logic tính toán nằm ở shared pricing engine để frontend, backend và test cùng bám một nguồn công thức.")}{" "}</ReportLead>
     <MiniTable
-      columns={['Lớp', 'Công nghệ', 'Trách nhiệm']}
+      columns={[prixText(lang, "Lớp"), prixText(lang, "Công nghệ"), prixText(lang, "Trách nhiệm")]}
       rows={[
-        ['Frontend', 'React 19 + Vite + TypeScript', 'Route có locale, workspace, form sản phẩm, dashboard, product detail, real-time preview.'],
-        ['Backend', 'Fastify + Node.js + TypeScript', 'Auth/session, REST API, validation, business scope, gọi pricing engine.'],
+        ['Frontend', 'React 19 + Vite + TypeScript', prixText(lang, "Route có locale, workspace, form sản phẩm, dashboard, product detail, real-time preview.")],
+        ['Backend', 'Fastify + Node.js + TypeScript', prixText(lang, "Auth/session, REST API, validation, business scope, gọi pricing engine.")],
         ['Database', 'PostgreSQL + Prisma ORM', 'Users, businesses, products, ingredients, channels, snapshots, promotions, combos.'],
-        ['Engine', 'Shared TypeScript Module', 'Công thức deterministic, confidence score, warning, scenario, combo calculation.'],
+        ['Engine', 'Shared TypeScript Module', prixText(lang, "Công thức deterministic, confidence score, warning, scenario, combo calculation.")],
       ]}
     />
     <InfoBox variant="highlight">
-      <strong>Nguyên tắc kiến trúc:</strong> Pricing engine là shared module dùng chung giữa frontend preview và backend persist. Cách tổ chức này giảm rủi ro lệch công thức giữa màn hình nhập liệu và dữ liệu lưu vào database. Stateless API cũng giúp việc mở rộng service về sau đơn giản hơn, miễn là auth scope và business scope được kiểm soát chặt.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Nguyên tắc kiến trúc:")}{" "}</strong>{" "}{prixText(lang, "Pricing engine là shared module dùng chung giữa frontend preview và backend persist. Cách tổ chức này giảm rủi ro lệch công thức giữa màn hình nhập liệu và dữ liệu lưu vào database. Stateless API cũng giúp việc mở rộng service về sau đơn giản hơn, miễn là auth scope và business scope được kiểm soát chặt.")}{" "}</InfoBox>
   </A4Page>,
 
   <A4Page key="p5-2" pageNumber={2} totalPages={totalPages} docId="PRX-005">
-    <SectionHeader number="II" title="Triển khai & Vận hành" />
-    <ReportLead>
-      Hệ thống được đóng gói theo hướng containerized deployment. Frontend và API được tách thành các service độc lập, giao tiếp qua reverse proxy. Cấu hình bảo mật, endpoint và biến môi trường cần được quản lý riêng theo từng môi trường để tránh lẫn dữ liệu thử nghiệm vào production.
-    </ReportLead>
+    <SectionHeader number="II" title={prixText(lang, "Triển khai & Vận hành")} />
+    <ReportLead>{" "}{prixText(lang, "Hệ thống được đóng gói theo hướng containerized deployment. Frontend và API được tách thành các service độc lập, giao tiếp qua reverse proxy. Cấu hình bảo mật, endpoint và biến môi trường cần được quản lý riêng theo từng môi trường để tránh lẫn dữ liệu thử nghiệm vào production.")}{" "}</ReportLead>
     <EncryptedBlock rows={[
       { label: 'Container Registry', value: '[INTERNAL]' },
       { label: 'Auth Provider', value: '[OAUTH_2.0]' },
@@ -1005,28 +829,26 @@ const Phase5Pages = ({ totalPages }) => [
       { label: 'CDN / Tunnel', value: '[CLOUDFLARE]' },
     ]} />
     <MiniTable
-      columns={['Component', 'Vai trò', 'Đặc điểm']}
+      columns={['Component', prixText(lang, "Vai trò"), prixText(lang, "Đặc điểm")]}
       rows={[
-        ['Web Service', 'Phục vụ frontend SPA + reverse proxy API', 'Static files + proxy routing tự động'],
+        ['Web Service', prixText(lang, "Phục vụ frontend SPA + reverse proxy API"), prixText(lang, "Static files + proxy routing tự động")],
         ['API Service', 'Business logic, auth, pricing calculation', 'Stateless, session qua signed cookies'],
-        ['Database', 'PostgreSQL với schema migration', 'Snapshot-first, business-scoped queries'],
-        ['CI/CD Pipeline', 'Build, test, deploy tự động', 'Container image → registry → orchestrator'],
+        ['Database', prixText(lang, "PostgreSQL với schema migration"), 'Snapshot-first, business-scoped queries'],
+        ['CI/CD Pipeline', prixText(lang, "Build, test, deploy tự động"), prixText(lang, "Container image → registry → orchestrator")],
       ]}
     />
     <ReportList
       items={[
-        'Production environment phải sạch dữ liệu demo. Demo fixtures chỉ được tạo trong môi trường development khi flag được bật rõ ràng.',
-        'Hệ thống đã cleanup toàn bộ demo data trong production, bao gồm demo user, business, products và combos.',
-        'Traffic được route qua CDN tunnel đến web service; API đi qua proxy nội bộ thay vì mở endpoint trực tiếp ra internet.',
+        prixText(lang, "Production environment phải sạch dữ liệu demo. Demo fixtures chỉ được tạo trong môi trường development khi flag được bật rõ ràng."),
+        prixText(lang, "Tài liệu ghi nhận việc cleanup demo user, business, products và combos; cần kiểm tra production hiện tại để xác nhận trạng thái."),
+        prixText(lang, "Traffic được route qua CDN tunnel đến web service; API đi qua proxy nội bộ thay vì mở endpoint trực tiếp ra internet."),
       ]}
     />
   </A4Page>,
 
   <A4Page key="p5-3" pageNumber={3} totalPages={totalPages} docId="PRX-005">
-    <SectionHeader number="III" title="Đánh giá & Tầm nhìn" />
-    <ReportLead>
-      Giai đoạn R&D tiếp theo nên giữ Prix. trong phạm vi pricing intelligence thay vì mở rộng sớm thành ERP. Ưu tiên trước mắt là tăng độ tin cậy quanh route guard, Product Builder preview, backend validation và production-clean mode. Các backlog như catalog, product family, variants, nhiều role, POS/order hoặc inventory chỉ nên đưa vào module riêng khi dữ liệu vận hành chứng minh nhu cầu.
-    </ReportLead>
+    <SectionHeader number="III" title={prixText(lang, "Đánh giá & Tầm nhìn")} />
+    <ReportLead>{" "}{prixText(lang, "Giai đoạn R&D tiếp theo nên giữ Prix. trong phạm vi pricing intelligence thay vì mở rộng sớm thành ERP. Ưu tiên trước mắt là tăng độ tin cậy quanh route guard, Product Builder preview, backend validation và production-clean mode. Các backlog như catalog, product family, variants, nhiều role, POS/order hoặc inventory chỉ nên đưa vào module riêng khi dữ liệu vận hành chứng minh nhu cầu.")}{" "}</ReportLead>
     <ChartFrame className="h-48">
       {({ width, height }) => (
         <BarChart width={width} height={height} data={deploymentData} layout="vertical">
@@ -1043,30 +865,29 @@ const Phase5Pages = ({ totalPages }) => [
       )}
     </ChartFrame>
     <MiniTable
-      columns={['Tiêu chí', 'Đánh giá', 'Ghi chú']}
+      columns={[prixText(lang, "Tiêu chí"), prixText(lang, "Đánh giá"), prixText(lang, "Ghi chú")]}
       rows={[
-        ['Độ tin cậy (Reliability)', '●●●●○ Cao', 'Engine deterministic + unit testable + snapshot history'],
-        ['Khả năng mở rộng (Scalability)', '●●●●○ Tốt', 'Stateless API + container orchestration + shared logic'],
-        ['Bảo mật (Security)', '●●●○○ Trung bình', 'Business scope + session auth; cần bổ sung RBAC chi tiết'],
-        ['Hiệu năng (Performance)', '●●●●○ Cao', 'Fastify framework + optimized database queries'],
+        [prixText(lang, "Độ tin cậy (Reliability)"), prixText(lang, "●●●●○ Cao"), 'Engine deterministic + unit testable + snapshot history'],
+        [prixText(lang, "Khả năng mở rộng (Scalability)"), prixText(lang, "●●●●○ Tốt"), 'Stateless API + container orchestration + shared logic'],
+        [prixText(lang, "Bảo mật (Security)"), prixText(lang, "●●●○○ Trung bình"), prixText(lang, "Business scope + session auth; cần bổ sung RBAC chi tiết")],
+        [prixText(lang, "Hiệu năng (Performance)"), prixText(lang, "●●●●○ Cao"), 'Fastify framework + optimized database queries'],
       ]}
     />
     <MiniTable
-      columns={['Ưu tiên', 'Hạng mục', 'Lý do']}
+      columns={[prixText(lang, "Ưu tiên"), prixText(lang, "Hạng mục"), prixText(lang, "Lý do")]}
       rows={[
-        ['P0', 'Frontend tests cho route guard, loading/error/empty state, Product Builder preview', 'Bảo vệ luồng tạo sản phẩm và workspace có locale/businessId.'],
-        ['P0', 'Backend tests cho auth scope, CRUD validation, soft delete, recalculate snapshot', 'Tránh rò dữ liệu business và bảo vệ tính đúng snapshot.'],
-        ['P1', 'Acceptance test production-clean mode', 'Đảm bảo demo fixture không quay lại production.'],
-        ['P1', 'Catalog, product family, variants, product-channel UX nâng cao', 'Phục vụ bakery/handmade có nhiều size, batch và dòng sản phẩm.'],
+        ['P0', prixText(lang, "Frontend tests cho route guard, loading/error/empty state, Product Builder preview"), prixText(lang, "Bảo vệ luồng tạo sản phẩm và workspace có locale/businessId.")],
+        ['P0', prixText(lang, "Backend tests cho auth scope, CRUD validation, soft delete, recalculate snapshot"), prixText(lang, "Tránh rò dữ liệu business và bảo vệ tính đúng snapshot.")],
+        ['P1', prixText(lang, "Acceptance test production-clean mode"), prixText(lang, "Đảm bảo demo fixture không quay lại production.")],
+        ['P1', prixText(lang, "Catalog, product family, variants, product-channel UX nâng cao"), prixText(lang, "Phục vụ bakery/handmade có nhiều size, batch và dòng sản phẩm.")],
       ]}
     />
     <InfoBox variant="success">
-      <strong>Kết luận báo cáo 5:</strong> Prix. đã có nền tảng kỹ thuật phù hợp cho giai đoạn beta: engine tất định tách rời khỏi AI, schema hỗ trợ lịch sử tính toán qua snapshot, AI có guardrail rõ ràng và deployment không phụ thuộc dữ liệu demo. Giai đoạn tiếp theo nên tập trung vào kiểm thử tự động, RBAC và mở rộng module có kiểm soát thay vì thêm tính năng mới khi chưa có tín hiệu vận hành đủ rõ.
-    </InfoBox>
+      <strong>{" "}{prixText(lang, "Kết luận báo cáo 5:")}{" "}</strong>{" "}{prixText(lang, "Prix. đã có nền tảng kỹ thuật phù hợp cho giai đoạn beta: engine tất định tách rời khỏi AI, schema hỗ trợ lịch sử tính toán qua snapshot, AI có guardrail rõ ràng và deployment không phụ thuộc dữ liệu demo. Giai đoạn tiếp theo nên tập trung vào kiểm thử tự động, RBAC và mở rộng module có kiểm soát thay vì thêm tính năng mới khi chưa có tín hiệu vận hành đủ rõ.")}{" "}</InfoBox>
     <div className="mt-8">
       <ReportClosing
-        title="Kết luận R&D tổng thể"
-        summary="Năm báo cáo R&D này trình bày hành trình từ khảo sát bài toán, thiết kế engine tính toán, cấu trúc dữ liệu, chiến lược AI đến kiến trúc triển khai. Ở giai đoạn beta, Prix. được định vị như một Financial Intelligence System cho SME F&B: hệ thống giúp chủ doanh nghiệp nhìn thấy lợi nhuận thật trước khi quyết định giá, kênh bán hoặc khuyến mãi."
+        title={prixText(lang, "Kết luận R&D tổng thể")}
+        summary={prixText(lang, "Năm báo cáo R&D này trình bày hành trình từ khảo sát bài toán, thiết kế engine tính toán, cấu trúc dữ liệu, chiến lược AI đến kiến trúc triển khai. Ở giai đoạn beta, Prix. được định vị như một Financial Intelligence System cho SME F&B: hệ thống giúp chủ doanh nghiệp nhìn thấy lợi nhuận thật trước khi quyết định giá, kênh bán hoặc khuyến mãi.")}
         signatureRole="R&D Technical Lead"
       />
     </div>
@@ -1190,7 +1011,7 @@ const PrixProject = () => {
   const visiblePageKeys = currentTabData.pageKeys;
   
   // Get glossary entries for current A4 page
-  const currentGlossary = lang === 'en' ? [] : pageGlossary[currentPageKey] || [];
+  const currentGlossary = (pageGlossary[currentPageKey] || []).map((entry) => lang === 'en' ? { ...entry, definition: prixGlossaryEnglish[entry.term] } : entry);
 
   const getPageScroller = useCallback(() => {
     const root = document.getElementById('root');
@@ -1433,6 +1254,13 @@ const PrixProject = () => {
 
           {/* SECTION 2: THE A4 REPORT SHOWCASE */}
           <section ref={reportSectionRef} className="report-section bg-[#f8f9fa] pt-16 pb-24 px-4 overflow-hidden shadow-inner" id="report-section">
+            <DataProvenance />
+            <nav aria-label={copy.roadmapTitle} className="sticky top-20 z-30 max-w-[900px] mx-auto mb-8 bg-white border border-black/15 p-3">
+              <label htmlFor="prix-report-select" className="block text-xs font-bold text-black mb-2">{copy.roadmapTitle}</label>
+              <select id="prix-report-select" value={activeTab} onChange={(event) => handleTabChange(event.target.value)} className="w-full border border-black/30 bg-white text-black p-3 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent">
+                {tabsData.map((tab) => <option key={tab.id} value={tab.id}>{tab.title}</option>)}
+              </select>
+            </nav>
             <div className="text-center mb-12">
               <span className="text-gray-400 text-[9px] font-black tracking-[0.5em] uppercase mb-4 block">{copy.reportEyebrow}</span>
               <h2 className="text-2xl font-black text-black uppercase tracking-tighter shadow-sm inline-block">{copy.reportTitle}</h2>
@@ -1449,9 +1277,7 @@ const PrixProject = () => {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="flex flex-col gap-3"
                 >
-                  {lang === 'en'
-                    ? <EnglishReportPage activeTab={activeTab} />
-                    : currentTabData.pages({ totalPages }).map(wrapA4Page)}
+                  {currentTabData.pages({ totalPages, lang }).map(wrapA4Page)}
                 </motion.div>
               </AnimatePresence>
             </div>

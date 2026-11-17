@@ -1,3 +1,5 @@
+> **Đối chiếu hiện trạng (2026-11-17):** Đây là tài liệu kế hoạch/tham khảo lịch sử. Ngân sách, roadmap và trạng thái trong bản này có thể khác runtime; xem [mốc runtime hiện tại](current-runtime-baseline.md). Số liệu chưa có hồ sơ xác minh không được xem là kết quả thực tế.
+
 # HỆ THỐNG QUẢN TRỊ DỰ ÁN: FOLIO_PLAN
 ## Full Stack Marketing - Strategic Documentation System
 

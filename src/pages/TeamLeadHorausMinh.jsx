@@ -24,7 +24,7 @@ const TeamLeadHorausMinh = () => {
     portfolio: 'https://studio.pdl.io.vn/',
     photoSrc: '/cv-edit/assets/horaus-minh-lead.jpg',
     cvButtons: [
-      ...(lang === 'vi' ? [{ id: 'ai-automation', label: 'AI & Automation', to: withLangPath(lang, '/team/horaus-minh/cv/ai-automation'), enabled: true }] : []),
+      { id: 'ai-automation', label: 'AI & Automation', to: withLangPath(lang, '/team/horaus-minh/cv/ai-automation'), enabled: true },
       { id: 'marketing', label: t('lead.cvButtons.marketing'), to: withLangPath(lang, '/team/horaus-minh/cv/marketing'), enabled: true },
       { id: 'brand', label: t('lead.cvButtons.brand'), to: '#', enabled: false },
       { id: 'strategy', label: t('lead.cvButtons.strategy'), to: '#', enabled: false },

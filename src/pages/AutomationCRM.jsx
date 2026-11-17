@@ -1,3 +1,5 @@
+import ReportSheet from '../design-system/templates/ReportSheet';
+import DataProvenance from '../components/layout/DataProvenance';
 import React from 'react';
 import Header from '../components/layout/Header';
 import PageTransition from '../components/layout/PageTransition';
@@ -8,14 +10,7 @@ import ReportClosing from '../components/layout/ReportClosing';
 import { useLang } from '../hooks/useLang';
 
 const A4Page = ({ children, pageNumber, totalPages }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true, margin: "-50px" }}
-    className="report-a4 bg-white text-black shadow-lg w-full max-w-[210mm] min-h-[297mm] mx-auto mb-4 py-10 px-[53px] md:py-14 md:px-[75px] relative flex flex-col rounded-sm border border-gray-200"
-    style={{ fontFamily: "'Inter', sans-serif" }}
-  >
+  <ReportSheet variant="standard">
     {/* Page Header */}
     <div className="flex justify-between items-start border-b border-black pb-4 mb-8">
       <div className="flex items-center gap-2">
@@ -40,7 +35,7 @@ const A4Page = ({ children, pageNumber, totalPages }) => (
       <div>Aurelia Yachts Automation — 2026</div>
       <div>Page {pageNumber} of {totalPages}</div>
     </div>
-  </motion.div>
+  </ReportSheet>
 );
 
 const AutomationCRM = () => {
@@ -186,6 +181,7 @@ const AutomationCRM = () => {
 
           {/* SECTION 2: THE A4 LOGIC REPORT */}
           <section className="report-section bg-[#f2f2f2] pt-16 pb-24 px-4 overflow-hidden shadow-inner" id="report-section">
+            <DataProvenance />
             <div className="text-center mb-12">
               <span className="text-gray-400 text-[9px] font-black tracking-[0.4em] uppercase mb-2 block">Lead Operations Workflow</span>
               <h2 className="text-3xl font-black text-black uppercase tracking-tighter">Lead Routing, CRM Update & Response Workflow</h2>

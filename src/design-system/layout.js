@@ -159,3 +159,6 @@ export const splitPanel = {
   /** Direction arrow */
   arrow: 'hidden md:block absolute bottom-10 left-1/2 -translate-x-1/2 transition-colors',
 };
+
+// Report variants preserve existing page spacing; CVs use their separate fixed-A4 stylesheet.
+export const reportSheet = {"strategy": "report-a4 bg-white text-black shadow-2xl w-full max-w-[210mm] min-h-[297mm] mx-auto mb-2 py-12 px-[70px] md:py-16 md:px-[100px] relative flex flex-col rounded-sm border border-gray-200", "standard": "report-a4 bg-white text-black shadow-lg w-full max-w-[210mm] min-h-[297mm] mx-auto mb-4 py-10 px-[53px] md:py-14 md:px-[75px] relative flex flex-col rounded-sm border border-gray-200", "prix": "report-a4 bg-white text-black shadow-2xl w-full max-w-[210mm] mx-auto mb-8 py-12 px-[50px] md:py-16 md:px-[70px] relative flex flex-col rounded-sm border border-gray-200 min-h-[297mm]"};

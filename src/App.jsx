@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect, useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
+import RouteMetadata from './components/layout/RouteMetadata';
 import Home from './pages/Home';
 import MarketingSystems from './pages/MarketingSystems';
 import Team from './pages/Team';
@@ -132,7 +133,7 @@ const AnimatedRoutes = () => {
           {withLang('/team').map((path) => <Route key={path} path={path} element={<Team />} />)}
           {withLang('/team/horaus-minh').map((path) => <Route key={path} path={path} element={<TeamLeadHorausMinh />} />)}
           {withLang('/team/horaus-minh/cv/marketing').map((path) => <Route key={path} path={path} element={<CVMarketing />} />)}
-          <Route path="/vi/team/horaus-minh/cv/ai-automation" element={<CVMarketing variant="ai-automation" />} />
+          {withLang('/team/horaus-minh/cv/ai-automation').map((path) => <Route key={path} path={path} element={<CVMarketing variant="ai-automation" />} />)}
           {withLang('/content-strategy').map((path) => <Route key={path} path={path} element={<ContentStrategy />} />)}
           {withLang('/strategy-planning').map((path) => <Route key={path} path={path} element={<StrategyPlanning />} />)}
           {withLang('/organic-paid-growth').map((path) => <Route key={path} path={path} element={<OrganicPaidGrowth />} />)}
@@ -171,6 +172,7 @@ function App() {
   return (
     <Router>
       <div className="app-container selection:bg-accent selection:text-white">
+        <RouteMetadata />
         <ScrollToTop />
         <AnimatedRoutes />
         <FloatingScrollTopButton />

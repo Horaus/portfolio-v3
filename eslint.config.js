@@ -8,6 +8,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   globalIgnores([
     'dist',
+    '.local/**',
     'Folio_Plan/**',
     'convert.js',
     'convertData.cjs',
