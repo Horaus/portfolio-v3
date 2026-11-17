@@ -10,10 +10,10 @@ const CVMarketing = ({ variant = 'marketing' }) => {
   const iframeRef = useRef(null);
 
   const backTo = withLangPath(lang, '/team/horaus-minh');
-  const cacheBust = '20260321-3';
+  const cacheBust = '20261117-2';
   const isAutomation = variant === 'ai-automation';
   const cvSrc = isAutomation
-    ? '/cv-edit/cv-ai-automation-vi.html?v=20261117-1'
+    ? `/cv-edit/cv-ai-automation-vi.html?v=${cacheBust}`
     : lang === 'en'
       ? `/cv-edit/cv-preview-en.html?v=${cacheBust}`
       : `/cv-edit/cv-preview-vi.html?v=${cacheBust}`;
@@ -33,19 +33,22 @@ const CVMarketing = ({ variant = 'marketing' }) => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#f1f1f1] relative">
-      <Link
-        to={backTo}
-        className="fixed top-5 left-5 z-50 px-4 py-2 rounded-full border border-black/20 bg-white/90 backdrop-blur text-[11px] font-bold uppercase tracking-[0.16em] text-black hover:text-accent hover:border-accent transition-colors"
-      >
-        {t('cv.back')}
-      </Link>
+    <div className="w-full h-dvh bg-[#f1f1f1] flex flex-col overflow-hidden">
+      <div className="shrink-0 flex items-center gap-5 px-5 py-3 border-b border-black/10 bg-white">
+        <Link
+          to={backTo}
+          className="text-xs font-semibold text-black hover:text-accent"
+        >
+          {lang === 'vi' ? 'Về hồ sơ' : t('cv.back')}
+        </Link>
+        <span className="text-xs text-black/50">{isAutomation ? 'AI & Automation' : 'Marketing'} · A4</span>
+      </div>
       <iframe
         ref={iframeRef}
         title={`Horaus Minh - ${isAutomation ? 'AI & Automation' : 'Marketing'} CV`}
         src={cvSrc}
         onLoad={handleIframeLoad}
-        className="w-full min-h-screen border-0"
+        className="w-full flex-1 min-h-0 border-0"
       />
     </div>
   );

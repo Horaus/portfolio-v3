@@ -64,6 +64,8 @@ button { font: inherit; }
   flex-wrap: wrap;
 }
 
+.viewer-hint { display: none; }
+
 .topbar-button {
   border: 1px solid rgba(0, 0, 0, 0.14);
   background: #ffffff;
@@ -85,8 +87,10 @@ button { font: inherit; }
 .preview {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 22px;
+  overflow-x: auto;
+  padding-bottom: 24px;
 }
 
 body.print-mode {
@@ -100,7 +104,10 @@ body.print-mode .page {
 .page {
   position: relative;
   width: var(--paper-width);
+  min-width: var(--paper-width);
   height: var(--paper-height);
+  flex: none;
+  margin-inline: auto;
   background: var(--page);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -473,11 +480,10 @@ body.print-mode .page {
 @media screen and (max-width: 900px) {
   .app { padding: 12px; }
   .topbar { flex-direction: column; align-items: stretch; }
-  .preview { align-items: flex-start; overflow-x: auto; padding-bottom: 16px; }
-  .contact-strip,
-  .metrics,
-  .pillars,
-  .content-grid { grid-template-columns: 1fr; }
+  /* The A4 document stays fixed; only the surrounding viewer responds. */
+  .preview { padding-bottom: 16px; }
+  .viewer-hint { display: block; margin: 0 0 12px; color: #555; font-size: 12px; line-height: 1.5; }
+  .preview:focus-visible { outline: 2px solid #111; outline-offset: 2px; }
 }
 
 @media print {
@@ -495,7 +501,7 @@ body.print-mode .page {
   body { background: #ffffff; }
   .screen-only { display: none !important; }
   .app { padding: 0; }
-  .preview { gap: 0; }
+  .preview { gap: 0; overflow: visible; padding: 0; }
   .contact-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

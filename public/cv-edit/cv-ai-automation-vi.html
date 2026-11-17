@@ -7,24 +7,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./cv-ai-automation.css" />
+    <link rel="stylesheet" href="./styles.css?v=20261117-2" />
+    <link rel="stylesheet" href="./cv-ai-automation.css?v=20261117-2" />
   </head>
   <body class="cv-automation">
     <div class="app">
       <header class="topbar screen-only">
         <div>
-          <p class="topbar-label">Bản xem trước · Tiếng Việt</p>
+          <p class="topbar-label">Tiếng Việt · A4 nguyên khổ</p>
           <h1 class="topbar-title">CV AI & Automation</h1>
         </div>
         <div class="topbar-actions">
-          <a class="topbar-button" href="/vi/team/horaus-minh" target="_top">Về hồ sơ</a>
           <button class="topbar-button topbar-button--dark" data-print type="button">Lưu PDF (A4)</button>
         </div>
       </header>
-      <main class="preview" id="cv-root"></main>
+      <p class="viewer-hint screen-only">Bố cục A4 giữ nguyên. Cuộn ngang để xem toàn bộ trang.</p>
+      <main class="preview" id="cv-root" tabindex="0" aria-label="CV A4, có thể cuộn ngang"></main>
     </div>
-    <script src="./cv-ai-automation-vi.js?v=20261117-1"></script>
-    <script src="./render.js?v=20260321-3"></script>
+    <script src="./cv-ai-automation-vi.js?v=20261117-2"></script>
+    <script src="./render.js?v=20261117-2"></script>
   </body>
 </html>
