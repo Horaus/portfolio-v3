@@ -142,9 +142,9 @@ window.CV_DATA = {
       "experienceLabel": "Sản phẩm & dự án",
       "experience": [
         {
-          "role": "AI Product & Automation Developer",
-          "company": "to.on — Xưởng phim hoạt hình AI",
-          "period": "Thử nghiệm nội bộ (MVP)",
+          "role": "to.on",
+          "company": "Xưởng phim hoạt hình AI",
+          "period": "MVP nội bộ",
           "bullets": [
             "Nền tảng desktop tự động hóa chuỗi sản xuất video hoạt hình từ ý tưởng đến thành phẩm cho nhà sáng tạo nội dung.",
             "Nghiên cứu và thiết kế quy trình sản xuất gồm 4 chặng: Kịch bản → Phong cách → Storyboard → Video, hướng đến tính đồng nhất nhân vật qua nhiều tập.",
@@ -166,9 +166,9 @@ window.CV_DATA = {
           ]
         },
         {
-          "role": "Hệ thống hỗ trợ quyết định giá",
-          "company": "Prix",
-          "period": "Dự án R&D",
+          "role": "Prix",
+          "company": "Hỗ trợ quyết định giá",
+          "period": "R&D",
           "bullets": [
             "Nghiên cứu giải pháp hỗ trợ SME F&B phân tích chi phí, so sánh giá bán và mô phỏng tác động của khuyến mãi đến lợi nhuận.",
             "Tổ chức luồng dữ liệu chi phí, phí theo kênh và các kịch bản giá; lưu đầu vào và kết quả để đối chiếu.",
