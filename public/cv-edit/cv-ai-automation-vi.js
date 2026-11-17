@@ -144,12 +144,12 @@ window.CV_DATA = {
         {
           "role": "to.on",
           "company": "Xưởng phim hoạt hình AI",
-          "period": "MVP nội bộ",
+          "period": "App",
           "bullets": [
             "Nền tảng desktop tự động hóa chuỗi sản xuất video hoạt hình từ ý tưởng đến thành phẩm cho nhà sáng tạo nội dung.",
             "Nghiên cứu và thiết kế quy trình sản xuất gồm 4 chặng: Kịch bản → Phong cách → Storyboard → Video, hướng đến tính đồng nhất nhân vật qua nhiều tập.",
-            "Phát triển trình biên dịch prompt có cấu trúc (SPL Compiler) và cầu nối Chrome Extension để tự động điều phối sinh ảnh/video qua ChatGPT và Google Flow.",
-            "Triển khai ứng dụng Electron, máy chủ quản lý phiên bản thời gian thực và đóng gói bản thử nghiệm nội bộ."
+            "Phát triển trình biên dịch prompt có cấu trúc (SPL Compiler).",
+            "Triển khai ứng dụng Electron, máy chủ quản lý phiên bản thời gian thực và đóng gói ứng dụng desktop."
           ],
           "links": [
             {
@@ -166,9 +166,34 @@ window.CV_DATA = {
           ]
         },
         {
+          "role": "worKITool",
+          "company": "Nền tảng tự động hóa phân tán",
+          "period": "Web",
+          "bullets": [
+            "Nền tảng tự động thực thi tác vụ web lặp lại, trích xuất dữ liệu và tạo nội dung, giúp người dùng chủ động quản lý dữ liệu cá nhân.",
+            "Định hình kiến trúc phân tầng và trình dựng quy trình dạng khối (React Flow), trực quan hóa việc kết nối các bước tự động hóa.",
+            "Xây dựng pipeline kết hợp n8n và OpenAI API, điều phối thực thi trên máy trạm và tiện ích trình duyệt mà không chia sẻ phiên đăng nhập.",
+            "Đóng gói Docker, triển khai trên cụm K3s và đồng bộ sự kiện qua WebSocket."
+          ],
+          "links": [
+            {
+              "label": "https://kit.pdl.io.vn",
+              "href": "https://kit.pdl.io.vn"
+            }
+          ],
+          "tags": [
+            "Đang bảo trì",
+            "n8n / OpenAI API",
+            "Next.js / React Flow",
+            "Fastify",
+            "Chrome Extension MV3",
+            "Docker / K3s"
+          ]
+        },
+        {
           "role": "Prix",
           "company": "Hỗ trợ quyết định giá",
-          "period": "R&D",
+          "period": "Web",
           "bullets": [
             "Nghiên cứu giải pháp hỗ trợ SME F&B phân tích chi phí, so sánh giá bán và mô phỏng tác động của khuyến mãi đến lợi nhuận.",
             "Tổ chức luồng dữ liệu chi phí, phí theo kênh và các kịch bản giá; lưu đầu vào và kết quả để đối chiếu.",
