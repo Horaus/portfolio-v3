@@ -80,6 +80,7 @@
             </div>
             <ul class="experience-list">
               ${item.bullets.map((bullet) => `<li>${escapeHtml(bullet)}</li>`).join("")}
+              ${item.links?.length ? `<li>${item.links.map((link) => `<a ${buildLinkAttrs(link.href)}>[${escapeHtml(link.label)}]</a>`).join(" · ")}</li>` : ""}
             </ul>
             ${
               item.tags && item.tags.length
