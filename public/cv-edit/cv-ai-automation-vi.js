@@ -142,6 +142,30 @@ window.CV_DATA = {
       "experienceLabel": "Sản phẩm & dự án",
       "experience": [
         {
+          "role": "AI Product & Automation Developer",
+          "company": "to.on — Xưởng phim hoạt hình AI",
+          "period": "Thử nghiệm nội bộ (MVP)",
+          "bullets": [
+            "Nền tảng desktop tự động hóa chuỗi sản xuất video hoạt hình từ ý tưởng đến thành phẩm cho nhà sáng tạo nội dung.",
+            "Nghiên cứu và thiết kế quy trình sản xuất gồm 4 chặng: Kịch bản → Phong cách → Storyboard → Video, hướng đến tính đồng nhất nhân vật qua nhiều tập.",
+            "Phát triển trình biên dịch prompt có cấu trúc (SPL Compiler) và cầu nối Chrome Extension để tự động điều phối sinh ảnh/video qua ChatGPT và Google Flow.",
+            "Triển khai ứng dụng Electron, máy chủ quản lý phiên bản thời gian thực và đóng gói bản thử nghiệm nội bộ."
+          ],
+          "links": [
+            {
+              "label": "https://toon.pdl.io.vn",
+              "href": "https://toon.pdl.io.vn"
+            }
+          ],
+          "tags": [
+            "Electron / TypeScript",
+            "Chrome Extension (MV3)",
+            "Structured Prompting (SPL)",
+            "WebSocket",
+            "Playwright"
+          ]
+        },
+        {
           "role": "Hệ thống hỗ trợ quyết định giá",
           "company": "Prix",
           "period": "Dự án R&D",
