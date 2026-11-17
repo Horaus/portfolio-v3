@@ -1256,21 +1256,18 @@ const PrixProject = () => {
           <section ref={reportSectionRef} className="report-section bg-[#f8f9fa] pt-16 pb-24 px-4 overflow-hidden shadow-inner" id="report-section">
             <DataProvenance />
             <nav aria-label={copy.roadmapTitle} className="lg:hidden max-w-lg mx-auto mb-10 bg-white/95 border border-gray-200 rounded-xl p-4 shadow-xl shadow-black/10">
-              <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center">{copy.roadmapTitle}</div>
-              <ul className="flex flex-col gap-1">
-                {tabsData.map((tab) => (
-                  <li key={tab.id}>
-                    <button
-                      type="button"
-                      aria-current={activeTab === tab.id ? 'step' : undefined}
-                      onClick={() => handleTabChange(tab.id)}
-                      className={`block w-full text-left text-[11px] uppercase font-bold tracking-wider px-3 py-3 rounded-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent ${activeTab === tab.id ? 'bg-[#111111] text-white' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}
-                    >
-                      {tab.title}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              <label htmlFor="prix-report-select" className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-3 text-center">{copy.roadmapTitle}</label>
+              <div className="relative">
+                <select
+                  id="prix-report-select"
+                  value={activeTab}
+                  onChange={(event) => handleTabChange(event.target.value)}
+                  className="appearance-none block w-full min-w-0 bg-[#111111] text-white border-0 rounded-lg pl-3 pr-9 py-3 text-[11px] uppercase font-bold tracking-wider focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  {tabsData.map((tab) => <option key={tab.id} value={tab.id}>{tab.title}</option>)}
+                </select>
+                <svg aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </div>
             </nav>
             <div className="text-center mb-12">
               <span className="text-gray-400 text-[9px] font-black tracking-[0.5em] uppercase mb-4 block">{copy.reportEyebrow}</span>
