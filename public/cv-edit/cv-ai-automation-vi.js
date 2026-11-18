@@ -182,12 +182,13 @@ window.CV_DATA = {
             }
           ],
           "tags": [
-            "Đang bảo trì",
-            "n8n / OpenAI API",
-            "Next.js / React Flow",
+            "n8n",
+            "Next.js",
+            "React Flow",
             "Fastify",
             "Chrome Extension MV3",
-            "Docker / K3s"
+            "Docker",
+            "K3s"
           ]
         },
         {

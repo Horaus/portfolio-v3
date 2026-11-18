@@ -56,7 +56,7 @@ const vi = {
     profile: 'Profile',
     leadRole: 'Lead',
     leadTitle: 'Founder PDL',
-    aiCv: 'CV AI & Automation',
+    aiCv: 'AI & Automation',
     leadSummary: 'Định hướng chiến lược tổng thể, thiết kế hệ marketing và điều phối triển khai theo dữ liệu.',
     member2Summary: 'Xây dựng tiếng nói thương hiệu, chuẩn hóa thông điệp và đảm bảo tính nhất quán đa kênh.',
     member3Summary: 'Quản trị media hiệu suất, tối ưu ngân sách và nâng chất lượng chuyển đổi theo mục tiêu kinh doanh.',

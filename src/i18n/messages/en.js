@@ -56,7 +56,7 @@ const en = {
     profile: 'Profile',
     leadRole: 'Lead',
     leadTitle: 'Founder PDL',
-    aiCv: 'CV AI & Automation',
+    aiCv: 'AI & Automation',
     leadSummary: 'Sets strategic direction, designs the marketing operating system, and orchestrates data-driven execution.',
     member2Summary: 'Shapes brand voice, message architecture, and multi-channel consistency.',
     member3Summary: 'Runs performance media with budget discipline and conversion-focused optimization.',
